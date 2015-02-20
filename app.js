@@ -14,7 +14,6 @@ require('./modules/oauth.js')(env);
 require('./modules/socketio.js')(env);
 
 env.app.use(env.express.static(env.path.join(__dirname, 'public')));
-
 env.app.use('/', require('./routes/index'));
 
 // enable dev logging
@@ -34,10 +33,7 @@ env.app.use(function(req, res, next) {
 if (env.app.get('env') === 'development') {
     env.app.use(function(err, req, res, next) {
         res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
+	res.status(err.status || 500).send( '<pre>' + err.stack + '</pre>' );
     });
 }
 
@@ -45,10 +41,7 @@ if (env.app.get('env') === 'development') {
 // no stacktraces leaked to user
 env.app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
+    res.send( err.message );
 });
 
 
