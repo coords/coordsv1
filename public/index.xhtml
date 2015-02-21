@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width,user-scalable=no"/>
+
+        <link rel="meta" type="application/rdf+xml" href="rdf.xml"/>
+
+        <link rel="icon" type="image/png" href="images/logo.png"/>
+
+        <title>Coords</title>
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+        <link rel="stylesheet" href="bower_components/bootstrap-social/bootstrap-social.css"/>
+        <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css"/>
+        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css"/>
+        <link rel="stylesheet" href="bower_components/lato/css/lato.css"/>
+        <link rel="stylesheet" href="bower_components/animate.css/animate.css"/>
+
+        <link rel="stylesheet" href="stylesheets/structure.css"/>
+        <link rel="stylesheet" href="stylesheets/ui.css"/>
+        <link rel="stylesheet" href="stylesheets/simple-animations.css"/>
+    </head>
+    <body>
+
+        <div class="loadingBar hidden">
+            <span></span>
+        </div>
+
+        <div id="loginPage" class="unscrollablePageContainer inactivePage">
+
+            <div class="scrollableContent fullHeight">
+
+                <div class="container">
+
+                    <div class="row margin-top-30 text-center">
+                        <div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4">
+                            <img class="img-responsive" src="/images/logo.png" alt="Coords Logo"/>
+                        </div>
+                    </div>
+
+                    <div class="row margin-top-30">
+                        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <p><a class="btn btn-block btn-social btn-facebook">
+                                        <i class="fa fa-facebook"></i>
+                                        Sign in with Facebook
+                                    </a></p>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <p><a class="btn btn-block btn-social btn-twitter">
+                                        <i class="fa fa-twitter"></i>
+                                        Sign in with Twitter
+                                    </a></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <p><a class="btn btn-block btn-social btn-google-plus">
+                                        <i class="fa fa-google-plus"></i>
+                                        Sign in with Google
+                                    </a></p>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <p><a class="btn btn-block btn-social btn-github">
+                                        <i class="fa fa-github"></i>
+                                        Sign in with GitHub
+                                    </a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="mapPage" class="unscrollablePageContainer inactivePage">
+            <div class="scrollableContent fullHeight">
+                <div id="map"></div>
+
+                <a href="#" class="btn btn-block btn-lg btn-primary logoutButton">
+                    <i class="fa fa-sign-out"></i> Log out of Coords
+                </a>
+
+                <a href="#" class="btn btn-block btn-lg btn-primary profilePageButton">
+                    <i class="fa fa-user"></i> View User Profile
+                </a>
+            </div>
+        </div>
+
+
+        <div id="profilePage" class="unscrollablePageContainer inactivePage">
+            <div class="scrollableContent fullHeight">
+
+                <div class="row">
+
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 margin-top-30">
+
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title userProfileName"></h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+
+                                    <div class="col-md-3 col-lg-3 " align="center">
+                                        <img alt="User Photo" src="" class="img-responsive img-circle userProfilePhoto"/>
+                                    </div>
+
+                                    <div class="col-md-9 col-lg-9">
+                                        <table class="table table-user-information">
+                                            <tbody>
+                                                
+                                                <tr>
+                                                    <td>Date of Birth</td>
+                                                    <td class="userProfileDOB"></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Gender</td>
+                                                    <td class="userProfileGender"></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Location</td>
+                                                    <td class="userProfileLocation"></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Email</td>
+                                                    <td><a href="mailto:" class="userProfileEmail"></a></td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                        
+                                        <a href="#" class="btn btn-lg btn-primary mapPageButton">
+                                            <i class="fa fa-undo"></i> Back to Map
+                                        </a>
+                                        
+                                        <a href="#" class="btn btn-lg btn-primary logoutButton">
+                                            <i class="fa fa-sign-out"></i> Log out
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    
+            </div>
+        </div>
+
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/jquery-cookie/jquery.cookie.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="bower_components/oauth-js/dist/oauth.js"></script>
+        <script src="bower_components/socket.io-client/socket.io.js"></script>
+        <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
+
+        <script src="javascripts/NativeWrapper.js"></script>
+        <script src="javascripts/CoordsLog.js"></script>
+        <script src="javascripts/CoordsUtil.js"></script>
+        <script src="javascripts/CoordsDB.js"></script>
+        <script src="javascripts/CoordsUI.js"></script>
+        <script src="javascripts/CoordsPages.js"></script>
+        <script src="javascripts/CoordsAuth.js"></script>
+        <script src="javascripts/CoordsComms.js"></script>
+        <script src="javascripts/CoordsMap.js"></script>
+        <script src="javascripts/DocumentReady.js"></script>
+    </body>
+</html>

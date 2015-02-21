@@ -24,8 +24,20 @@ CoordsPages = {
                 CoordsAuth.authenticateWithProvider('github');
             });
 
-            CoordsAuth.updateUserInfoDisplay();
-            
+            $('.logoutButton').click(function() {
+                CoordsDB.removeString("authProvider");
+                CoordsPages.changePage("loginPage");
+            });
+
+            $('.mapPageButton').click(function() {
+                CoordsPages.changePage("mapPage");
+            });
+
+            $('.profilePageButton').click(function() {
+                CoordsPages.changePage("profilePage");
+            });
+
+            CoordsMap.initialize();
             CoordsComms.testComms();
         }
         catch (e)
@@ -47,7 +59,7 @@ CoordsPages = {
                 var currentPageId = CoordsDB.getString("currentPageId");
                 if ( CoordsUtil.stringIsEmpty(currentPageId) )
                 {
-                    currentPageId = "loginPage";
+                    currentPageId = "mapPage";
                     CoordsDB.setString("currentPageId", currentPageId);
                 }
 
@@ -76,14 +88,10 @@ CoordsPages = {
             // If there is no active page, or the currently active page is not the one the database thinks it should be, change to it
             if (activePage.length == 0 || activePage[0].id != currentPageId)
             {
-                if( CoordsAuth.loggedIn() )
-                {
-                    CoordsPages.changePage("mapPage");
-                }
-                else
+                CoordsAuth.checkUserLogin(function loginSuccess()
                 {
                     CoordsPages.changePage(currentPageId);
-                }
+                });
             }
         }
         catch (e)
@@ -204,6 +212,16 @@ CoordsPages = {
             {
                 CoordsUI.hideLoadingBar();
             }
+            else if (newPageId == "mapPage")
+            {
+                CoordsUI.hideLoadingBar();
+            }
+            else if (newPageId == "profilePage")
+            {
+                CoordsUI.hideLoadingBar();
+            }
+
+
         }
         catch (e)
         {

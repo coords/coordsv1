@@ -48,6 +48,12 @@ if (typeof NativeWrapper === 'undefined')
             }
         },
 
+        caughtError: function caughtError(errorString)
+        {
+            CoordsLog.v("NativeWrapper." + CoordsLog.getInlineFunctionTrace(arguments));
+            CoordsLog.e(errorString);
+        },
+        
         getStorageString: function getStorageString(key)
         {
             var stringValue = localStorage.getItem(key);

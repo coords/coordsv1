@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc = "http://purl.org/dc/elements/1.1/">
+    <rdf:Description rdf:about="index.xhtml">
+        <dc:title>Coords</dc:title>
+        <dc:creator>Andrew Beveridge, Leif Gehrmann</dc:creator>
+        <dc:subject>Easily chat with people near you and maintain chat rooms with friends centred around a common location!</dc:subject>
+        <dc:description>Mobile web application for location-based chat rooms</dc:description>
+        <dc:publisher>Andrew Beveridge</dc:publisher>
+        <dc:date>2015:01:21</dc:date>
+        <dc:type>text</dc:type>
+        <dc:format>application/xhtml+xml</dc:format>
+        <dc:language>en</dc:language>
+    </rdf:Description>
+</rdf:RDF>

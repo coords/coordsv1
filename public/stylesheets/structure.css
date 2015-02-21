@@ -53,9 +53,9 @@ div.unscrollablePageContainer.activePage.duringTransition {
 }
 
 /* Background for Login and About pages, nice radial glow */
-div.radialBackground {
+/*div.radialBackground {
     background-image: radial-gradient(circle at 50% 60%, rgb(225, 225, 225), rgb(183, 220, 179));
-}
+}*/
 
 /* This is the main content element for a given page; it has role="main" and .ui-content, should be scrollable, but does not necessarily fill 100% of screen */
 .scrollableContent {
@@ -94,6 +94,17 @@ div.page-container.login-page div.row {
     margin: 2em;
 }
 
+
+/**************************************/
+/*      BOOTSTRAP ELEMENT STYLES      */
+/**************************************/
+
+.margin-top-05 { margin-top: 0.5em; }
+.margin-top-10 { margin-top: 1.0em; }
+.margin-top-15 { margin-top: 1.5em; }
+.margin-top-20 { margin-top: 2.0em; }
+.margin-top-25 { margin-top: 2.5em; }
+.margin-top-30 { margin-top: 3.0em; }
 
 /********************/
 /*      PANELS      */
@@ -220,16 +231,16 @@ div.pageHeader h1.driverName {
 /* Pages which need to be moved down to show this bar */
 
 body.pushedDownByLoadingBar div.unscrollablePageContainer.activePage {
-    top: 10px !important;
+    top: 7px !important;
 }
 body.pushedDownByLoadingBar div.unscrollablePanelContainer.activePanel {
-    top: 10px !important;
+    top: 7px !important;
 }
 body.pushedDownByLoadingBar div#panelContentOverlay {
-    top: 10px !important;
+    top: 7px !important;
 }
 body.pushedDownByLoadingBar div.ui-widget-overlay.ui-front {
-    top: 10px !important;
+    top: 7px !important;
 }
 
 /* Loading bar container */
@@ -241,7 +252,7 @@ body.pushedDownByLoadingBar div.ui-widget-overlay.ui-front {
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 10px;
+    height: 7px;
 }
 
 /* The actual loading bar */
@@ -287,8 +298,8 @@ body.pushedDownByLoadingBar div.ui-widget-overlay.ui-front {
     );
     background-image: linear-gradient(-45deg, #3366cc 25%, transparent 25%, transparent 50%, #3366cc 50%, #3366cc 75%, transparent 75%, transparent);
     background-size: 50px 50px;
-    -webkit-box-shadow: inset 0 10px 0 rgba(255, 255, 255, .2);
-    -moz-box-shadow: inset 0 10px 0 rgba(255, 255, 255, .2);
+    -webkit-box-shadow: inset 0 7px 0 rgba(255, 255, 255, .2);
+    -moz-box-shadow: inset 0 7px 0 rgba(255, 255, 255, .2);
     box-shadow: inset 0 5px 0 rgba(255, 255, 255, .2);
     -webkit-animation: move 2s linear infinite;
     -moz-animation: move 2s linear infinite;
@@ -298,7 +309,7 @@ body.pushedDownByLoadingBar div.ui-widget-overlay.ui-front {
     -webkit-background-size: 50px 50px;
     -moz-background-size: 50px 50px;
     -ms-background-size: 50px 50px;
-    -ms-box-shadow: inset 0 10px 0 rgba(255, 255, 255, .2);
+    -ms-box-shadow: inset 0 7px 0 rgba(255, 255, 255, .2);
 }
 
 .loadingBar > span:after {

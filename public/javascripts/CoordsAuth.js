@@ -4,58 +4,98 @@ CoordsAuth = {
         key: 'xii9p-_4ZfUXQZhCmOnMFyqLgjM'
     },
 
-    init_oauthio: function init_oauthio()
+    logout: function logout()
     {
-        try
-        {
-            CoordsLog.v("CoordsAuth." + CoordsLog.getInlineFunctionTrace(arguments));
-
-            OAuth.initialize(CoordsAuth.credentials.key);
-        }
-        catch (e)
-        {
-            CoordsLog.exception(e);
-        }
+        CoordsDB.removeObject("user");
+        CoordsPages.changePage("loginPage");
     },
 
-    loggedIn: function isLoggedIn()
+    checkUserLogin: function checkUserLogin(loggedInCallback)
     {
         try
         {
             CoordsLog.v("CoordsAuth." + CoordsLog.getInlineFunctionTrace(arguments));
 
-            var authProvider = CoordsDB.getString("authProvider");
-            
-            if(CoordsUtil.stringIsBlank(authProvider))
+            var user = CoordsDB.getObject("user");
+
+            if (CoordsUtil.stringIsNotBlank(user['authProvider']))
             {
-                return false;
-            }
-            
-            return true;
-        }
-        catch (e)
-        {
-            CoordsLog.exception(e);
-        }
-    },
-    
-    retrieve_token: function retrieve_token(callback)
-    {
-        try
-        {
-            CoordsLog.v("CoordsAuth." + CoordsLog.getInlineFunctionTrace(arguments));
+                $.ajax({
+                    url: '/me/' + user['authProvider'],
+                    success: function (data, status)
+                    {
+                        data['authProvider'] = user['authProvider'];
+                        CoordsDB.setObject("user", data);
 
-            $.ajax({
-                url: '/oauth/token',
-                success: function (data, status)
-                {
-                    callback(null, data.token);
-                },
-                error: function (data)
-                {
-                    callback(data);
-                }
-            });
+                        CoordsLog.i(data);
+                        
+                        $('.userProfileName').text(data['name']);
+                        $('.userProfilePhoto').attr('src', data['avatar']);
+
+                        if(CoordsUtil.isDefined(data['gender']))
+                        {
+                            $('.userProfileGender')
+                                .text(data['gender'] ? 'Female' : 'Male')
+                                .closest('tr')
+                                .removeClass('hidden');
+                        }
+                        else
+                        {
+                            $('.userProfileGender').closest('tr').addClass('hidden');
+                        }
+                        
+                        if(CoordsUtil.isDefined(data['location']))
+                        {
+                            $('.userProfileLocation')
+                                .text(data['location'])
+                                .closest('tr')
+                                .removeClass('hidden');
+                        }
+                        else
+                        {
+                            $('.userProfileLocation').closest('tr').addClass('hidden');
+                        }
+
+                        if(CoordsUtil.isDefined(data['email']))
+                        {
+                            $('.userProfileEmail')
+                                .text(data['email'])
+                                .attr('href', 'mailto:' + data['email'])
+                                .closest('tr')
+                                .removeClass('hidden');
+                        }
+                        else
+                        {
+                            $('.userProfileEmail').closest('tr').addClass('hidden');
+                        }
+
+                        if(CoordsUtil.isDefined(data['birthdate']))
+                        {
+                            $('.userProfileDOB')
+                                .text(data['birthdate']['day'] + '/' + data['birthdate']['month'] + '/' + data['birthdate']['year'])
+                                .closest('tr')
+                                .removeClass('hidden');
+                        }
+                        else
+                        {
+                            $('.userProfileDOB').closest('tr').addClass('hidden');
+                        }
+                        
+                        if (CoordsUtil.isDefined(loggedInCallback))
+                        {
+                            loggedInCallback();
+                        }
+                    },
+                    error: function (data)
+                    {
+                        CoordsAuth.logout();
+                    }
+                });
+            }
+            else
+            {
+                CoordsAuth.logout();
+            }
         }
         catch (e)
         {
@@ -71,70 +111,30 @@ CoordsAuth = {
 
             OAuth.popup(provider, {
                 state: token,
-                // Google requires the following field 
-                // to get a refresh token
+                
+                // Google requires the following field to get a refresh token
                 authorize: {
                     approval_prompt: 'force'
                 }
             })
-                .done(function (r)
-                {
-                    $.ajax({
-                        url: '/oauth/signin',
-                        method: 'POST',
-                        data: {
-                            code: r.code
-                        },
-                        success: function (data, status)
-                        {
-                            callback(null, data);
-                        },
-                        error: function (data)
-                        {
-                            callback(data);
-                        }
-                    });
-                })
-                .fail(function (e)
-                {
-                    console.log(e);
-                });
-        }
-        catch (e)
-        {
-            CoordsLog.exception(e);
-        }
-    },
-
-    updateUserInfoDisplay: function updateUserInfoDisplay(callback)
-    {
-        try
-        {
-            CoordsLog.v("CoordsAuth." + CoordsLog.getInlineFunctionTrace(arguments));
-
-            var authProvider = CoordsDB.getString("authProvider");
-
-            if (CoordsUtil.stringIsNotBlank(authProvider))
+            .done(function (r)
             {
                 $.ajax({
-                    url: '/me/' + authProvider,
+                    url: '/oauth/signin/' + provider + '/' + r.code,
                     success: function (data, status)
                     {
-                        $('#name_box').html(data['name']);
-                        $('#email_box').html(data['email']);
-                        $('#img_box').attr('src', data['avatar']);
-
-                        if (callback)
-                        {
-                            callback(data);
-                        }
+                        callback(data);
                     },
                     error: function (data)
                     {
-
+                        CoordsAuth.logout();
                     }
                 });
-            }
+            })
+            .fail(function (e)
+            {
+                CoordsAuth.logout();
+            });
         }
         catch (e)
         {
@@ -148,18 +148,30 @@ CoordsAuth = {
         {
             CoordsLog.v("CoordsAuth." + CoordsLog.getInlineFunctionTrace(arguments));
 
-            CoordsDB.setString("authProvider", provider);
+            CoordsUI.showLoadingBar();
+            
+            OAuth.initialize(CoordsAuth.credentials.key);
 
-            CoordsAuth.init_oauthio();
-            CoordsAuth.retrieve_token(function (err, token)
-            {
-                CoordsAuth.authenticate(provider, token, function (err)
+            $.ajax({
+                url: '/oauth/token',
+                success: function (data, status)
                 {
-                    if (!err)
+                    CoordsAuth.authenticate(provider, data.token, function ()
                     {
-                        CoordsAuth.updateUserInfoDisplay();
-                    }
-                });
+                        CoordsDB.setObject("user", {
+                            authProvider: provider
+                        });
+                        
+                        CoordsAuth.checkUserLogin(function loginSuccess()
+                        {
+                            CoordsPages.changePage("mapPage");
+                        });
+                    });
+                },
+                error: function (data)
+                {
+                    CoordsAuth.logout();
+                }
             });
         }
         catch (e)
