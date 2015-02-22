@@ -1,0 +1,71 @@
+.messenger {
+    border: 1px solid #00c0d0;
+}
+
+.messenger-messages {
+    width:100%;
+    background: #ffffff;
+    padding: 10px;
+}
+
+.messenger-compose {
+    width:100%;
+    border-top: 1px solid #dddddd;
+    background: #ffffff;
+}
+
+.messenger-message {
+    width:100%;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.messenger-message .messenger-message-content{
+    display: inline-block;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+.messenger-message.messenger-message-user-other .messenger-message-user{
+    display: inline-block;
+}
+
+.messenger-message.messenger-message-user-other .messenger-message-user img {
+    width: 35px;
+    height: 35px;
+    border-radius: 100px;
+    margin-right: 10px;
+}
+
+.messenger-message.messenger-message-user-other .messenger-message-content{
+    /*border: 1px solid #dddddd;*/
+    background: #eeeeee;
+}
+
+.messenger-message.messenger-message-user-me {
+    text-align: right;
+}
+
+.messenger-message.messenger-message-user-me .messenger-message-content{
+    /*border: 1px solid rgba(0,178,89,0.5);*/
+    background: rgba(0,178,89,0.3);
+    background: rgba(0,178,89,1);
+    color: #ffffff;
+}
+
+.messenger-compose-text{
+    display: inline-block;
+    width: calc( 100% - 75px);
+    border: none;
+    padding: 10px;
+}
+
+.messenger-compose-send{
+    border-radius: 0px;
+    vertical-align: top;
+    display: inline-block;
+    background: rgba(0,178,89,1);
+    width: 75px;
+    height: 50px;
+}
