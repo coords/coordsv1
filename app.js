@@ -8,7 +8,17 @@ env.logger = require('morgan');
 env.cookieParser = require('cookie-parser');
 env.bodyParser = require('body-parser');
 env.session = require('express-session');
+env.mongoClient = require('mongodb').MongoClient;
+env.assert = require('assert');
 env.app = env.express();
+
+// Connect to mongodb server
+var mongoUrl = 'mongodb://localhost';
+env.mongoClient.connect(mongoUrl, function(err,db) {
+    env.assert.equal(null,err);
+    env.mongo = db;
+    console.log('Connected to ' + mongoUrl);
+});
 
 require('./modules/oauth.js')(env);
 require('./modules/socketio.js')(env);
