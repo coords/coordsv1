@@ -13,7 +13,7 @@ body, html {
 
     height: 100%;
 
-    background: #e8e8e8;
+    background: #FFFFFF;
 }
 
 /* This is the top element for a given page, with data-role="page". It should be 100% of the viewport and not scrollable; scrolling happens in children */
