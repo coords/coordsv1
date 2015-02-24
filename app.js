@@ -13,7 +13,7 @@ env.assert = require('assert');
 env.app = env.express();
 
 // Connect to mongodb server
-var mongoUrl = 'mongodb://localhost';
+var mongoUrl = 'mongodb://localhost/coords';
 env.mongoClient.connect(mongoUrl, function(err,db) {
     env.assert.equal(null,err);
     env.mongo = db;
@@ -22,6 +22,7 @@ env.mongoClient.connect(mongoUrl, function(err,db) {
 
 require('./modules/oauth.js')(env);
 require('./modules/socketio.js')(env);
+require('./modules/rooms.js')(env);
 
 env.app.use(env.express.static(env.path.join(__dirname, 'public')));
 env.app.use('/', require('./routes/index'));
