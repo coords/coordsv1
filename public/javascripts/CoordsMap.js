@@ -9,8 +9,7 @@ CoordsMap = {
             CoordsMap.map = L.map('map').setView([55.909403, -3.320699], 16);
             
             L.tileLayer('https://{s}.tiles.mapbox.com/v4/leifgehrmann.7eb9fffd/{z}/{x}/{y}'+(L.Browser.retina ? '@2x': '')+'.png?access_token=pk.eyJ1IjoibGVpZmdlaHJtYW5uIiwiYSI6IjBtOXlPQk0ifQ.I_I40vLyM3KMJWAMUjKiFw', {
-                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-                detectRetina: true
+                attribution: "<a href='https://www.mapbox.com/about/maps/' target='_blank'>&copy; Mapbox &copy; OpenStreetMap</a> <a class='mapbox-improve-map' href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a>"
             }).addTo(CoordsMap.map);
 
             CoordsMap.map.addControl( new L.Control.Gps() );
