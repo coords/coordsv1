@@ -3,13 +3,22 @@ module.exports = function (env)
 
     var oauth = require('oauthio');
 
-// env.app.use(env.bodyParser());
+    // env.app.use(env.bodyParser());
     env.app.use(env.cookieParser());
     env.app.use(env.session({secret: 'crazysecretcat', key: 'sid', resave: true, saveUninitialized: true}));
 
     var config = {
         key: 'xii9p-_4ZfUXQZhCmOnMFyqLgjM',
         secret: 'QqbTG8NDh9NYm2qDrbh_SaRFfRM'
+    };
+
+    env.Users = {};
+    env.Users.getUserBySession = function(){
+        var users = env.mongo.collection('users');
+
+    };
+    env.Users.getUserById = function(){
+
     };
 
     oauth.initialize(config.key, config.secret);
@@ -32,6 +41,56 @@ module.exports = function (env)
         })
             .then(function (request_object)
             {
+                return request_object.me();
+            })
+            .then(function (user_data)
+            {
+                console.log("/oauth/signin session: ");
+                console.log(req.session.oauth);
+
+                console.log("/oauth/signin user_data: ");
+                console.log(user_data);
+
+                var users = env.mongo.collection('users');
+                
+                // Check if user has already been entered into the database
+                // If the user has not been entered into the collection, we add:
+                //  * id
+                //  * provider
+                //  * access_token
+                var user = {};
+                user.provider = req.params.provider;
+                user.providerId = user_data.id;
+                user.access_token = req.session.oauth[user.provider].access_token;
+                
+                console.log("Successfully signed in as new user, upserting: ");
+                console.log(user);
+
+                users.update(
+                    {
+                        provider: user.provider,
+                        providerId: user.providerId
+                    },
+                    user,
+                    { 
+                        upsert: true 
+                    },
+                    function(err, result) {
+                        if( err == null
+                        ) {
+                            console.log(result);
+                            console.log("oauth.js : Inserted 1 user");
+                        } else {
+                            console.log(err);
+                        }
+                    }
+                );
+
+            })
+            .then(function ()
+            {
+                console.log("/oauth/signin successfully authed user");
+
                 // Here the user is authenticated, and the access token 
                 // for the requested provider is stored in the session.
                 res.status(200).send('The user is authenticated');

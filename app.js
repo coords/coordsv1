@@ -20,6 +20,7 @@ env.mongoClient.connect(mongoUrl, function(err,db) {
     console.log('Connected to ' + mongoUrl);
 });
 
+require('./modules/util.js')(env);
 require('./modules/oauth.js')(env);
 require('./modules/socketio.js')(env);
 require('./modules/rooms.js')(env);
