@@ -13,12 +13,27 @@ module.exports = function (env)
     };
 
     env.Users = {};
-    env.Users.getUserBySession = function(){
+    env.Users.getUserBySession = function(provider,session){
         var users = env.mongo.collection('users');
-
+        oauth.auth(provider, session);
+        // How on earth do we get the OId?....
     };
-    env.Users.getUserById = function(){
-
+    env.Users.getUserById = function(userId,success,fail,badRequest){
+        if(env.Util.isHex(userId)) {
+            var ObjectId = require('mongodb').ObjectID;
+            var userOId = new ObjectId(userId);
+            var users = env.mongo.collection('users');
+            users.find({_id: userOId}, function (err, doc) {
+                if (err == null) {
+                    success(doc);
+                    return doc;
+                } else {
+                    fail(err);
+                }
+            });
+        } else {
+            badRequest();
+        }
     };
 
     oauth.initialize(config.key, config.secret);
