@@ -306,7 +306,8 @@ module.exports = function (env)
                             _id: 1,
                             name: 1,
                             dist: 1,
-                            private: 1
+                            private: 1,
+                            loc: 1
                         }
                     }
                 ];
