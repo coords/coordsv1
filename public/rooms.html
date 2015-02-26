@@ -81,6 +81,85 @@
                     }
                 });
             });
+
+            $.ajax({
+                type: "GET",
+                url: "rooms/nearby/55.91153932483637/-3.3208322525024414/1000/10/0",
+                contentType: "application/json",
+                dataType: "json",
+                success: function (msg) {
+                    console.log(msg)
+                },
+                error:function(x,e){
+                    if(x.status==0){
+                        alert('error 0');
+                    }
+                }
+            });
+
+            var query = {
+                'roomId': '54ea531cefac2bd6717ceb5e',
+                'passphrase':'hello'
+            }
+            function joinRoom(roomId){
+                $.ajax({
+                    type: "POST",
+                    url: "rooms/join",
+                    data: JSON.stringify({
+                        'roomId': '54ea531cefac2bd6717ceb5e',
+                        'passphrase':'hello'
+                    }),
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (msg) {
+                        console.log(data)
+                    },
+                    error:function(x,e){
+                        if(x.status==0){
+                            alert('error 0');
+                        }
+                    }
+                });
+            }
+            function joinPasswordRoom(roomId){
+                $.ajax({
+                    type: "POST",
+                    url: "rooms/join",
+                    data: JSON.stringify({
+                        'roomId': '54ea5390efac2bd6717ceb61',
+                        'passphrase':'lalalal'
+                    }),
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (msg) {
+                        console.log(data)
+                    },
+                    error:function(x,e){
+                        if(x.status==0){
+                            alert('error 0');
+                        }
+                    }
+                });
+            }
+            function leaveRoom(roomId){
+                $.ajax({
+                    type: "POST",
+                    url: "rooms/leave",
+                    data: JSON.stringify({
+                        'roomId': '54ea531cefac2bd6717ceb5e'
+                    }),
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (msg) {
+                        console.log(data)
+                    },
+                    error:function(x,e){
+                        if(x.status==0){
+                            alert('error 0');
+                        }
+                    }
+                });
+            }
         </script>
     </body>
 </html>

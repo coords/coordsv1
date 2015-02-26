@@ -4,14 +4,17 @@ module.exports = function (env)
     env.app.use(env.bodyParser.urlencoded({
         extended: true
     }));
-    
-    var createRoom = function(name,latitude,longitude,isPrivate,passphrase,success,fail,badRequest){
+
+    env.Rooms = {};
+    env.Rooms.createRoom = function(name,latitude,longitude,isPrivate,passphrase,success,fail,badRequest){
         if( env.Util.isString(name) &&
             env.Util.isLatitude(latitude) &&
             env.Util.isLongitude(longitude) &&
             env.Util.isBoolean(isPrivate) &&
-            ( env.Util.isString(passphrase) ||
-            env.Util.isUndefined(passphrase)
+            (
+                env.Util.isString(passphrase) ||
+                env.Util.isUndefined(passphrase) ||
+                env.Util.isNull(passphrase)
             )
         ) {
             // Create a room object
@@ -39,13 +42,34 @@ module.exports = function (env)
         }
     };
 
+    env.Rooms.updateRoom = function(roomId,room,success,fail,badrequest){
+        if (env.Util.isHex(roomId)){
+            var ObjectId = require('mongodb').ObjectID;
+            var roomOId = new ObjectId(roomId);
+            var rooms = env.mongo.collection('rooms');
+            rooms.update(
+                { _id: roomOId },
+                room,
+                {},
+                function(err, result) {
+                    if( err == null) {
+                        success();
+                    } else {
+                        fail(err);
+                    }
+                });
+        } else {
+            badrequest();
+        }
+    };
+
     // Returns the room based on object id
-    var getRoomById = function(roomId,success,fail,badRequest){
+    env.Rooms.getRoomById = function(roomId,success,fail,badRequest){
         if(env.Util.isHex(roomId)) {
             var ObjectId = require('mongodb').ObjectID;
             var roomOId = new ObjectId(roomId);
             var rooms = env.mongo.collection('rooms');
-            rooms.find({_id: roomOId}, function (err, doc) {
+            rooms.findOne({_id: roomOId}, function (err, doc) {
                 if (err == null) {
                     success(doc);
                     return doc;
@@ -59,28 +83,107 @@ module.exports = function (env)
     };
 
     // checks if the user has correctly given the passphrase
-    var verifyRoomPassphrase = function(room,passphrase,success,fail,badRequest){
+    env.Rooms.verifyRoomPassphrase = function(roomId,passphrase,success,fail,badRequest){
         if( env.Util.isString(passphrase) ||
-            env.Util.isUndefined(passphrase)
+            env.Util.isNull(passphrase)
         ) {
-            if ("passphrase" in room) {
-                if (passphrase === room.passphrase) {
-                    success();
-                    return true;
+            env.Rooms.getRoomById(roomId,function(room) {
+                if ("passphrase" in room && !env.Util.isNull(room.passphrase)) {
+                    if (passphrase === room.passphrase) {
+                        success();
+                        return true;
+                    } else {
+                        fail();
+                    }
                 } else {
-                    fail();
+                    success();
                 }
-            } else {
-                success();
-            }
+            },fail,badRequest);
         } else {
             badRequest();
         }
         return false;
     };
 
-    var addRoomToUser = function(){
+    env.Rooms.userInRoom = function(userId,roomId,success,fail,badRequest){
+        var ObjectId = require('mongodb').ObjectID;
+        var roomOId = new ObjectId(roomId);
+        env.Users.getUserById(userId,function(user){
+            if(user.roomsJoined){
+                if(user.roomsJoined.indexOf(roomOId)==-1){
+                    success(false);
+                } else {
+                    success(true);
+                }
+            } else { success(false); }
+        },fail,badRequest);
+    };
 
+    env.Rooms.addUserToRoom = function(userId,roomId,success,fail,badRequest){
+        if(env.Util.isHex(userId)&&env.Util.isHex(roomId)) {
+            var ObjectId = require('mongodb').ObjectID;
+            var userOId = new ObjectId(userId);
+            var roomOId = new ObjectId(roomId);
+            env.Rooms.getRoomById(roomId,function(room){
+                env.Users.getUserById(userId,function(user){
+
+                    if(env.Util.isArray(user.roomsJoined)){
+                        if(env.Util.OIdInArray(roomOId,user.roomsJoined)==-1){
+                            user.roomsJoined.push(roomOId);
+                        }
+                    } else { user.roomsJoined = [roomOId]; }
+
+                    if(env.Util.isArray(room.usersJoined)){
+                        if(env.Util.OIdInArray(userOId,room.usersJoined)==-1){
+                            room.usersJoined.push(userOId);
+                        }
+                    } else { room.usersJoined = [userOId]; }
+
+                    env.Users.updateUser(userId,user,function(){
+                        console.log(" @room, Updated User "+userId);
+                        env.Rooms.updateRoom(roomId,room,function(){
+                            console.log(" @room, Updated Room "+roomId);
+                            success();
+                        },fail,badRequest);
+                    },fail,badRequest);
+                },fail,badRequest);
+            },fail,badRequest);
+        } else {
+            badRequest();
+        }
+    };
+
+    env.Rooms.removeUserFromRoom = function(userId,roomId,success,fail,badRequest){
+        if(env.Util.isHex(userId)&&env.Util.isHex(roomId)) {
+            var ObjectId = require('mongodb').ObjectID;
+            var userOId = new ObjectId(userId);
+            var roomOId = new ObjectId(roomId);
+            env.Rooms.getRoomById(roomId,function(room){
+                env.Users.getUserById(userId,function(user){
+
+                    if(user.roomsJoined){
+                        var i = env.Util.OIdInArray(roomOId,user.roomsJoined);
+                        if(i!==-1)
+                            user.roomsJoined.splice(i,1);
+                    }
+
+                    if(room.usersJoined){
+                        var i = env.Util.OIdInArray(userOId,room.usersJoined);
+                        if(i!==-1)
+                            room.usersJoined.splice(i,1);
+                    }
+
+                    env.Users.updateUser(userId,user,function(){
+                        env.Rooms.updateRoom(roomId,room,function(){
+                            success();
+                        },fail,badRequest);
+                    },fail,badRequest);
+
+                },fail,badRequest);
+            },fail,badRequest);
+        } else {
+            badRequest();
+        }
     };
 
     /* Endpoints */
@@ -95,7 +198,7 @@ module.exports = function (env)
      * @return a json of either the unique mongo-db id of the room or a false success
      */
     env.app.post('/rooms/create', function(req, res) {
-        createRoom(
+        env.Rooms.createRoom(
             req.body.name,
             req.body.latitude,
             req.body.longitude,
@@ -228,29 +331,35 @@ module.exports = function (env)
      * @optional passphrase
      * @return a json object, with a success response of either true or false
      */
-    env.app.get('/rooms/join', function (req, res)
+    env.app.post('/rooms/join', function (req, res)
     {
         if( env.Util.isHex(req.body.roomId) &&
             ( env.Util.isString(req.body.passphrase) ||
-            env.Util.isUndefined(req.body.passphrase)
+            env.Util.isUndefined(req.body.passphrase) ||
+            env.Util.isNull(req.body.passphrase)
             )
         ) {
-            var ObjectId = require('mongodb').ObjectID;
-            var rooms = env.mongo.collection('rooms');
             var passphrase = req.body.passphrase;
-            var room_id = req.body.id;
-            var room_oid = new ObjectId(room_id);
+            var roomId = req.body.roomId;
+            var userId = env.Users.getUserIdBySession(req.session);
 
-            getRoomById( req.body.room_id, function(room){
-                verifyRoomPassphrase(room, passphrase, function(){
-                    console.log("Join user with room");
-                }, function(){
-                    console.log("Wrong passphrase");
+            env.Rooms.verifyRoomPassphrase(roomId, passphrase, function(){
+                console.log(" @room, verified passphrase");
+                env.Rooms.addUserToRoom(userId,roomId,function(results){
+                    console.log(" @room, Added User "+userId+" to Room "+roomId);
+                    res.status(200).json(results);
+                },function(err){
+                    console.log("error");
+                    console.log(err);
+                    res.status(500);
+                },function(){
+                    console.log("bad request");
+                    res.status(400);
                 });
             }, function(){
-                console.log("room not found");
+                console.log("Wrong passphrase");
+                res.status(403);
             });
-
         } else {
             res.status(400);
         }
@@ -261,14 +370,26 @@ module.exports = function (env)
      * @requires roomId
      * @return a json object, with a success response of either true or false
      */
-    /*env.app.get('/rooms/leave', function (req, res)
+    env.app.post('/rooms/leave', function (req, res)
     {
-        *//*var latitude = req.body.latitude,
-         longitude = req.body.longitude;*//*
-        // ...
-        res.status(200).json({
+        if( env.Util.isHex(req.body.roomId)) {
+            var roomId = req.body.roomId;
+            var userId = env.Users.getUserIdBySession(req.session);
 
-        });
-    });*/
+            env.Rooms.removeUserFromRoom(userId,roomId,function(results){
+                console.log(" @room, Removed User "+userId+" from Room "+roomId);
+                res.status(200).json(results);
+            },function(err){
+                console.log("error");
+                console.log(err);
+                res.status(500);
+            },function(){
+                console.log("bad request");
+                res.status(400);
+            });
+        } else {
+            res.status(400);
+        }
+    });
 
 };

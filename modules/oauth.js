@@ -3,38 +3,63 @@ module.exports = function (env)
 
     var oauth = require('oauthio');
 
-    // env.app.use(env.bodyParser());
-    env.app.use(env.cookieParser());
-    env.app.use(env.session({secret: 'crazysecretcat', key: 'sid', resave: true, saveUninitialized: true}));
-
     var config = {
         key: 'xii9p-_4ZfUXQZhCmOnMFyqLgjM',
         secret: 'QqbTG8NDh9NYm2qDrbh_SaRFfRM'
     };
 
     env.Users = {};
-    env.Users.getUserBySession = function(provider,session){
-        var users = env.mongo.collection('users');
-        oauth.auth(provider, session);
-        // How on earth do we get the OId?....
-    };
-    env.Users.getUserById = function(userId,success,fail,badRequest){
-        if(env.Util.isHex(userId)) {
+
+    env.Users.updateUser = function(userId,user,success,fail,badrequest){
+        if (env.Util.isHex(userId)){
             var ObjectId = require('mongodb').ObjectID;
             var userOId = new ObjectId(userId);
             var users = env.mongo.collection('users');
-            users.find({_id: userOId}, function (err, doc) {
-                if (err == null) {
+            users.update(
+                { _id: userOId },
+                user,
+                {},
+                function(err, result) {
+                    if( err == null) {
+                        success();
+                    } else {
+                        fail(err);
+                    }
+                });
+        } else {
+            badrequest();
+        }
+    };
+
+    env.Users.getUserById = function (userId, success, fail, badRequest)
+    {
+        if (env.Util.isHex(userId))
+        {
+            var ObjectId = require('mongodb').ObjectID;
+            var userOId = new ObjectId(userId);
+            var users = env.mongo.collection('users');
+            users.findOne({_id: userOId}, function (err, doc)
+            {
+                if (err == null)
+                {
                     success(doc);
-                    return doc;
-                } else {
+                }
+                else
+                {
                     fail(err);
                 }
             });
-        } else {
+        }
+        else
+        {
             badRequest();
         }
     };
+
+    env.Users.getUserIdBySession = function (session)
+    {
+        return session.user.id;
+    }
 
     oauth.initialize(config.key, config.secret);
 
@@ -58,28 +83,15 @@ module.exports = function (env)
             {
                 return request_object.me();
             })
-            .then(function (user_data)
+            .then(function (providerUserData)
             {
-                console.log("/oauth/signin session: ");
-                console.log(req.session.oauth);
-
-                console.log("/oauth/signin user_data: ");
-                console.log(user_data);
-
                 var users = env.mongo.collection('users');
-                
-                // Check if user has already been entered into the database
-                // If the user has not been entered into the collection, we add:
-                //  * id
-                //  * provider
-                //  * access_token
-                var user = {};
-                user.provider = req.params.provider;
-                user.providerId = user_data.id;
-                user.access_token = req.session.oauth[user.provider].access_token;
-                
-                console.log("Successfully signed in as new user, upserting: ");
-                console.log(user);
+
+                var user = {
+                    provider: req.params.provider,
+                    providerId: providerUserData.id,
+                    accessToken: req.session.oauth[req.params.provider].access_token
+                };
 
                 users.update(
                     {
@@ -87,28 +99,38 @@ module.exports = function (env)
                         providerId: user.providerId
                     },
                     user,
-                    { 
-                        upsert: true 
+                    {
+                        upsert: true
                     },
-                    function(err, result) {
-                        if( err == null
-                        ) {
-                            console.log(result);
-                            console.log("oauth.js : Inserted 1 user");
-                        } else {
+                    function (err, result)
+                    {
+                        if (err == null)
+                        {
+                            console.log("oauth.js : Updated / Inserted 1 user");
+                        }
+                        else
+                        {
                             console.log(err);
                         }
                     }
                 );
 
-            })
-            .then(function ()
-            {
-                console.log("/oauth/signin successfully authed user");
+                // Now we've inserted the basics about this user into the database, add the rest of the data to the session and JSON array we return to the client
 
-                // Here the user is authenticated, and the access token 
-                // for the requested provider is stored in the session.
-                res.status(200).send('The user is authenticated');
+                // Fetch the ID of the row we just insert/updated and stick it in the user object
+                users.find({
+                    provider: user.provider,
+                    providerId: user.providerId
+                }).toArray(function(err, docs) {
+                    
+                    user.id = docs[0]._id;
+                    
+                    user.providerUserData = providerUserData;
+
+                    req.session.user = user;
+
+                    res.json(user);
+                });
             })
             .fail(function (e)
             {
@@ -117,28 +139,9 @@ module.exports = function (env)
             });
     });
 
-    env.app.get('/me/:provider', function (req, res)
+    env.app.get('/user/session', function (req, res)
     {
-        // Here we first build a request object from the session with the auth method.
-        // Then we perform a request using the .me() method.
-        // This retrieves a unified object representing the authenticated user.
-        // You could also use .get('/me') and map the results to fields usable from
-        // the front-end (which waits for the fields 'name', 'email' and 'avatar').
-
-        oauth.auth(req.params.provider, req.session)
-            .then(function (request_object)
-            {
-                return request_object.me();
-            })
-            .then(function (user_data)
-            {
-                res.json(user_data);
-            })
-            .fail(function (e)
-            {
-                console.log(e);
-                res.status(400).send('An error occured');
-            });
-
+        res.json(req.session);
     });
+
 };
