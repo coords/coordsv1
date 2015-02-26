@@ -9,21 +9,17 @@
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
         <link rel="stylesheet" href="bower_components/lato/css/lato.css"/>
 
-        <link rel="stylesheet" href="stylesheets/messenger.css"/>
-        <link rel="stylesheet" href="stylesheets/structure.css"/>
-        <link rel="stylesheet" href="stylesheets/ui.css"/>
-        <link rel="stylesheet" href="stylesheets/animations.css"/>
         <link rel="stylesheet" href="stylesheets/media-sizes.css"/>
 
     </head>
     <body>
         <!-- Main Menu Panel, disconnected from pages for re-use -->
-        <div id="menuPanel" class="unscrollablePanelContainer rightPanel inactivePanel">
+        <div id="menuPanel" class="unscrollablePanelContainer rightPanel activePanel">
 
-            <div class="scrollableContent customWebkitScrollbar fullHeight noselect">
+            <div class="scrollableContent customWebkitScrollbar fullHeight noselect overflow-y-hidden">
 
-                <div class="col-xs-4 room room-1">
-                    <form class="form-inline">
+                <div class="room room-1 fullHeight">
+                    <!--<form class="form-inline">
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-addon">Room Name:</div>
@@ -31,10 +27,16 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Set room</button>
-                    </form>
+                    </form>-->
                     <div class="messenger">
-                        <div class="messenger-messages">
+                        <div class="messenger-room">
+                            Room Name
+                        </div>
+                        <div class="messenger-messages scrollableContent">
                             <div class="messenger-message messenger-message-user-other">
+                                <div class="messenger-message-timestamp">
+                                    15 Feb At 13:08
+                                </div>
                                 <div class="messenger-message-user">
                                     <img src="https://avatars0.githubusercontent.com/u/757713?v=3&amp;s=40"/>
                                 </div>
@@ -43,13 +45,90 @@
                                 </div>
                             </div>
                             <div class="messenger-message messenger-message-user-me">
+                                <div class="messenger-message-timestamp">
+                                    15 Feb At 13:08
+                                </div>
                                 <div class="messenger-message-content">
                                     This is just a test.
                                 </div>
                             </div>
+                            <div class="messenger-message messenger-message-user-me">
+                                <div class="messenger-message-timestamp">
+                                    15 Feb At 13:08
+                                </div>
+                                <div class="messenger-message-content">
+                                    Ignore me
+                                </div>
+                            </div>
+                            <div class="messenger-message messenger-message-user-other">
+                                <div class="messenger-message-timestamp">
+                                    15 Feb At 13:08
+                                </div>
+                                <div class="messenger-message-user">
+                                    <img src="https://avatars0.githubusercontent.com/u/757713?v=3&amp;s=40"/>
+                                </div>
+                                <div class="messenger-message-content">
+                                    okay
+                                </div>
+                            </div>
+                            <div class="messenger-message messenger-message-user-me">
+                                <div class="messenger-message-timestamp">
+                                    15 Feb At 13:08
+                                </div>
+                                <div class="messenger-message-content">
+                                    Hey, question...
+                                </div>
+                            </div>
+                            <div class="messenger-message messenger-message-user-other">
+                                <div class="messenger-message-timestamp">
+                                    15 Feb At 13:08
+                                </div>
+                                <div class="messenger-message-user">
+                                    <img src="https://avatars0.githubusercontent.com/u/757713?v=3&amp;s=40"/>
+                                </div>
+                                <div class="messenger-message-content">
+                                    I'm Ignoring you!
+                                </div>
+                            </div>
+                            <div class="messenger-message messenger-message-user-other">
+                                <div class="messenger-message-timestamp">
+                                    15 Feb At 13:08
+                                </div>
+                                <div class="messenger-message-user">
+                                    <img src="https://avatars0.githubusercontent.com/u/757713?v=3&amp;s=40"/>
+                                </div>
+                                <div class="messenger-message-content">
+                                    I'm Ignoring you!
+                                </div>
+                            </div>
+                            <div class="messenger-message messenger-message-user-me">
+                                <div class="messenger-message-timestamp">
+                                    15 Feb At 13:08
+                                </div>
+                                <div class="messenger-message-content">
+                                    &#x1F41B; <- an emoji
+                                </div>
+                            </div>
+                            <div class="messenger-message messenger-message-user-me">
+                                <div class="messenger-message-timestamp">
+                                    15 Feb At 13:08
+                                </div>
+                                <div class="messenger-message-content">
+                                    Lorem ipsum dolor sit amet
+                                </div>
+                            </div>
+                            <div class="messenger-message messenger-message-user-me">
+                                <div class="messenger-message-timestamp">
+                                    15 Feb At 13:08
+                                </div>
+                                <div class="messenger-message-content">
+                                    Cheese
+                                </div>
+                            </div>
                         </div>
                         <div class="messenger-compose">
-                            <textarea class="messenger-compose-text"></textarea><button type="submit" class="messenger-compose-send">Send</button>
+                            <textarea class="messenger-compose-text" placeholder="Write a message"></textarea>
+                            <button type="submit" class="messenger-compose-send">Send</button>
                         </div>
                     </div>
                 </div>
@@ -84,15 +163,15 @@
 
                 var chat_copy = $(".room-1").clone(false);
                 $(chat_copy).removeClass("room-1");
-                $(chat_copy).addClass("room-2");
+                $(chat_copy).addClass("col-xs-4 room-2");
                 $(".rooms").append(chat_copy);
                 var chat_copy = $(".room-1").clone(false);
                 $(chat_copy).removeClass("room-1");
-                $(chat_copy).addClass("room-3");
+                $(chat_copy).addClass("col-xs-4 room-3");
                 $(".rooms").append(chat_copy);
                 var chat_copy = $(".room-1").clone(false);
                 $(chat_copy).removeClass("room-1");
-                $(chat_copy).addClass("room-4");
+                $(chat_copy).addClass("col-xs-4 room-4");
                 $(".rooms").append(chat_copy);
 
                 $(".messenger-compose-send").click(function(){
