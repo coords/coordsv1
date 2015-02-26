@@ -5,6 +5,8 @@ module.exports = function (env)
     env.Util.isBoolean = function(obj){ return typeof(obj)==="boolean"; };
     env.Util.isNumber = function(obj){ return typeof(obj)==="number"; };
     env.Util.isUndefined = function(obj){ return typeof(obj)==="undefined"; };
+    env.Util.isNull = function(obj){ return obj === null; };
+    env.Util.isArray = function(obj){ return obj instanceof Array; };
     env.Util.isLatitude = function(obj){
         if( env.Util.isNumber(obj) )
             if( obj<90 && obj>-90 )
@@ -24,5 +26,15 @@ module.exports = function (env)
             }
         }
         return false;
+    };
+    env.Util.OIdInArray = function(oid,arr){
+        if(env.Util.isArray(arr)){
+            for(var i=0;i<arr.length;i++){
+                if(oid.equals(arr[i])){
+                    return i;
+                }
+            }
+        }
+        return -1;
     };
 };
