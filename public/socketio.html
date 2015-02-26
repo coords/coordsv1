@@ -10,12 +10,18 @@
         <link rel="stylesheet" href="bower_components/lato/css/lato.css"/>
 
         <link rel="stylesheet" href="stylesheets/messenger.css"/>
+        <link rel="stylesheet" href="stylesheets/structure.css"/>
         <link rel="stylesheet" href="stylesheets/ui.css"/>
+        <link rel="stylesheet" href="stylesheets/animations.css"/>
+        <link rel="stylesheet" href="stylesheets/media-sizes.css"/>
 
     </head>
     <body>
-        <div class="container">
-            <div class="row rooms">
+        <!-- Main Menu Panel, disconnected from pages for re-use -->
+        <div id="menuPanel" class="unscrollablePanelContainer rightPanel inactivePanel">
+
+            <div class="scrollableContent customWebkitScrollbar fullHeight noselect">
+
                 <div class="col-xs-4 room room-1">
                     <form class="form-inline">
                         <div class="form-group">
@@ -43,11 +49,17 @@
                             </div>
                         </div>
                         <div class="messenger-compose">
-                            <textarea class="messenger-compose-text"></textarea>
-                            <button type="submit" class="btn btn-primary messenger-compose-send">Send</button>
+                            <textarea class="messenger-compose-text"></textarea><button type="submit" class="messenger-compose-send">Send</button>
                         </div>
                     </div>
                 </div>
+
+            </div>
+
+        </div>
+        <div class="container">
+            <div class="row rooms">
+
             </div>
         </div>
         <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -56,7 +68,14 @@
 
         <script src="javascripts/NativeWrapper.js"></script>
         <script src="javascripts/CoordsLog.js"></script>
+        <script src="javascripts/CoordsUtil.js"></script>
+        <script src="javascripts/CoordsDB.js"></script>
+        <script src="javascripts/CoordsUI.js"></script>
+        <script src="javascripts/CoordsPages.js"></script>
+        <script src="javascripts/CoordsAuth.js"></script>
         <script src="javascripts/CoordsComms.js"></script>
+        <script src="javascripts/CoordsMap.js"></script>
+        <script src="javascripts/DocumentReady.js"></script>
         <script>
 
             $(document).ready(function(){
@@ -70,6 +89,10 @@
                 var chat_copy = $(".room-1").clone(false);
                 $(chat_copy).removeClass("room-1");
                 $(chat_copy).addClass("room-3");
+                $(".rooms").append(chat_copy);
+                var chat_copy = $(".room-1").clone(false);
+                $(chat_copy).removeClass("room-1");
+                $(chat_copy).addClass("room-4");
                 $(".rooms").append(chat_copy);
 
                 $(".messenger-compose-send").click(function(){
