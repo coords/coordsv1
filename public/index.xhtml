@@ -2,8 +2,8 @@
 <html>
     <head>
         <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width,user-scalable=no"/>
-
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        
         <link rel="meta" type="application/rdf+xml" href="rdf.xml"/>
 
         <link rel="icon" type="image/png" href="images/icon-16.png"/>
@@ -12,19 +12,19 @@
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
         <link rel="stylesheet" href="bower_components/bootstrap-social/bootstrap-social.css"/>
         <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css"/>
+        <link rel="stylesheet" href="bower_components/leaflet-gps/dist/leaflet-gps.src.css"/>
         <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css"/>
         <link rel="stylesheet" href="bower_components/lato/css/lato.css"/>
         <link rel="stylesheet" href="bower_components/animate.css/animate.css"/>
 
         <link rel="stylesheet" href="stylesheets/structure.css"/>
         <link rel="stylesheet" href="stylesheets/ui.css"/>
-        <link rel="stylesheet" href="stylesheets/simple-animations.css"/>
+        <link rel="stylesheet" href="stylesheets/animations.css"/>
+        <link rel="stylesheet" href="stylesheets/media-sizes.css"/>
     </head>
     <body>
 
-        <div class="loadingBar hidden">
-            <span></span>
-        </div>
+        <div class="loadingBar hidden"></div>
 
         <div id="loginPage" class="unscrollablePageContainer inactivePage">
 
@@ -33,22 +33,20 @@
                 <div class="container">
 
                     <div class="row margin-top-30 text-center">
-                        <div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4">
-                            <img class="img-responsive" src="/images/logo.png" alt="Coords Logo"/>
-                        </div>
+                        <img src="/images/logo.png" class="coordsLogo" />
                     </div>
 
                     <div class="row margin-top-30">
                         <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6">
-                                    <p><a class="btn btn-block btn-social btn-facebook">
+                                    <p><a class="btn btn-block btn-lg btn-social btn-facebook">
                                         <i class="fa fa-facebook"></i>
                                         Sign in with Facebook
                                     </a></p>
                                 </div>
                                 <div class="col-xs-12 col-sm-6">
-                                    <p><a class="btn btn-block btn-social btn-twitter">
+                                    <p><a class="btn btn-block btn-lg btn-social btn-twitter">
                                         <i class="fa fa-twitter"></i>
                                         Sign in with Twitter
                                     </a></p>
@@ -56,13 +54,13 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6">
-                                    <p><a class="btn btn-block btn-social btn-google-plus">
+                                    <p><a class="btn btn-block btn-lg btn-social btn-google-plus">
                                         <i class="fa fa-google-plus"></i>
                                         Sign in with Google
                                     </a></p>
                                 </div>
                                 <div class="col-xs-12 col-sm-6">
-                                    <p><a class="btn btn-block btn-social btn-github">
+                                    <p><a class="btn btn-block btn-lg btn-social btn-github">
                                         <i class="fa fa-github"></i>
                                         Sign in with GitHub
                                     </a></p>
@@ -80,19 +78,17 @@
         <div id="mapPage" class="unscrollablePageContainer inactivePage">
             <div class="scrollableContent fullHeight">
                 <div id="map"></div>
-
-                <a href="#" class="btn btn-block btn-lg btn-primary logoutButton">
-                    <i class="fa fa-sign-out"></i> Log out of Coords
-                </a>
-
-                <a href="#" class="btn btn-block btn-lg btn-primary profilePageButton">
-                    <i class="fa fa-user"></i> View User Profile
-                </a>
+                <div id="mapMenuButton" class="fab green fab-glyphicon glyphicon-menu-hamburger openMenuPanelButton"></div>
             </div>
         </div>
 
 
         <div id="profilePage" class="unscrollablePageContainer inactivePage">
+
+            <div class="pageHeader noselect">
+                
+            </div>
+            
             <div class="scrollableContent fullHeight">
 
                 <div class="row">
@@ -152,6 +148,11 @@
                 </div>
                     
             </div>
+
+            <div class="pageFooter noselect">
+                
+            </div>
+            
         </div>
 
 
@@ -159,16 +160,41 @@
         <div id="menuPanel" class="unscrollablePanelContainer rightPanel inactivePanel">
 
             <div class="scrollableContent customWebkitScrollbar fullHeight noselect">
-                <div class="container-fluid">
-                    <div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4">
-                        <img class="img-responsive" src="/images/logo.png" alt="Coords Logo"/>
-                    </div>
-                </div>
+            
+                <img src="/images/logo.png" class="coordsLogo" />
+                
+                <ul class="menuPanelList">
+                    
+                    <li class="panelSectionGlobalActionsStart panelSectionStart"></li>
+                    
+                    <li class="mapPageButtonListItem panelSectionListItem">
+                        <a class="btn btn-lg btn-primary btn-fa fa-map-marker mapPageButton">Map</a>
+                    </li>
 
+                    <li class="mapPageButtonListItem panelSectionListItem">
+                        <a class="btn btn-lg btn-primary btn-fa fa-user profilePageButton">Profile</a>
+                    </li>
+
+                    <li class="logoutButtonListItem panelSectionListItem">
+                        <a class="btn btn-lg btn-primary btn-fa fa-power-off logoutButton">Logout</a>
+                    </li>
+
+                    <li class="panelSectionGlobalActionsEnd panelSectionEnd"></li>
+
+                    <li class="panelSectionPanelActionsStart panelSectionStart"></li>
+
+                    <li class="closeMenuPanelButtonListItem panelSectionListItem">
+                        <a class="btn btn-lg btn-primary btn-fa fa-arrow-right closeMenuPanelButton closePanelButton">Hide Menu</a>
+                    </li>
+
+                    <li class="panelSectionPanelActionsEnd panelSectionEnd"></li>
+                </ul>
+                
             </div>
 
         </div>
 
+        <div id="panelContentOverlay" class="hidden"></div>
 
         <script src="bower_components/jquery/dist/jquery.js"></script>
         <script src="bower_components/jquery-cookie/jquery.cookie.js"></script>
@@ -176,6 +202,7 @@
         <script src="bower_components/oauth-js/dist/oauth.js"></script>
         <script src="bower_components/socket.io-client/socket.io.js"></script>
         <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
+        <script src="bower_components/leaflet-gps/dist/leaflet-gps.src.js"></script>
 
         <script src="javascripts/NativeWrapper.js"></script>
         <script src="javascripts/CoordsLog.js"></script>

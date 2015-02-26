@@ -1,0 +1,9 @@
+
+body {
+    background-color: #d5fffd
+}
+
+div#menuPanel {
+    min-width: 14em;
+    width: 40%;
+}

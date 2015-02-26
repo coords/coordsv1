@@ -24,18 +24,26 @@ CoordsPages = {
                 CoordsAuth.authenticateWithProvider('github');
             });
 
-            $('.logoutButton').click(function() {
-                CoordsDB.removeString("authProvider");
-                CoordsPages.changePage("loginPage");
-            });
-
             $('.mapPageButton').click(function() {
                 CoordsPages.changePage("mapPage");
             });
-
+            
             $('.profilePageButton').click(function() {
                 CoordsPages.changePage("profilePage");
             });
+
+            $('.logoutButton').click(function() {
+                CoordsPages.changePage("loginPage");
+            });
+
+            $('.openMenuPanelButton').click(function() {
+                CoordsUI.openPanel("menuPanel");
+            });
+            
+            $('.closeMenuPanelButton').click(function() {
+                CoordsUI.closePanel("menuPanel");
+            });
+            
 
             CoordsMap.initialize();
             CoordsComms.testComms();
@@ -100,7 +108,6 @@ CoordsPages = {
         }
     },
 
-
     changePage: function changePage(newPageId)
     {
         try
@@ -129,9 +136,7 @@ CoordsPages = {
 
             var pageTransitionAnimation = pageTransitionAnimationForwards;
 
-            if (currentPageId == "aboutPage" ||
-                (currentPageId == "jobPage" && newPageId == "indexPage")
-            )
+            if (newPageId == "loginPage")
             {
                 pageTransitionAnimation = pageTransitionAnimationReverse;
             }
@@ -139,6 +144,8 @@ CoordsPages = {
             $(' .unscrollablePageContainer').addClass("inactivePage").removeClass("activePage animated " + pageTransitionAnimationForwards + " " + pageTransitionAnimationReverse);
             $('#' + newPageId).removeClass("inactivePage").addClass("activePage animated " + pageTransitionAnimation);
 
+            $('body').removeClass("loginPage aboutPage profilePage mapPage").addClass(newPageId);
+            
             CoordsPages.pageActionsAfterAnimation(newPageId, currentPageId);
 
             pages.removeClass('duringTransition');
@@ -191,6 +198,8 @@ CoordsPages = {
 
         try
         {
+            CoordsUI.closeAllPanels();
+            
             if (newPageId == "loginPage")
             {
                 

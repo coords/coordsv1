@@ -85,7 +85,7 @@ if (typeof NativeWrapper === 'undefined')
 
         showProgressBar: function showProgressBar()
         {
-            $('.loadingBar').removeClass('hidden');
+            $('.loadingBar').html('<span></span>').removeClass('hidden');
             $('body').addClass('pushedDownByLoadingBar');
         },
 
