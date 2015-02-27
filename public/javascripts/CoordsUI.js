@@ -33,7 +33,8 @@ CoordsUI = {
         CoordsLog.v("CoordsUI." + CoordsLog.getInlineFunctionTrace(arguments));
 
         $('#' + panelId).removeClass("inactivePanel").addClass("activePanel");
-        $('#panelContentOverlay').removeClass("hidden");
+        
+        $('#' + panelId + 'ContentOverlay').removeClass("hidden");
 
         CoordsUI.hideLoadingBar();
     },
@@ -46,7 +47,7 @@ CoordsUI = {
         if( panelToClose.hasClass("activePanel") )
         {
             panelToClose.removeClass("activePanel").addClass("inactivePanel");
-            $('#panelContentOverlay').addClass("hidden");
+            $('#' + panelId + 'ContentOverlay').addClass("hidden");
         }
     },
 

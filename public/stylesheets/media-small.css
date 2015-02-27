@@ -1,9 +1,6 @@
 
-body {
-    background-color: #d5fffd
-}
+/* This file is min-width: 768px */
 
 div#menuPanel {
-    min-width: 14em;
-    width: 40%;
+    width: 60%;
 }

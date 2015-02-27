@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
         <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-        
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+
         <link rel="meta" type="application/rdf+xml" href="rdf.xml"/>
 
         <link rel="icon" type="image/png" href="images/icon-16.png"/>
@@ -11,15 +11,14 @@
         <title>Coords</title>
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
         <link rel="stylesheet" href="bower_components/bootstrap-social/bootstrap-social.css"/>
+        <link rel="stylesheet" href="bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css"/>
         <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css"/>
         <link rel="stylesheet" href="bower_components/leaflet-gps/dist/leaflet-gps.src.css"/>
+        <link rel="stylesheet" href="bower_components/leaflet.markercluster/dist/MarkerCluster.Default.css"/>
         <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css"/>
-        <link rel="stylesheet" href="bower_components/lato/css/lato.css"/>
         <link rel="stylesheet" href="bower_components/animate.css/animate.css"/>
+        <link rel="stylesheet" href="bower_components/roboto-fontface/roboto-fontface.css"/>
 
-        <link rel="stylesheet" href="stylesheets/structure.css"/>
-        <link rel="stylesheet" href="stylesheets/ui.css"/>
-        <link rel="stylesheet" href="stylesheets/animations.css"/>
         <link rel="stylesheet" href="stylesheets/media-sizes.css"/>
     </head>
     <body>
@@ -32,44 +31,152 @@
 
                 <div class="container">
 
-                    <div class="row margin-top-30 text-center">
-                        <img src="/images/logo.png" class="coordsLogo" />
+                    <div class="row margin-top-10 text-center">
+                        <img src="/images/logo.png" class="coordsLogo" alt="Coords Logo"/>
                     </div>
 
-                    <div class="row margin-top-30">
-                        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                    <div class="row margin-top-20 text-center">
+                        <div class="col-md-8 col-md-offset-2">
+
+                            <div class="row">
+                                <p class="tagline">Chat publicly with people near you.</p>
+
+                                <p class="tagline">Create a room for your group of friends.</p>
+
+                                <p class="tagline">See when your friends are near you and meet up!</p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row margin-top-20">
+                        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6">
-                                    <p><a class="btn btn-block btn-lg btn-social btn-facebook">
-                                        <i class="fa fa-facebook"></i>
-                                        Sign in with Facebook
-                                    </a></p>
+                                    <p>
+                                        <a class="btn btn-block btn-lg btn-social btn-facebook btn-fa fontawesomepsuedo fa-facebook">
+                                            Sign in with Facebook
+                                        </a>
+                                    </p>
                                 </div>
                                 <div class="col-xs-12 col-sm-6">
-                                    <p><a class="btn btn-block btn-lg btn-social btn-twitter">
-                                        <i class="fa fa-twitter"></i>
-                                        Sign in with Twitter
-                                    </a></p>
+                                    <p>
+                                        <a class="btn btn-block btn-lg btn-social btn-twitter btn-fa fontawesomepsuedo fa-twitter">
+                                            Sign in with Twitter
+                                        </a>
+                                    </p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6">
-                                    <p><a class="btn btn-block btn-lg btn-social btn-google-plus">
-                                        <i class="fa fa-google-plus"></i>
-                                        Sign in with Google
-                                    </a></p>
+                                    <p>
+                                        <a class="btn btn-block btn-lg btn-social btn-google-plus btn-fa fontawesomepsuedo fa-google-plus">
+                                            Sign in with Google
+                                        </a>
+                                    </p>
                                 </div>
                                 <div class="col-xs-12 col-sm-6">
-                                    <p><a class="btn btn-block btn-lg btn-social btn-github">
-                                        <i class="fa fa-github"></i>
-                                        Sign in with GitHub
-                                    </a></p>
+                                    <p>
+                                        <a class="btn btn-block btn-lg btn-social btn-github btn-fa fontawesomepsuedo fa-github">
+                                            Sign in with GitHub
+                                        </a>
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <div class="row hidden-xs hidden-sm margin-top-30">
+                        <div class="col-md-8 col-md-offset-2">
+
+                            <div class="panel panel-info">
+                                <div class="panel-body">
+
+                                    <h1>What is Coords?</h1>
+
+                                    <p>The overview XHTML 5 page should describe the design and name the group members.</p>
+                                    <h2>Creators</h2>
+                                    <ul>
+                                        <li>Andrew Beveridge</li>
+                                        <li>Leif Gehrmann</li>
+                                    </ul>
+                                    <h2>HTML 5 and CSS 3 features</h2>
+                                
+                                    <h2>Validation</h2>
+                                    
+                                    <p>
+                                        This website is constructed using valid XHTML5 and CSS3, following standards and best practices set by the <a href="http://www.w3.org/">W3C</a>.
+                                    </p>
+                                    
+                                    <p>
+                                        <a href="http://validator.w3.org/check?uri=coords.uk&amp;charset=%28detect+automatically%29&amp;doctype=Inline&amp;group=0">
+                                            <img src="/images/HTML5_Logo_512.png" width="100" alt="W3C HTML5" />
+                                        </a>
+                                    </p>
+                                    
+                                    <p>
+                                        Here are the tools used to validate that the code written is valid:
+                                    </p>
+
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <a href="http://validator.w3.org/check?uri=coords.uk&amp;charset=%28detect+automatically%29&amp;doctype=Inline&amp;group=0">
+                                                W3C HTML5 Validator
+                                            </a>
+                                            <br />
+                                            
+                                            This is the mainstream, "official" W3C web validator. It does not officially support HTML5 fully yet, so the results have to be taken with a pinch of salt.<br />
+                                            It also unfortunately does not yet check whether the HTML5 is sent with the correct content-type to trigger XML mode (XHTML5), so while it provides a guideline it does not truly tell us whether our XHTML5 document is valid.<br />
+                                            Regardless, as expected our document passes validation.
+                                        </li>
+                                        
+                                        <li class="list-group-item">
+                                            <a href="https://validator.nu/?doc=http%3A%2F%2Fcoords.uk%2F&amp;schema=http%3A%2F%2Fs.validator.nu%2Fxhtml5-rdfalite.rnc+http%3A%2F%2Fs.validator.nu%2Fhtml5%2Fassertions.sch+http%3A%2F%2Fc.validator.nu%2Fall%2F&amp;parser=xml&amp;showimagereport=yes&amp;showsource=yes">
+                                                Validator.nu XHTML5 Validator
+                                            </a>
+                                            <br />
+
+                                            This validator is where 
+                                        </li>
+                                        
+                                        <li class="list-group-item">
+                                            <a href="https://jigsaw.w3.org/css-validator/validator?uri=coords.uk%2Fstylesheets%2Fmedia-sizes.css&amp;profile=css3&amp;usermedium=all&amp;warning=1&amp;vextwarning=true&amp;lang=en">
+                                                W3C CSS Validator
+                                            </a>
+                                            <br />
+
+                                            This is
+                                        </li>
+                                    </ul>
+
+                                    <h2>External Libraries</h2>
+                                    <ul>
+                                        <li>Link, Overview, Author</li>
+                                        <li>jquery</li>
+                                        <li>bootstrap</li>
+                                        <li>bootstrap-social</li>
+                                        <li>bootstrap-switch</li>
+                                        <li>leaflet</li>
+                                        <li>leaflet-gps</li>
+                                        <li>leaflet.markercluster</li>
+                                        <li>oauth-js</li>
+                                        <li>socket.io-client</li>
+                                        <li>roboto-fontface</li>
+                                        <li>font-awesome</li>
+                                        <li>animate.css</li>
+                                    </ul>
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
+
+                <footer class="footer hidden-md hidden-lg">
+
+                </footer>
 
             </div>
 
@@ -82,127 +189,193 @@
             </div>
         </div>
 
+        <div id="menuPanel" class="unscrollablePanelContainer leftPanel inactivePanel">
 
-        <div id="profilePage" class="unscrollablePageContainer inactivePage">
+            <div class="scrollableContent customWebkitScrollbar fullHeight noselect">
 
-            <div class="pageHeader noselect">
-                
-            </div>
-            
-            <div class="scrollableContent fullHeight">
+                <div class="userProfileContainer">
 
-                <div class="row">
+                    <div class="row userProfilePhotoContainer">
+                        <div class="col-xs-10">
+                            <img alt="User Photo" src="/images/logo.png" class="img-responsive img-circle userProfilePhoto"/>
+                        </div>
+                    </div>
 
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 margin-top-30">
+                    <div class="row userProfileSummaryContainer">
+                        <div class="col-xs-10">
+                            <h4 class="userProfileName">No data</h4>
+                            <span class="userProfileEmail">No data</span>
+                        </div>
+                    </div>
 
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h3 class="panel-title userProfileName"></h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="row">
+                    <a class="rectangleFadeButton logoutButton">
+                        <div class="rectangleFadeButtonBackground"></div>
+                        <div class="rectangleFadeButtonIcon fontawesome fontawesome-power-off"></div>
+                    </a>
 
-                                    <div class="col-md-3 col-lg-3 " align="center">
-                                        <img alt="User Photo" src="" class="img-responsive img-circle userProfilePhoto"/>
-                                    </div>
+                    <a class="rectangleFadeButton expandUserProfileButton">
+                        <div class="rectangleFadeButtonBackground"></div>
+                        <div class="rectangleFadeButtonIcon fontawesome fontawesome-caret-down"></div>
+                    </a>
 
-                                    <div class="col-md-9 col-lg-9">
-                                        <table class="table table-user-information">
-                                            <tbody>
-                                                
-                                                <tr>
-                                                    <td>Date of Birth</td>
-                                                    <td class="userProfileDOB"></td>
-                                                </tr>
+                </div>
 
-                                                <tr>
-                                                    <td>Gender</td>
-                                                    <td class="userProfileGender"></td>
-                                                </tr>
+                <div class="expandedUserProfileContainer slideDown slideDownCollapsed">
 
-                                                <tr>
-                                                    <td>Location</td>
-                                                    <td class="userProfileLocation"></td>
-                                                </tr>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h5>Gender</h5>
+                        </div>
+                        <div class="col-xs-8">
+                            <h5 class="userProfileGender">No data</h5>
+                        </div>
+                    </div>
 
-                                                <tr>
-                                                    <td>Email</td>
-                                                    <td><a href="mailto:" class="userProfileEmail"></a></td>
-                                                </tr>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h5>Location</h5>
+                        </div>
+                        <div class="col-xs-8">
+                            <h5 class="userProfileLocation">No data</h5>
+                        </div>
+                    </div>
 
-                                            </tbody>
-                                        </table>
-                                        
-                                        <a href="#" class="btn btn-lg btn-primary mapPageButton">
-                                            <i class="fa fa-undo"></i> Back to Map
-                                        </a>
-                                        
-                                        <a href="#" class="btn btn-lg btn-primary logoutButton">
-                                            <i class="fa fa-sign-out"></i> Log out
-                                        </a>
-                                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h5>Date of birth</h5>
+                        </div>
+                        <div class="col-xs-8">
+                            <h5 class="userProfileDOB">No data</h5>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div role="tabpanel">
+
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#nearbyRooms" aria-controls="nearbyRooms" role="tab" data-toggle="tab">
+                                <div class="fontawesome fontawesome-map-marker"></div>
+                            </a></li>
+                        <li role="presentation">
+                            <a href="#createRoom" aria-controls="createRoom" role="tab" data-toggle="tab">
+                                <div class="fontawesome fontawesome-plus-circle"></div>
+                            </a></li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="nearbyRooms">
+                            <div class="rooms-nearby">
+                                <h4>Nearby Rooms</h4>
+
+                                <div id="nearbyRoomsList">
                                 </div>
                             </div>
                         </div>
+                        <div role="tabpanel" class="tab-pane" id="createRoom">
+                            <div class="create-room">
+                                <div class="input-group">
+                                    <label>
+                                        <span class="input-group-addon">Room Name</span>
+                                        <input type="text" class="form-control" aria-label="Name of the room"/>
+                                    </label>
+                                </div>
+                                <label>
+                                    Private:
+                                    <input type="checkbox"/>
+                                </label>
+
+                                <div class="help-block">
+                                    This will create a room at your current coords.
+                                </div>
+                                <button class="btn btn-success">Create Room</button>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
-                    
+
             </div>
 
-            <div class="pageFooter noselect">
-                
-            </div>
-            
-        </div>
-
-
-        <!-- Main Menu Panel, disconnected from pages for re-use -->
-        <div id="menuPanel" class="unscrollablePanelContainer rightPanel inactivePanel">
-
-            <div class="scrollableContent customWebkitScrollbar fullHeight noselect">
-            
-                <img src="/images/logo.png" class="coordsLogo" />
-                
-                <ul class="menuPanelList">
-                    
-                    <li class="panelSectionGlobalActionsStart panelSectionStart"></li>
-                    
-                    <li class="mapPageButtonListItem panelSectionListItem">
-                        <a class="btn btn-lg btn-primary btn-fa fa-map-marker mapPageButton">Map</a>
-                    </li>
-
-                    <li class="mapPageButtonListItem panelSectionListItem">
-                        <a class="btn btn-lg btn-primary btn-fa fa-user profilePageButton">Profile</a>
-                    </li>
-
-                    <li class="logoutButtonListItem panelSectionListItem">
-                        <a class="btn btn-lg btn-primary btn-fa fa-power-off logoutButton">Logout</a>
-                    </li>
-
-                    <li class="panelSectionGlobalActionsEnd panelSectionEnd"></li>
-
-                    <li class="panelSectionPanelActionsStart panelSectionStart"></li>
-
-                    <li class="closeMenuPanelButtonListItem panelSectionListItem">
-                        <a class="btn btn-lg btn-primary btn-fa fa-arrow-right closeMenuPanelButton closePanelButton">Hide Menu</a>
-                    </li>
-
-                    <li class="panelSectionPanelActionsEnd panelSectionEnd"></li>
-                </ul>
-                
-            </div>
+            <a class="closePanelButton noselect">
+                <div class="closePanelButtonIcon">
+                    <div class="closePanelButtonIconCharacter fontawesome fontawesome-black-chevron-left"></div>
+                </div>
+            </a>
 
         </div>
 
-        <div id="panelContentOverlay" class="hidden"></div>
+        <div id="roomPanel" class="unscrollablePanelContainer rightPanel inactivePanel">
+
+            <div class="roomHeader">
+
+                <a class="rectangleFadeButton closePanelButton">
+                    <div class="rectangleFadeButtonBackground"></div>
+                    <div class="rectangleFadeButtonIcon fontawesome fontawesome-chevron-left"></div>
+                </a>
+
+                <div class="roomName">No room loaded</div>
+
+                <a class="rectangleFadeButton leaveRoomButton hiddenWhenNotRoomMember hidden">
+                    <div class="rectangleFadeButtonBackground"></div>
+                    <div class="rectangleFadeButtonIcon fontawesome fontawesome-sign-out"></div>
+                </a>
+                
+            </div>
+
+            <div class="roomUsersHeading margin-top-10 hiddenWhenRoomMember hidden">
+                <h4>Most recent users:</h4>
+            </div>
+
+            <div class="roomUsers hiddenWhenRoomMember hidden">
+
+            </div>
+
+            <div class="roomDetails hiddenWhenRoomMember hidden">
+
+                <h4>Room details:</h4>
+
+                <table>
+                    <tr>
+                        <td class="roomDetailName"><strong>Private: </strong></td>
+                        <td class="roomPrivate">No data</td>
+                    </tr>
+
+                    <tr>
+                        <td class="roomDetailName"><strong>Distance from your coords: </strong></td>
+                        <td class="roomDistance">No data</td>
+                    </tr>
+                </table>
+
+                <a class="btn btn-lg btn-primary btn-block margin-top-10 joinRoomButton">Join Room</a>
+
+            </div>
+
+
+            <div class="roomMessages scrollableContent fullHeightMinus135 hiddenWhenNotRoomMember hidden">
+
+            </div>
+
+            <div class="roomComposeMessage hiddenWhenNotRoomMember hidden">
+                <textarea class="messenger-compose-text" placeholder="Write a message" />
+                <button type="submit" class="messenger-compose-send">Send</button>
+            </div>
+
+        </div>
+
+        <div id="menuPanelContentOverlay" class="panelContentOverlay hidden"></div>
+        <div id="roomPanelContentOverlay" class="panelContentOverlay hidden"></div>
 
         <script src="bower_components/jquery/dist/jquery.js"></script>
-        <script src="bower_components/jquery-cookie/jquery.cookie.js"></script>
         <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
         <script src="bower_components/oauth-js/dist/oauth.js"></script>
         <script src="bower_components/socket.io-client/socket.io.js"></script>
         <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
         <script src="bower_components/leaflet-gps/dist/leaflet-gps.src.js"></script>
+        <script src="bower_components/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
 
         <script src="javascripts/NativeWrapper.js"></script>
         <script src="javascripts/CoordsLog.js"></script>
@@ -210,8 +383,10 @@
         <script src="javascripts/CoordsDB.js"></script>
         <script src="javascripts/CoordsUI.js"></script>
         <script src="javascripts/CoordsPages.js"></script>
+        <script src="javascripts/CoordsUser.js"></script>
         <script src="javascripts/CoordsAuth.js"></script>
-        <script src="javascripts/CoordsComms.js"></script>
+        <script src="javascripts/CoordsMessaging.js"></script>
+        <script src="javascripts/CoordsRooms.js"></script>
         <script src="javascripts/CoordsMap.js"></script>
         <script src="javascripts/DocumentReady.js"></script>
     </body>

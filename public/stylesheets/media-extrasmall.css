@@ -1,0 +1,1021 @@
+/********************/
+/*      GLOBAL      */
+/********************/
+
+/* This is meant to fix the blue-highlight-on-click-event issue on older mobile webkit devices, and does for some, but sadly doesn't work for android 4.1.2 */
+* {
+
+}
+
+body,
+input,
+select,
+textarea,
+button {
+    /*font-size: 1em;*/
+    font-family: Roboto, sans-serif;
+    line-height: 1.3;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.noselect, .noselect * {
+
+}
+
+.noMargin {
+    margin: 0 !important;
+}
+
+.margin-top-05 {
+    margin-top: 0.5em;
+}
+
+.margin-top-10 {
+    margin-top: 1.0em;
+}
+
+.margin-top-15 {
+    margin-top: 1.5em;
+}
+
+.margin-top-20 {
+    margin-top: 2.0em;
+}
+
+.margin-top-25 {
+    margin-top: 2.5em;
+}
+
+.margin-top-30 {
+    margin-top: 3.0em;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.fontawesomepsuedo:before,
+.fontawesomepsuedo:after {
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+}
+
+.fontawesome-power-off {
+    background: transparent url("/images/fontawesomesvg/white/svg/power-off.svg") center center no-repeat;
+}
+
+.fontawesome-caret-down {
+    background: transparent url("/images/fontawesomesvg/white/svg/caret-down.svg") center center no-repeat;
+}
+
+.fontawesome-map-marker {
+    background: transparent url("/images/fontawesomesvg/white/svg/map-marker.svg") center center no-repeat;
+}
+
+.fontawesome-plus-circle {
+    background: transparent url("/images/fontawesomesvg/white/svg/plus-circle.svg") center center no-repeat;
+}
+
+.fontawesome-chevron-left {
+    background: transparent url("/images/fontawesomesvg/white/svg/chevron-circle-left.svg") center center no-repeat;
+}
+
+.fontawesome-black-chevron-left {
+    background: transparent url("/images/fontawesomesvg/black/svg/chevron-circle-left.svg") center center no-repeat;
+}
+
+.fontawesome-sign-out {
+    background: transparent url("/images/fontawesomesvg/white/svg/sign-out.svg") center center no-repeat;
+}
+
+.fontawesome {
+    height: 100%;
+    width: 100%;
+    background-size: 100%;
+}
+
+.btn-lg.btn-fa:before {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    font-size: 25px;
+}
+
+/********************/
+/*       PAGES      */
+/********************/
+
+body, html {
+    position: relative;
+
+    overflow: hidden;
+    margin: 0;
+
+    padding: 0;
+    width: 100%;
+
+    height: 100%;
+
+    background: #FFFFFF;
+}
+
+/* This is the top element for a given page, with data-role="page". It should be 100% of the viewport and not scrollable; scrolling happens in children */
+div.unscrollablePageContainer {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    overflow: hidden;
+    margin: 0;
+
+    padding: 0;
+    width: 100%;
+
+    height: 100%;
+}
+
+/* Pages which are not visible */
+div.unscrollablePageContainer.inactivePage {
+    top: -200% !important;
+    z-index: 5;
+}
+
+/* The single, currently active page which is visible */
+div.unscrollablePageContainer.activePage {
+    top: 0 !important;
+    z-index: 10;
+}
+
+div.unscrollablePageContainer.inactivePage.duringTransition {
+    z-index: 500;
+}
+
+div.unscrollablePageContainer.activePage.duringTransition {
+    z-index: 1000;
+}
+
+/* Background for Login and About pages, nice radial glow */
+/*div.radialBackground {
+    background-image: radial-gradient(circle at 50% 60%, rgb(225, 225, 225), rgb(183, 220, 179));
+}*/
+
+/* This is the main content element for a given page; it has role="main" and .ui-content, should be scrollable, but does not necessarily fill 100% of screen */
+.scrollableContent {
+    position: relative;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.fullHeight {
+    height: 100%;
+}
+
+.fullHeightMinus45 {
+    height: calc(100% - 45px);
+}
+
+.fullHeightMinus90 {
+    height: calc(100% - 90px);
+}
+
+.fullHeightMinus135 {
+    height: calc(100% - 135px);
+}
+
+.fullHeightMinus200 {
+    height: calc(100% - 200px);
+}
+
+div.page-container.login-page {
+    padding: 3em;
+}
+
+div.page-container.login-page div.row {
+    text-align: center;
+    margin: 2em;
+}
+
+/********************/
+/*      PANELS      */
+/********************/
+
+/* General panel styles */
+
+div.panelContentOverlay {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    z-index: 15;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    opacity: 0.5;
+}
+
+div.unscrollablePanelContainer {
+    position: absolute;
+
+    top: 0;
+
+    z-index: 20;
+    overflow: hidden;
+
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    background: transparent;
+
+    transition: transform 300ms ease-in-out;
+}
+
+div.unscrollablePanelContainer div.scrollableContent {
+    width: calc(100% - 30px);
+    background: #ffffff;
+}
+
+div.unscrollablePanelContainer a.closePanelButton {
+    display: block;
+
+    position: absolute;
+    top: 0;
+
+    height: 100%;
+    width: 30px;
+    overflow: hidden;
+
+    background: transparent;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+div.unscrollablePanelContainer a.closePanelButton .closePanelButtonIconCharacter {
+    margin-left: -3px;
+}
+
+div.unscrollablePanelContainer a.closePanelButton:hover .closePanelButtonIconCharacter {
+    transition: transform .3s ease-in-out;
+
+}
+
+div.unscrollablePanelContainer a.closePanelButton:hover .closePanelButtonIconCharacter,
+div.unscrollablePanelContainer a.closePanelButton:active .closePanelButtonIconCharacter {
+    transform: rotate(360deg);
+}
+
+div.unscrollablePanelContainer a.closePanelButton .closePanelButtonIcon {
+    position: absolute;
+
+    top: calc(50% - 30px);
+    left: 0;
+
+    height: 60px;
+    width: 30px;
+
+    line-height: 60px;
+    font-size: 24px;
+
+    background: #ffffff;
+    color: #000000;
+}
+
+/* Side specific styles */
+div.leftPanel {
+    right: auto;
+    left: 0;
+}
+
+div.leftPanel > div.scrollableContent {
+
+    box-shadow: 5px 0 5px rgba(0, 0, 0, .15);
+}
+
+div.leftPanel a.closePanelButton {
+    left: auto;
+    right: 1px;
+}
+
+div.leftPanel a.closePanelButton .closePanelButtonIcon {
+
+    padding-left: 2px;
+
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+
+    box-shadow: 5px 0 5px rgba(0, 0, 0, .15);
+}
+
+div.rightPanel {
+    right: 0;
+    left: auto;
+}
+
+div.rightPanel > div.scrollableContent {
+
+    box-shadow: -5px 0 5px rgba(0, 0, 0, .15);
+}
+
+div.rightPanel a.closePanelButton {
+    left: 1px;
+    right: auto;
+}
+
+div.rightPanel a.closePanelButton .closePanelButtonIcon {
+
+    padding-right: 2px;
+
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+
+    box-shadow: -5px 0 5px rgba(0, 0, 0, .15);
+}
+
+/* Side-specific open and close states */
+div.leftPanel.inactivePanel {
+
+    transform: translateX(-200%);
+}
+
+div.rightPanel.inactivePanel {
+
+    transform: translateX(200%);
+}
+
+div.leftPanel.activePanel {
+
+    transform: translateX(0);
+}
+
+div.rightPanel.activePanel {
+
+    transform: translateX(0);
+}
+
+/********************/
+/*  GLOBAL ELEMENTS */
+/********************/
+
+div.pageHeader,
+div.pageFooter {
+    position: relative;
+    height: 45px;
+
+    border: none;
+    background: #2c3e50;
+    color: #fff;
+
+    font-weight: bold;
+}
+
+div.pageHeader h1,
+div.pageFooter h1 {
+    position: relative;
+    display: block;
+
+    overflow: hidden;
+    margin: 0 30%;
+    padding: .7em 0;
+
+    min-height: 1.1em;
+    outline: 0;
+
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    font-size: 1em;
+}
+
+/******************************/
+/*   NON-NATIVE LOADING BAR   */
+/******************************/
+
+/* Pages which need to be moved down to show this bar */
+
+body.pushedDownByLoadingBar div.unscrollablePageContainer.activePage {
+    top: 6px !important;
+}
+
+body.pushedDownByLoadingBar div.unscrollablePanelContainer.activePanel {
+    top: 6px !important;
+}
+
+body.pushedDownByLoadingBar div.panelContentOverlay {
+    top: 6px !important;
+}
+
+body.pushedDownByLoadingBar div.ui-widget-overlay.ui-front {
+    top: 6px !important;
+}
+
+/* Loading bar container */
+.loadingBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 6px;
+    
+    background: #ffffff url(/images/loading-bar.gif) center center repeat-x;
+}
+
+/*********************************/
+/*       MENU PANEL CONTENT      */
+/*********************************/
+
+/* Menu panel is not full-width */
+div#menuPanel {
+    width: 98%;
+}
+
+ul.menuPanelList {
+    margin: 1em;
+    padding: 0;
+    border-radius: 0.4em;
+    list-style: none;
+}
+
+ul.menuPanelList > li {
+    position: relative;
+    display: block;
+
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+
+    border: none;
+    /* border: solid #16a085;
+    border-right-width: 1px;
+    border-left-width: 1px;*/
+    background: #fff;
+
+    color: #333;
+    list-style: none;
+
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+ul.menuPanelList > li.panelSectionStart {
+    margin: 0;
+    padding: 0;
+    height: 10px;
+    border-top-width: 0;
+    border-bottom-width: 0;
+}
+
+ul.menuPanelList > li.panelSectionListItem {
+    border-top-width: 0;
+    border-bottom-width: 0;
+
+    margin-top: 0.5em;
+}
+
+ul.menuPanelList > li.panelSectionListItem a.btn {
+    width: 100%;
+    text-align: left;
+    padding-left: 2em;
+    box-sizing: border-box;
+}
+
+ul.menuPanelList > li.panelSectionListItem a.btn:before {
+    position: absolute;
+    left: 13px;
+    top: 15px;
+}
+
+ul.menuPanelList > li.panelSectionEnd {
+    display: none;
+    margin: 0;
+    padding: 0;
+    height: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+}
+
+ul.menuPanelList > li.panelSectionStart:first-child {
+    border: none;
+
+    /*border-top-width: 1px;
+
+    border-top-left-radius: 0.4em;
+    border-top-right-radius: 0.4em;*/
+}
+
+ul.menuPanelList > li.panelSectionEnd:last-child {
+    display: block;
+    height: 10px;
+
+    border: none;
+
+    /*border-bottom-width: 1px;
+
+    border-bottom-right-radius: 0.4em;
+    border-bottom-left-radius: 0.4em;*/
+}
+
+div.userProfileContainer {
+    position: relative;
+    padding: 1em;
+    background: rgba(0, 178, 89, 1);
+    color: #ffffff;
+}
+
+div.expandedUserProfileContainer {
+    padding: 0 1em 0 1em;
+    background: rgba(0, 178, 89, 1);
+    color: #ffffff;
+
+    box-sizing: border-box;
+}
+
+div.roomUserProfileContainer {
+    
+}
+
+div.userProfilePhotoColumn {
+    text-align: center;
+    padding-right: 0;
+}
+
+img.userProfilePhoto {
+    height: 70px;
+    width: 70px;
+}
+
+h4.userProfileName {
+    margin-top: 1em;
+    margin-bottom: 0;
+    text-align: left;
+}
+
+a.rectangleFadeButton {
+    position: relative;
+    display: inline-block;
+
+    width: 60px;
+    height: 60px;
+
+    overflow: hidden;
+
+    background: transparent;
+}
+
+a.rectangleFadeButton div.rectangleFadeButtonBackground {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: #333333;
+
+    opacity: 0;
+
+    text-decoration: none;
+    cursor: pointer;
+
+    transition: opacity .25s ease-in-out;
+
+}
+
+a.rectangleFadeButton:hover div.rectangleFadeButtonBackground,
+a.rectangleFadeButton:active div.rectangleFadeButtonBackground {
+    opacity: 0.4;
+}
+
+a.rectangleFadeButton div.rectangleFadeButtonIcon {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    top: 0;
+    left: 0;
+
+    font-size: 30px;
+    line-height: 60px;
+    text-align: center;
+
+    color: #ffffff;
+
+    transition: transform .3s ease-in-out;
+
+}
+
+div.userProfileContainer a.rectangleFadeButton.logoutButton {
+    position: absolute;
+    top: 0;
+    left: auto;
+    right: 0;
+}
+
+div.userProfileContainer a.rectangleFadeButton.logoutButton div.rectangleFadeButtonIcon {
+    background-size: 60%;
+}
+
+div.userProfileContainer a.rectangleFadeButton.expandUserProfileButton {
+    position: absolute;
+    bottom: 0;
+    left: auto;
+    right: 0;
+}
+
+div.userProfileContainer a.rectangleFadeButton.expandUserProfileButton div.rectangleFadeButtonIcon {
+    background-size: 40%;
+}
+
+div.userProfileContainer a.rectangleFadeButton.expandUserProfileButton.userProfileExpanded div.rectangleFadeButtonIcon {
+    transform: rotate(180deg);
+}
+
+div.slideDown {
+    overflow: hidden;
+    max-height: 200px;
+
+    transition: max-height .3s ease-in-out;
+
+}
+
+div.slideDownCollapsed {
+    max-height: 0;
+}
+
+/*********************************/
+/*          CHAT PANEL           */
+/*********************************/
+
+div#roomPanel {
+    width: 100%;
+    background: #ffffff;
+}
+
+div#roomPanel div.scrollableContent {
+    width: 100%;
+    box-shadow: none;
+
+}
+
+div#roomPanel a.closePanelButton {
+    height: 60px;
+    width: 60px;
+}
+
+div#roomPanel a.leaveRoomButton {
+    height: 60px;
+    width: 60px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+div#roomPanel div.roomHeader {
+    text-align: center;
+    height: 60px;
+    width: 100%;
+    color: #ffffff;
+    background: rgba(0, 178, 89, 1);
+    padding: 17px;
+    font-weight: 600;
+    font-size: large;
+    overflow: hidden;
+}
+
+div#roomPanel div.roomHeader .fontawesome {
+    background-size: 60%;
+}
+
+div#roomPanel div.roomUsersHeading {
+    padding: 0 1em 0 1em;
+    height: 40px;
+}
+
+div#roomPanel div.roomUsers {
+    padding: 0 1em 0 1em;
+    height: calc(100% - 300px);
+}
+
+div#roomPanel div.roomDetails {
+    padding: 0 1em 0 1em;
+    height: 200px;
+}
+
+div#roomPanel div.roomComposeMessage {
+    font-size: 0;
+    width: 100%;
+    border-top: 1px solid #dddddd;
+    background: #ffffff;
+    height: 80px;
+
+    transition: height 0.3s;
+}
+
+div#roomPanel .messenger-message {
+    width: 100%;
+    padding: 5px 17px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+div#roomPanel .messenger-message:first-child {
+    padding-top: 17px;
+}
+
+div#roomPanel .messenger-message:last-child {
+    padding-bottom: 17px;
+}
+
+/*The space between adjacent messages are shortened to be concise*/
+/*We need two to separate between us and other users*/
+div#roomPanel .messenger-message-user-me + .messenger-message-user-me {
+    margin-top: -10px;
+}
+
+div#roomPanel .messenger-message-user-other + .messenger-message-user-other {
+    margin-top: -10px;
+}
+
+div#roomPanel .messenger-message .messenger-message-timestamp {
+    display: none;
+    font-size: 80%;
+    text-transform: uppercase;
+    color: #666666;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-align: center;
+}
+
+div#roomPanel .messenger-message .messenger-message-content {
+    vertical-align: bottom;
+    display: inline-block;
+    border-radius: 5px;
+    padding: 8px;
+
+}
+
+div#roomPanel .messenger-message.messenger-message-user-other .messenger-message-user {
+    display: inline-block;
+}
+
+div#roomPanel .messenger-message.messenger-message-user-other .messenger-message-user img {
+    width: 34px;
+    height: 34px;
+    border-radius: 100px;
+    margin-right: 5px;
+}
+
+div#roomPanel .messenger-message.messenger-message-user-other .messenger-message-user {
+
+}
+
+div#roomPanel .messenger-message.messenger-message-user-other .messenger-message-content {
+    background: #eeeeee;
+}
+
+div#roomPanel .messenger-message.messenger-message-user-me {
+    text-align: right;
+}
+
+div#roomPanel .messenger-message.messenger-message-user-me .messenger-message-content {
+    background: rgba(0, 178, 89, 1);
+    color: #ffffff;
+}
+
+div#roomPanel .messenger-compose-text {
+    outline: none;
+    height: 100%;
+    display: inline-block;
+    width: calc(100% - 75px);
+    border: none;
+    padding: 17px;
+    box-sizing: border-box;
+    resize: none;
+    font-size: 15px;
+}
+
+div#roomPanel .messenger-compose-send {
+    color: #fff;
+    margin: 0;
+    height: 100%;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 0;
+    vertical-align: top;
+    display: inline-block;
+    background: rgba(0, 178, 89, 1);
+    width: 75px;
+    font-size: 15px;
+}
+
+/*********************************/
+/*          ROOMS LIST           */
+/*********************************/
+
+ul.nav-tabs [role="presentation"] {
+    background: rgba(0, 178, 89, 1);
+    border-bottom: 7px solid rgba(0, 0, 0, 0);
+    width: 50%;
+    text-align: center;
+}
+
+ul.nav-tabs [role="presentation"].active {
+    border-bottom: 7px solid rgba(0, 0, 0, 0.2);
+}
+
+ul.nav-tabs [role="tab"], ul.nav-tabs [role="tab"]:hover, ul.nav-tabs [role="tab"]:focus {
+    color: rgba(0, 0, 0, 0.6) !important;
+    background: none !important;
+    border: none !important;
+    font-size: 25px !important;
+}
+
+ul.nav-tabs .fontawesome {
+    height: 40px;
+    width: 40px;
+    margin: 0 auto;
+}
+
+.rooms-nearby h4, .rooms-nearby p {
+    padding-left: 17px;
+    padding-top: 17px;
+}
+
+.rooms-room {
+    padding: 17px;
+}
+
+.rooms-room:hover {
+    background: rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+}
+
+.rooms-room-name {
+    font-weight: 700;
+}
+
+.rooms-room-distance {
+    color: #666666;
+}
+
+/*********************************/
+/*        MENU PANEL LIST        */
+/*********************************/
+
+.create-room {
+    padding: 17px;
+}
+
+/*********************************/
+/*          LOGIN PAGE           */
+/*********************************/
+
+img.coordsLogo {
+    display: block;
+
+    max-width: 90%;
+    padding-top: 2em;
+    margin: 0 auto;
+}
+
+p.tagline {
+    font-size: 16px;
+    color: #ffffff;
+}
+
+footer.footer {
+    display: none;
+}
+
+body.loginPage {
+    /*background: linear-gradient(to bottom, #1e528e 0%,#265889 50%,#9da671 100%);*/
+    background: linear-gradient(to bottom, #94c5f8 1%,#a6e6ff 70%,#b1b5ea 100%);
+}
+
+body.loginPage footer.footer {
+    display: block;
+    
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+    height: 100px;
+    background: transparent url(/images/mountains.png) center top no-repeat;
+    background-size: cover;
+    
+    z-index: -5;
+}
+
+/*********************************/
+/*          MAP PAGE           */
+/*********************************/
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+#mapMenuButton {
+    position: absolute;
+    top: 2em;
+    left: 2em;
+}
+
+.fab {
+    position: relative;
+    display: inline-block;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    color: #fff;
+    overflow: hidden;
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: 0.2s;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+
+    line-height: 56px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.fab-glyphicon:before {
+    display: block;
+
+    position: absolute;
+    height: 20px;
+    width: 20px;
+
+    top: 18px;
+    left: 18px;
+
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+
+}
+
+.fab.red {
+    background-color: #d23f31;
+}
+
+.fab.blue {
+    background-color: #4285f4;
+}
+
+.fab.green {
+    background-color: #0f9d58;
+}
+
+.fab:active {
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
+    transition-delay: 0s;
+}
+
+.leaflet-bar a {
+    width: 36px !important;
+    height: 36px !important;
+    line-height: 36px;
+}
+
+.leaflet-control-gps .gps-button {
+    width: 36px !important;
+    height: 36px !important;
+}
+
+.leaflet-control-gps {
+    box-shadow: none !important;
+
+    border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.leaflet-control-gps .gps-button {
+    background: #ffffff url('/images/maps-gps-icon.png') no-repeat 0 0;
+}
+
+.leaflet-control-gps .gps-button:hover,
+.leaflet-control-gps .gps-button.active:hover {
+    background: #ffffff url('/images/maps-gps-icon.png') no-repeat -180px 0;
+}
+
+.leaflet-control-gps .gps-button.active {
+    background: #ffffff url('/images/maps-gps-icon.png') no-repeat -324px 0;
+}

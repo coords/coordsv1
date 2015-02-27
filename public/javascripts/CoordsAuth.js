@@ -9,86 +9,7 @@ CoordsAuth = {
         CoordsDB.removeObject("user");
         CoordsPages.changePage("loginPage");
     },
-
-    checkUserLogin: function checkUserLogin(loggedInCallback)
-    {
-        try
-        {
-            CoordsLog.v("CoordsAuth." + CoordsLog.getInlineFunctionTrace(arguments));
-
-            var userObject = CoordsDB.getObject("user");
-            var userData = userObject["providerUserData"];
-            
-            if (CoordsUtil.iterableLength(userData))
-            {
-                $('.userProfileName').text(userData['name']);
-                $('.userProfilePhoto').attr('src', userData['avatar']);
-
-                if (CoordsUtil.isDefined(userData['gender']))
-                {
-                    $('.userProfileGender')
-                        .text(userData['gender'] ? 'Female' : 'Male')
-                        .closest('tr')
-                        .removeClass('hidden');
-                }
-                else
-                {
-                    $('.userProfileGender').closest('tr').addClass('hidden');
-                }
-
-                if (CoordsUtil.isDefined(userData['location']))
-                {
-                    $('.userProfileLocation')
-                        .text(userData['location'])
-                        .closest('tr')
-                        .removeClass('hidden');
-                }
-                else
-                {
-                    $('.userProfileLocation').closest('tr').addClass('hidden');
-                }
-
-                if (CoordsUtil.isDefined(userData['email']))
-                {
-                    $('.userProfileEmail')
-                        .text(userData['email'])
-                        .attr('href', 'mailto:' + userData['email'])
-                        .closest('tr')
-                        .removeClass('hidden');
-                }
-                else
-                {
-                    $('.userProfileEmail').closest('tr').addClass('hidden');
-                }
-
-                if (CoordsUtil.isDefined(userData['birthdate']))
-                {
-                    $('.userProfileDOB')
-                        .text(userData['birthdate']['day'] + '/' + userData['birthdate']['month'] + '/' + userData['birthdate']['year'])
-                        .closest('tr')
-                        .removeClass('hidden');
-                }
-                else
-                {
-                    $('.userProfileDOB').closest('tr').addClass('hidden');
-                }
-
-                if (CoordsUtil.isDefined(loggedInCallback))
-                {
-                    loggedInCallback();
-                }
-            }
-            else
-            {
-                CoordsAuth.logout();
-            }
-        }
-        catch (e)
-        {
-            CoordsLog.exception(e);
-        }
-    },
-
+    
     authenticate: function authenticate(provider, token, callback)
     {
         try
@@ -96,12 +17,7 @@ CoordsAuth = {
             CoordsLog.v("CoordsAuth." + CoordsLog.getInlineFunctionTrace(arguments));
 
             OAuth.popup(provider, {
-                state: token,
-
-                // Google requires the following field to get a refresh token
-                authorize: {
-                    approval_prompt: 'force'
-                }
+                state: token
             })
                 .done(function (r)
                 {
@@ -147,12 +63,16 @@ CoordsAuth = {
                 {
                     CoordsAuth.authenticate(provider, data.token, function (userObject)
                     {
-                        CoordsLog.i("Successfully authenticated, userObject response: ");
-                        console.log(userObject);
+                        CoordsLog.i("Successfully authenticated, stored user object in local storage");
                         
+                        var userData = userObject["providerUserData"];
+                        jQuery.extend(userObject, userData);
+                        
+                        delete(userObject["providerUserData"]);
+
                         CoordsDB.setObject("user", userObject);
 
-                        CoordsAuth.checkUserLogin(function loginSuccess()
+                        CoordsUser.checkLogin(function loginSuccess()
                         {
                             CoordsPages.changePage("mapPage");
                         });

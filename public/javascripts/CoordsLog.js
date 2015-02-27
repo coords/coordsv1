@@ -2,7 +2,7 @@ CoordsLog = {
 
     v: function v(logMessage)
     {
-        if(arguments.callee.caller && arguments.callee.caller.name)
+        if($.type(logMessage) == "string" && arguments.callee.caller && arguments.callee.caller.name)
         {
             logMessage = arguments.callee.caller.name + ": " + logMessage;
         }
@@ -12,7 +12,7 @@ CoordsLog = {
 
     d: function d(logMessage)
     {
-        if(arguments.callee.caller && arguments.callee.caller.name)
+        if($.type(logMessage) == "string" && arguments.callee.caller && arguments.callee.caller.name)
         {
             logMessage = arguments.callee.caller.name + ": " + logMessage;
         }
@@ -22,7 +22,7 @@ CoordsLog = {
 
     i: function i(logMessage)
     {
-        if(arguments.callee.caller && arguments.callee.caller.name)
+        if($.type(logMessage) == "string" && arguments.callee.caller && arguments.callee.caller.name)
         {
             logMessage = arguments.callee.caller.name + ": " + logMessage;
         }
@@ -32,7 +32,7 @@ CoordsLog = {
 
     w: function w(logMessage)
     {
-        if(arguments.callee.caller && arguments.callee.caller.name)
+        if($.type(logMessage) == "string" && arguments.callee.caller && arguments.callee.caller.name)
         {
             logMessage = arguments.callee.caller.name + ": " + logMessage;
         }
@@ -42,7 +42,7 @@ CoordsLog = {
 
     e: function e(logMessage)
     {
-        if(arguments.callee.caller && arguments.callee.caller.name)
+        if($.type(logMessage) == "string" && arguments.callee.caller && arguments.callee.caller.name)
         {
             logMessage = arguments.callee.caller.name + ": " + logMessage;
         }

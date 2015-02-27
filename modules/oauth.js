@@ -58,8 +58,8 @@ module.exports = function (env)
 
     env.Users.getUserIdBySession = function (session)
     {
-        return session.user.id;
-    }
+        return session.user.dbid;
+    };
 
     oauth.initialize(config.key, config.secret);
 
@@ -88,6 +88,9 @@ module.exports = function (env)
                 var users = env.mongo.collection('users');
 
                 var user = {
+                    name: providerUserData.name,
+                    email: providerUserData.email,
+                    avatar: providerUserData.avatar,
                     provider: req.params.provider,
                     providerId: providerUserData.id,
                     accessToken: req.session.oauth[req.params.provider].access_token
@@ -123,7 +126,7 @@ module.exports = function (env)
                     providerId: user.providerId
                 }).toArray(function(err, docs) {
                     
-                    user.id = docs[0]._id;
+                    user.dbid = docs[0]._id;
                     
                     user.providerUserData = providerUserData;
 
@@ -144,4 +147,29 @@ module.exports = function (env)
         res.json(req.session);
     });
 
+    /**
+     * Gets a user by ID
+     * @requires userId
+     * @return a json object, with a success response of either true or false
+     */
+    env.app.post('/users/get', function (req, res)
+    {
+        if( env.Util.isHex(req.body.userId)) {
+            var userId = req.body.userId;
+
+            env.Users.getUserById(userId,function(user){
+                console.log(" @users/get, retrieved details of User "+userId);
+                res.status(200).json(user);
+            },function(err){
+                console.log("error");
+                console.log(err);
+                res.status(500);
+            },function(){
+                console.log("bad request");
+                res.status(400);
+            });
+        } else {
+            res.status(400);
+        }
+    });
 };

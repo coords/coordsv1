@@ -24,29 +24,22 @@ CoordsPages = {
                 CoordsAuth.authenticateWithProvider('github');
             });
 
-            $('.mapPageButton').click(function() {
-                CoordsPages.changePage("mapPage");
-            });
-            
-            $('.profilePageButton').click(function() {
-                CoordsPages.changePage("profilePage");
-            });
-
             $('.logoutButton').click(function() {
-                CoordsPages.changePage("loginPage");
+                CoordsAuth.logout(); 
             });
 
             $('.openMenuPanelButton').click(function() {
                 CoordsUI.openPanel("menuPanel");
             });
             
-            $('.closeMenuPanelButton').click(function() {
-                CoordsUI.closePanel("menuPanel");
+            $('.expandUserProfileButton').off('click').click(function() {
+                CoordsUser.expandUserProfile();
             });
             
-
-            CoordsMap.initialize();
-            CoordsComms.testComms();
+            $('.closePanelButton').click(function() {
+                var panelId = $(this).closest('div.unscrollablePanelContainer').attr('id');
+                CoordsUI.closePanel(panelId);
+            });
         }
         catch (e)
         {
@@ -96,7 +89,7 @@ CoordsPages = {
             // If there is no active page, or the currently active page is not the one the database thinks it should be, change to it
             if (activePage.length == 0 || activePage[0].id != currentPageId)
             {
-                CoordsAuth.checkUserLogin(function loginSuccess()
+                CoordsUser.checkLogin(function loginSuccess()
                 {
                     CoordsPages.changePage(currentPageId);
                 });
@@ -134,15 +127,20 @@ CoordsPages = {
             var pageTransitionAnimationForwards = "simpleFlipInY";
             var pageTransitionAnimationReverse = "simpleFlipInYReverse";
 
-            var pageTransitionAnimation = pageTransitionAnimationForwards;
+            var pageTransitionAnimation = "animated " + pageTransitionAnimationForwards;
 
             if (newPageId == "loginPage")
             {
-                pageTransitionAnimation = pageTransitionAnimationReverse;
+                pageTransitionAnimation = "animated " + pageTransitionAnimationReverse;
+            }
+            
+            if (newPageId == "loginPage" && (CoordsUtil.stringIsBlank(currentPageId) || currentPageId == "loginPage") )
+            {
+                pageTransitionAnimation = "";
             }
 
-            $(' .unscrollablePageContainer').addClass("inactivePage").removeClass("activePage animated " + pageTransitionAnimationForwards + " " + pageTransitionAnimationReverse);
-            $('#' + newPageId).removeClass("inactivePage").addClass("activePage animated " + pageTransitionAnimation);
+            $(' .unscrollablePageContainer').addClass("inactivePage").removeClass("activePage " + pageTransitionAnimationForwards + " " + pageTransitionAnimationReverse);
+            $('#' + newPageId).removeClass("inactivePage").addClass("activePage " + pageTransitionAnimation);
 
             $('body').removeClass("loginPage aboutPage profilePage mapPage").addClass(newPageId);
             
@@ -220,16 +218,16 @@ CoordsPages = {
             if (newPageId == "loginPage")
             {
                 CoordsUI.hideLoadingBar();
+                
+                $('img.coordsLogo').addClass('animated bounceInDown');
+                
+                $('a.btn-social').addClass('animated fadeInLeft');
             }
             else if (newPageId == "mapPage")
             {
+                CoordsMap.initialize();
                 CoordsUI.hideLoadingBar();
             }
-            else if (newPageId == "profilePage")
-            {
-                CoordsUI.hideLoadingBar();
-            }
-
 
         }
         catch (e)

@@ -46,6 +46,26 @@ CoordsUtil = {
         }
     },
 
+    stringCompare: function stringCompare(string1, string2)
+    {
+        if( CoordsUtil.isString(string1) && CoordsUtil.isString(string2) )
+        {
+            return string1 === string2;
+        }
+        
+        return false;
+    },
+
+    stringiCompare: function stringiCompare(string1, string2)
+    {
+        if( CoordsUtil.isString(string1) && CoordsUtil.isString(string2) )
+        {
+            return string1.toUpperCase() === string2.toUpperCase();
+        }
+
+        return false;
+    },
+    
     stringIsEmpty: function stringIsEmpty(value)
     {
         try

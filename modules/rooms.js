@@ -1,10 +1,5 @@
 module.exports = function (env)
 {
-    env.app.use(env.bodyParser.json());
-    env.app.use(env.bodyParser.urlencoded({
-        extended: true
-    }));
-
     env.Rooms = {};
     env.Rooms.createRoom = function(name,latitude,longitude,isPrivate,passphrase,success,fail,badRequest){
         if( env.Util.isString(name) &&
@@ -307,7 +302,8 @@ module.exports = function (env)
                             name: 1,
                             dist: 1,
                             private: 1,
-                            loc: 1
+                            loc: 1,
+                            usersJoined: 1
                         }
                     }
                 ];
@@ -345,10 +341,17 @@ module.exports = function (env)
             var userId = env.Users.getUserIdBySession(req.session);
 
             env.Rooms.verifyRoomPassphrase(roomId, passphrase, function(){
-                console.log(" @room, verified passphrase");
+                console.log(" @rooms/join, verified passphrase");
+
+                console.log(" @rooms/join, attempting to add User "+userId+" to Room "+roomId);
                 env.Rooms.addUserToRoom(userId,roomId,function(results){
                     console.log(" @room, Added User "+userId+" to Room "+roomId);
-                    res.status(200).json(results);
+                    res.status(200).json({
+                        action: "rooms/join",
+                        status: "success",
+                        userId: userId,
+                        roomId: roomId
+                    });
                 },function(err){
                     console.log("error");
                     console.log(err);
@@ -379,7 +382,38 @@ module.exports = function (env)
 
             env.Rooms.removeUserFromRoom(userId,roomId,function(results){
                 console.log(" @room, Removed User "+userId+" from Room "+roomId);
-                res.status(200).json(results);
+                res.status(200).json({
+                    action: "rooms/leave",
+                    status: "success",
+                    userId: userId,
+                    roomId: roomId
+                });
+            },function(err){
+                console.log("error");
+                console.log(err);
+                res.status(500);
+            },function(){
+                console.log("bad request");
+                res.status(400);
+            });
+        } else {
+            res.status(400);
+        }
+    });
+
+    /**
+     * Gets a room details by ID
+     * @requires roomId
+     * @return a json object, with a success response of either true or false
+     */
+    env.app.post('/rooms/get', function (req, res)
+    {
+        if( env.Util.isHex(req.body.roomId)) {
+            var roomId = req.body.roomId;
+            
+            env.Rooms.getRoomById(roomId,function(room){
+                console.log(" @rooms/get, retrieved details of Room "+roomId);
+                res.status(200).json(room);
             },function(err){
                 console.log("error");
                 console.log(err);

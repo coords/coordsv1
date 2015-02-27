@@ -1,37 +1,29 @@
 
-body {
-    background-color: #e9e9ff
-}
+/* This file is min-width: 992px */
 
-div.unscrollablePageContainer.activePage {
-    width: 70% !important;
-}
-
-div#loginPage {
-    width: 100% !important;
-}
-
-div#panelContentOverlay {
+div#roomPanelContentOverlay {
     display: none !important;
 }
 
-div.leftPanel, 
-div.rightPanel {
-    width: 30% !important;
-    
-    -webkit-transform: none !important;
+body.mapPage div#menuPanel {
+    width: 500px !important;
+}
+
+body.mapPage div.unscrollablePageContainer.activePage {
+    padding-right: 500px;
+}
+
+body.mapPage div#roomPanel a.closePanelButton {
+    display: none;    
+}
+
+body.mapPage div#roomPanel {
+    display: block;
+    width: 500px !important;
+
     transform: none !important;
 }
 
-body.loginPage div.leftPanel,
-body.loginPage div.rightPanel {
-    display: none;
-}
-
-li.closeMenuPanelButtonListItem {
-    display: none !important;
-}
-
-#mapMenuButton {
-    display: none !important;
+body.mapPage div.rightPanel {
+    box-shadow: -5px 0 5px rgba(0, 0, 0, .15);
 }
