@@ -18,7 +18,7 @@ CoordsRooms = {
                     '<div class="rooms-room-distance">' + (room.dist.calculated / 1000).toFixed(1) + ' km</div>' +
                     '</div>';
                 $("#nearbyRoomsList").append(template);
-                $('.load-room-' + room._id).click(function ()
+                $('.load-room-' + room._id).off('click').click(function ()
                 {
                     CoordsRooms.loadRoom(room);
                 });
@@ -32,6 +32,54 @@ CoordsRooms = {
         }
     },
 
+    closeRoom: function closeRoom()
+    {
+        var roomPanel = $('#roomPanel');
+        
+        roomPanel.find('.hiddenWhenRoomMember').addClass('hidden');
+        roomPanel.find('.hiddenWhenNotRoomMember').addClass('hidden');
+    },
+    
+    createRoom: function createRoom(roomName, roomPassphrase, roomLatitude, roomLongitude)
+    {
+        CoordsLog.i("Creating room with name: " + roomName);
+
+        CoordsUI.showLoadingBar();
+
+        var room = {
+            name: roomName,
+            latitude: roomLatitude,
+            longitude: roomLongitude
+        };
+        
+        if( CoordsUtil.stringIsNotBlank(roomPassphrase) )
+        {
+            room.private = true;
+            room.passphrase = roomPassphrase;
+        }
+        else
+        {
+            room.private = false;
+            room.passphrase = null;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "rooms/create",
+            data: JSON.stringify(room),
+            contentType: "application/json",
+            dataType: "json",
+            success: function (msg) {
+                CoordsMap.getMarkers();
+                $('[href=#nearbyRooms]').tab('show');
+                CoordsUI.hideLoadingBar();
+            },
+            error:function(x,e){
+                CoordsLog.e("Failed to create room");
+            }
+        });
+    },
+    
     loadRoom: function loadRoom(room)
     {
         CoordsLog.i("Loading room with ID: " + room['_id']);
@@ -51,10 +99,14 @@ CoordsRooms = {
                 CoordsLog.i("Loaded fresh room details: ");
                 CoordsLog.i(room);
 
+
+                $('#roomManagementTabPanel').appendTo('#menuPanel > div.scrollableContent');
+                
                 var roomPanel = $('#roomPanel');
 
-                roomPanel.find('.roomName').text(room.name);
-
+                roomPanel.find('.roomName').text(room.name).removeClass('hidden');
+                roomPanel.find('.welcomeMessage').addClass('hidden');
+                
                 var exampleMessagesHTML = '<div class="messenger-message messenger-message-user-other">' +
                     '    <div class="messenger-message-timestamp">' +
                     '        15 Feb At 13:08' +
@@ -194,11 +246,11 @@ CoordsRooms = {
                                     
                                     var encoded_avatar = user.avatar.replace(/&/g, "&amp;").replace(/>/g, "&gt;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
 
-                                    var roomUserProfileHTML =   '<div class="row roomUserProfileContainer margin-top-10">' +
-                                                                '    <div class="col-xs-2 userProfilePhotoColumn">' +
+                                    var roomUserProfileHTML =   '<div class="roomUserProfileContainer">' +
+                                                                '    <div class="userProfilePhotoColumn">' +
                                                                 '        <img alt="User Photo" src="' + encoded_avatar + '" class="img-responsive img-circle userProfilePhoto"/>' +
                                                                 '    </div>' +
-                                                                '    <div class="col-xs-10 userProfileNameColumn">' +
+                                                                '    <div class="userProfileNameColumn">' +
                                                                 '        <h4 class="userProfileName">' + user.name + '</h4>' +
                                                                 '    </div>' +
                                                                 '</div>';
@@ -236,7 +288,7 @@ CoordsRooms = {
                     roomPanel.find('.roomDistance').closest('tr').addClass('hidden');
                 }
 
-                $('.joinRoomButton').click(function ()
+                $('.joinRoomButton').off('click').click(function ()
                 {
                     CoordsUI.showLoadingBar();
                     
@@ -263,7 +315,7 @@ CoordsRooms = {
                     });
                 });
 
-                $('.leaveRoomButton').click(function ()
+                $('.leaveRoomButton').off('click').click(function ()
                 {
                     CoordsUI.showLoadingBar();
                     

@@ -40,6 +40,8 @@ CoordsPages = {
                 var panelId = $(this).closest('div.unscrollablePanelContainer').attr('id');
                 CoordsUI.closePanel(panelId);
             });
+
+            CoordsAuth.initialize();
         }
         catch (e)
         {
@@ -60,7 +62,7 @@ CoordsPages = {
                 var currentPageId = CoordsDB.getString("currentPageId");
                 if ( CoordsUtil.stringIsEmpty(currentPageId) )
                 {
-                    currentPageId = "mapPage";
+                    currentPageId = "mainPage";
                     CoordsDB.setString("currentPageId", currentPageId);
                 }
 
@@ -91,6 +93,12 @@ CoordsPages = {
             {
                 CoordsUser.checkLogin(function loginSuccess()
                 {
+                    var roomPanel = $('#roomPanel');
+
+                    $('#roomManagementTabPanel').appendTo('#roomPanel');
+                    roomPanel.find('.welcomeMessage').removeClass('hidden');
+                    roomPanel.find('.roomName').addClass('hidden');
+                    
                     CoordsPages.changePage(currentPageId);
                 });
             }
@@ -142,7 +150,7 @@ CoordsPages = {
             $(' .unscrollablePageContainer').addClass("inactivePage").removeClass("activePage " + pageTransitionAnimationForwards + " " + pageTransitionAnimationReverse);
             $('#' + newPageId).removeClass("inactivePage").addClass("activePage " + pageTransitionAnimation);
 
-            $('body').removeClass("loginPage aboutPage profilePage mapPage").addClass(newPageId);
+            $('body').removeClass("loginPage aboutPage profilePage mainPage").addClass(newPageId);
             
             CoordsPages.pageActionsAfterAnimation(newPageId, currentPageId);
 
@@ -223,9 +231,19 @@ CoordsPages = {
                 
                 $('a.btn-social').addClass('animated fadeInLeft');
             }
-            else if (newPageId == "mapPage")
+            else if (newPageId == "mainPage")
             {
                 CoordsMap.initialize();
+
+                $('.createRoomButton').click(function() {
+
+                    var mapCenter = CoordsMap.map.getCenter();
+                    var roomNameInput = $('#roomNameInput');
+                    
+                    CoordsRooms.createRoom( roomNameInput.val(), '', mapCenter.lat, mapCenter.lng );
+                    roomNameInput.val('');
+                });
+                
                 CoordsUI.hideLoadingBar();
             }
 

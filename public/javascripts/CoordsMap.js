@@ -5,18 +5,19 @@ CoordsMap = {
         try {
             CoordsLog.v("CoordsMap." + CoordsLog.getInlineFunctionTrace(arguments));
 
-            CoordsMap.rooms = {};
-            CoordsMap.roomMarkers = [];
-
             if(!CoordsUtil.isDefined(CoordsMap.map))
             {
-                CoordsMap.map = L.map('map', {
+
+                CoordsMap.rooms = {};
+                CoordsMap.roomMarkers = [];
+
+                CoordsMap.map = L.map('discoveryMap', {
                     zoomControl: false
                 });
 
-            L.tileLayer('https://{s}.tiles.mapbox.com/v4/leifgehrmann.7eb9fffd/{z}/{x}/{y}' + (L.Browser.retina ? '@2x' : '') + '.png?access_token=pk.eyJ1IjoibGVpZmdlaHJtYW5uIiwiYSI6IjBtOXlPQk0ifQ.I_I40vLyM3KMJWAMUjKiFw', {
-                attribution: '<a href="http://www.openstreetmap.org/">OpenStreetMap</a> | <a href="https://www.mapbox.com/">MapBox</a>'
-            }).addTo(CoordsMap.map);
+                L.tileLayer('https://{s}.tiles.mapbox.com/v4/leifgehrmann.7eb9fffd/{z}/{x}/{y}' + (L.Browser.retina ? '@2x' : '') + '.png?access_token=pk.eyJ1IjoibGVpZmdlaHJtYW5uIiwiYSI6IjBtOXlPQk0ifQ.I_I40vLyM3KMJWAMUjKiFw', {
+                    attribution: '<a href="http://www.openstreetmap.org/">OpenStreetMap</a> | <a href="https://www.mapbox.com/">MapBox</a>'
+                }).addTo(CoordsMap.map);
 
                 CoordsMap.roomMarkers = new L.MarkerClusterGroup({
                     iconCreateFunction: function (cluster) {
@@ -48,29 +49,14 @@ CoordsMap = {
                     iconAnchor: [21, 21] // point of the icon which will correspond to marker's location
                 });
 
-                CoordsMap.map.addControl(new L.Control.Gps({position: 'topright'}));
-                CoordsMap.map.addControl(new L.Control.Zoom({position: 'topright'}));
+                CoordsMap.map.addControl(new L.Control.Gps({position: 'bottomleft'}));
+                CoordsMap.map.addControl(new L.Control.Zoom({position: 'bottomleft'}));
                 CoordsMap.map.addLayer(CoordsMap.roomMarkers);
-
-                var getMarkers = function () {
-                    var center = CoordsMap.map.getCenter();
-                    $.ajax({
-                        type: "GET",
-                        url: "rooms/nearby/" + center.lat + "/" + center.lng + "/10000/100/0",
-                        contentType: "application/json",
-                        dataType: "json",
-                        success: function (rooms) {
-                            CoordsMap.addRooms(rooms);
-                            CoordsRooms.displayNearbyRooms(rooms);
-
-                        }
-                    });
-                };
 
                 CoordsMap.map.on('moveend', function (e) {
                     var center = CoordsMap.map.getCenter();
                     var zoom = CoordsMap.map.getZoom();
-                    getMarkers();
+                    CoordsMap.getMarkers();
                     CoordsDB.setObject("coordsMapPosition", [center.lat, center.lng]);
                     CoordsDB.setObject("coordsMapZoom", zoom);
                 });
@@ -92,8 +78,7 @@ CoordsMap = {
 
                 CoordsMap.map.setView(previousPosition, previousZoom);
 
-                getMarkers();
-
+                CoordsMap.getMarkers();
             }
         }
 
@@ -103,6 +88,20 @@ CoordsMap = {
         }
     },
 
+    getMarkers: function getMarkers() {
+        var center = CoordsMap.map.getCenter();
+        $.ajax({
+            type: "GET",
+            url: "rooms/nearby/" + center.lat + "/" + center.lng + "/10000/100/0",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (rooms) {
+                CoordsMap.addRooms(rooms);
+                CoordsRooms.displayNearbyRooms(rooms);
+            }
+        });
+    },
+    
     addRooms: function addRooms(rooms)
     {
         try

@@ -1,0 +1,29 @@
+.marker-cluster-small {
+    /*background-color: rgba(0, 0, 0, 0);*/
+    background-color: rgba(0, 178, 89, 0.6);
+}
+.marker-cluster-small div {
+    /*border: 2px solid #FFF;
+    color: #FFF;
+    background-color: rgba(0, 178, 88, 1);
+    box-shadow: 0 1px 2px 2px rgba(0,0,0,0.4);*/
+    background-color: rgba(0, 178, 89, 1);
+}
+
+.marker-cluster-medium {
+    /*background-color: rgba(241, 211, 87, 0.6);*/
+    background-color: rgba(0, 224, 109, 0.60);
+}
+.marker-cluster-medium div {
+    /*background-color: rgba(240, 194, 12, 0.6);*/
+    background-color: rgba(0, 224, 109, 0.60);
+}
+
+.marker-cluster-large {
+    /*background-color: rgba(253, 156, 115, 0.6);*/
+    background-color: rgba(0, 255, 123, 0.60);
+}
+.marker-cluster-large div {
+    /*background-color: rgba(241, 128, 23, 0.6);*/
+    background-color: rgba(0, 255, 123, 0.60);
+}

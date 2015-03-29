@@ -2,24 +2,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
         <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"/>
 
         <link rel="meta" type="application/rdf+xml" href="rdf.xml"/>
 
         <link rel="icon" type="image/png" href="images/icon-16.png"/>
 
         <title>Coords</title>
-        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
-        <link rel="stylesheet" href="bower_components/bootstrap-social/bootstrap-social.css"/>
-        <link rel="stylesheet" href="bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css"/>
-        <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css"/>
-        <link rel="stylesheet" href="bower_components/leaflet-gps/dist/leaflet-gps.src.css"/>
-        <link rel="stylesheet" href="bower_components/leaflet.markercluster/dist/MarkerCluster.Default.css"/>
-        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css"/>
-        <link rel="stylesheet" href="bower_components/animate.css/animate.css"/>
-        <link rel="stylesheet" href="bower_components/roboto-fontface/roboto-fontface.css"/>
+        <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.css"/>
+        <link rel="stylesheet" href="components/bootstrap-social/bootstrap-social.css"/>
+        <link rel="stylesheet" href="components/leaflet/dist/leaflet.css"/>
+        <link rel="stylesheet" href="components/leaflet-gps/dist/leaflet-gps.src.css"/>
+        <link rel="stylesheet" href="components/leaflet.markercluster/dist/MarkerCluster.Default.css"/>
+        <link rel="stylesheet" href="components/font-awesome/css/font-awesome.css"/>
+        <link rel="stylesheet" href="components/animate.css/animate.css"/>
+        <link rel="stylesheet" href="components/roboto-fontface/roboto-fontface.css"/>
 
+        <link rel="stylesheet" href="stylesheets/fab.css"/>
         <link rel="stylesheet" href="stylesheets/media-sizes.css"/>
+        <link rel="stylesheet" href="stylesheets/markerclustermod.css"/>
     </head>
     <body>
 
@@ -43,7 +44,7 @@
 
                                 <p class="tagline">Create a room for your group of friends.</p>
 
-                                <p class="tagline">See when your friends are near you and meet up!</p>
+                                <p class="tagline">Know when your friends are near and meet up!</p>
                             </div>
 
                         </div>
@@ -94,24 +95,51 @@
 
                                     <h1>What is Coords?</h1>
 
-                                    <p>The overview XHTML 5 page should describe the design and name the group members.</p>
+                                    <p>This project is intended to be a Synchronous Chat Service, with geo-location features added on top.
+                                        Logging in as a user will bring you to a map page which should display Heriot Watt.
+                                        On this map there are currently more than 5 rooms around the Heriot Watt campus.
+                                    </p>
+                                    <p>
+                                        Clicking on an icon will display information to the right of the interface in a panel about a chat room, which you can join (as long as it is public). Joining a room will bring a prototype of the messaging system, with speech bubbles, similar to Facebook's messenger and other popular chat services.
+                                    </p>
+                                    <p>
+                                        Clicking the menu button on the right will display information about the user logged in and provide a list of nearby rooms. It also has the ability to create a room, by selecting the "plus" tab. Pressing the power off button will return you to the homepage and sign you out.
+                                    </p>
                                     <h2>Creators</h2>
                                     <ul>
-                                        <li>Andrew Beveridge</li>
-                                        <li>Leif Gehrmann</li>
+                                        <li><a href="https://github.com/andrewthecoder">Andrew Beveridge</a></li>
+                                        <li><a href="https://github.com/lg90">Leif Gehrmann</a></li>
                                     </ul>
+                                    
+                                    <p class="text-center">
+                                        <a href="http://validator.w3.org/check?uri=coords.uk&amp;charset=%28detect+automatically%29&amp;doctype=Inline&amp;group=0">
+                                            <img src="/images/html5css3badges.png" height="150" alt="W3C HTML5" />
+                                        </a>
+                                    </p>
+
                                     <h2>HTML 5 and CSS 3 features</h2>
-                                
+                                    <ul>
+                                        <li>HTML5
+                                            <ul>
+                                                <li><a href="http://www.w3.org/TR/html5-diff/#obsolete-elements">Proudly uses no frames</a></li>
+                                                <li><a href="http://www.w3.org/TR/html5/forms.html#the-placeholder-attribute">Placeholders</a></li>
+                                                <li><a href="http://dev.w3.org/geo/api/spec-source.html">Geolocation</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>CSS3
+                                            <ul>
+                                                <li><a href="http://www.w3.org/TR/css3-animations/">CSS Animations</a></li>
+                                                <li><a href="http://www.w3.org/TR/css3-transitions/">CSS Transitions</a></li>
+                                                <li><a href="http://www.w3.org/TR/css3-transforms/">CSS Transforms</a></li>
+                                                <li><a href="http://www.w3.org/TR/css3-mediaqueries/">CSS Media Queries</a></li>
+                                                <li><a href="http://www.w3.org/TR/css3-values/#calc">CSS Calc()</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
                                     <h2>Validation</h2>
                                     
                                     <p>
-                                        This website is constructed using valid XHTML5 and CSS3, following standards and best practices set by the <a href="http://www.w3.org/">W3C</a>.
-                                    </p>
-                                    
-                                    <p>
-                                        <a href="http://validator.w3.org/check?uri=coords.uk&amp;charset=%28detect+automatically%29&amp;doctype=Inline&amp;group=0">
-                                            <img src="/images/HTML5_Logo_512.png" width="100" alt="W3C HTML5" />
-                                        </a>
+                                        This website is constructed using valid XHTML5 and CSS3, following <a href="http://www.w3.org/">W3C</a> standards and best practices.
                                     </p>
                                     
                                     <p>
@@ -136,7 +164,8 @@
                                             </a>
                                             <br />
 
-                                            This validator is where 
+                                            This validator is the most up-to-date version of the parsing engine behind the "official" W3C validator. Contributed to since 2006 by a variety of W3C staff members, the source changes regularly and can be seen on GitHub here: <a href="https://github.com/validator/validator">https://github.com/validator/validator</a>.<br />
+                                            It is the only official validator which supports validating XHTML5 in XML mode, so it's what we've been checking against as we work. As such, it passes validation.
                                         </li>
                                         
                                         <li class="list-group-item">
@@ -145,27 +174,79 @@
                                             </a>
                                             <br />
 
-                                            This is
+                                            This last validator is the official W3C CSS validator. Again somewhat of a work in progress, as CSS3 is still a moving target with vendor extensions coming and going and new properties becoming part of the standard every few weeks.<br />
+                                            Developing a real-world web application which uses entirely W3C-valid CSS can be very frustrating at times, as many widely used and supported features are still not part of the standard, meaning using them requires adding "vendor prefixes" to properties to add support for the major browsers. As this breaks validation, we have avoided using these in our own CSS, at the expense of a slightly less exciting interface.<br />
+                                            Also making CSS validation exceedingly difficult in real world development is the fact that most third-party libraries include CSS rules of their own, and they will almost always fail validation according to the W3C, as they use vendor prefixes to access full functionality.<br />
+                                            <br />
+                                            Even more frustratingly, despite our best efforts to write entirely valid CSS in our own files, we managed to find a bug in the CSS validator itself which has been reported but not yet fixed: <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=18913">https://www.w3.org/Bugs/Public/show_bug.cgi?id=18913</a><br />
+                                            This bug causes our validation to have 8 errors, all caused by the same bug which fails to parse whitespace in the CSS3 calc() function correctly.
                                         </li>
                                     </ul>
 
                                     <h2>External Libraries</h2>
-                                    <ul>
-                                        <li>Link, Overview, Author</li>
-                                        <li>jquery</li>
-                                        <li>bootstrap</li>
-                                        <li>bootstrap-social</li>
-                                        <li>bootstrap-switch</li>
-                                        <li>leaflet</li>
-                                        <li>leaflet-gps</li>
-                                        <li>leaflet.markercluster</li>
-                                        <li>oauth-js</li>
-                                        <li>socket.io-client</li>
-                                        <li>roboto-fontface</li>
-                                        <li>font-awesome</li>
-                                        <li>animate.css</li>
-                                    </ul>
-                                    
+                                    <p>Packages were installed using <a href="http://bower.io/">Bower</a>, which makes dependencies manageable for this kind of project. </p>
+                                    <pre>~/coords/public $ bower list
+bower check-new     Checking for new versions of the project dependencies..
+public /home/coords/coords/public
+&#9500;&#9472;&#9472; animate.css#3.2.0 extraneous (3.2.1 available)
+&#9500;&#9472;&#9472; bootstrap#3.3.2 extraneous
+&#9500;&#9472;&#9516; bootstrap-social#4.8.0 extraneous
+&#9474; &#9500;&#9472;&#9516; bootstrap#3.3.2
+&#9474; &#9474; &#9492;&#9472;&#9472; jquery#2.1.3
+&#9474; &#9492;&#9472;&#9472; font-awesome#4.2.0 (latest is 4.3.0)
+&#9500;&#9472;&#9472; bootstrap-toggle#2.2.0 extraneous
+&#9500;&#9472;&#9472; jquery#2.1.3 extraneous
+&#9500;&#9472;&#9472; leaflet#0.7.3 extraneous
+&#9500;&#9472;&#9472; leaflet-gps#1.0.1 extraneous
+&#9500;&#9472;&#9472; leaflet.markercluster#0.4.0 extraneous
+&#9500;&#9472;&#9472; oauth-js#0.4.0 extraneous
+&#9500;&#9472;&#9472; roboto-fontface#0.3.0 extraneous
+&#9492;&#9472;&#9472; socket.io-client#1.3.4 extraneous</pre>
+                                    <table class="table table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th>Bower Name</th><th>Overview</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="https://github.com/twbs/bootstrap">bootstrap</a></td>
+                                                <td>A responsive CSS framework, with some nice additional UI interface components.</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="https://github.com/lipis/bootstrap-social">bootstrap-social</a></td>
+                                                <td>Allows us to easily add social media login icons.</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="https://github.com/jquery/jquery">jquery</a></td>
+                                                <td>The DOM-manipulation and event handling tool we know and love, jQuery, standardizes the modern features of ECMAScript 5 browsers and allows us to build a functional interface quickly and easily without worry about browser support. After considering newer frameworks which are gaining momentum such as AngularJS and React, we settled back with jQuery to meet the requirement of having standard, readable XHTML5 markup.</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="https://github.com/Leaflet/Leaflet">Leaflet</a></td>
+                                                <td>A javascript map interface.</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="https://github.com/stefanocudini/leaflet-gps">leaflet-gps</a></td>
+                                                <td>Adds a geo-location marker to the leaflet map.</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="https://github.com/Leaflet/Leaflet.markercluster">Leaflet.markercluster</a></td>
+                                                <td>Adds the ability to group markers on a map into clusters.</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="https://github.com/oauth-io/oauth-js">oauth-jsr</a></td>
+                                                <td>An SDK for oAuth.io that allows us to do user authentication between a variety of providers</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="https://github.com/choffmeister/roboto-fontface-bower">roboto-fontface</a></td>
+                                                <td>Adds the Roboto fontface to the page.</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="https://github.com/Automattic/socket.io-client">socket.io-client</a></td>
+                                                <td>Not currently used for anything yet, but it is the intended library that will be used for managing live communication between the server for the chat rooms.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
 
@@ -182,10 +263,58 @@
 
         </div>
 
-        <div id="mapPage" class="unscrollablePageContainer inactivePage">
-            <div class="scrollableContent fullHeight">
-                <div id="map"></div>
-                <div id="mapMenuButton" class="fab green fab-glyphicon glyphicon-menu-hamburger openMenuPanelButton"></div>
+        <div id="mainPage" class="unscrollablePageContainer inactivePage">
+            <div class="scrollableContent fullHeight mainMapPageHeader">
+                <div class="scrollableContent fullHeight">
+                    <div id="discoveryMap"></div>
+                    <div class="dropdown userProfileButton">
+                        <button class="fab userProfilePhotoContainer" id="userProfilePhotoContainerButton" data-toggle="dropdown">
+                            <img alt="User Photo" src="/images/logo.png" class="img-responsive img-circle userProfilePhoto"/>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="userProfilePhotoContainerButton">
+                            <li role="presentation" class="userProfileName"></li>
+                            <li role="presentation" class="userProfileEmail">Another action</li>
+                            <li role="presentation" class="divider"></li>
+                            <li role="presentation" class="logoutButton"><a role="menuitem" tabindex="-1" href="#">Sign out</a></li>
+                        </ul>
+                    </div>
+                    <!--<button id="mapMenuButton" class="fab green fab-glyphicon glyphicon-menu-hamburger openMenuPanelButton"></button>-->
+                    <button class="fab fab-white geolocateDiscoveryMap">
+                        <svg viewBox="0 840 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="/images/svg-sprite/svg-sprite-device.svg#ic_gps_fixed_24px"></use>
+                        </svg>
+                        <svg viewBox="0 864 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="/images/svg-sprite/svg-sprite-device.svg#ic_gps_not_fixed_24px"></use>
+                        </svg>
+                        <svg viewBox="0 888 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="/images/svg-sprite/svg-sprite-device.svg#ic_gps_off_24px"></use>
+                        </svg>
+                    </button>
+                    <button class="fab fab-green openNearbyPage hidden-md hidden-lg">
+                        <svg viewBox="0 3648 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="/images/svg-sprite/svg-sprite-action.svg#ic_view_list_24px"></use>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="roomPage" class="unscrollablePageContainer inactivePage">
+            <div class="scrollableContent fullHeight mainMapPageHeader">
+                <div class="scrollableContent fullHeight">
+                    <div id="roomMap"></div>
+                    <button class="fab fab-white geolocateMainMap hidden-md hidden-lg">
+                        <svg viewBox="0 840 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="/images/svg-sprite/svg-sprite-device.svg#ic_gps_fixed_24px"></use>
+                        </svg>
+                        <svg viewBox="0 864 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="/images/svg-sprite/svg-sprite-device.svg#ic_gps_not_fixed_24px"></use>
+                        </svg>
+                        <svg viewBox="0 888 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="/images/svg-sprite/svg-sprite-device.svg#ic_gps_off_24px"></use>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -251,7 +380,7 @@
 
                 </div>
 
-                <div role="tabpanel">
+                <div id="roomManagementTabPanel" role="tabpanel">
 
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
@@ -267,6 +396,7 @@
 
                     <!-- Tab panes -->
                     <div class="tab-content">
+                        
                         <div role="tabpanel" class="tab-pane active" id="nearbyRooms">
                             <div class="rooms-nearby">
                                 <h4>Nearby Rooms</h4>
@@ -275,25 +405,30 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <div role="tabpanel" class="tab-pane" id="createRoom">
                             <div class="create-room">
-                                <div class="input-group">
-                                    <label>
-                                        <span class="input-group-addon">Room Name</span>
-                                        <input type="text" class="form-control" aria-label="Name of the room"/>
-                                    </label>
+                                
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <label for="roomNameInput" class="input-group-addon">Room Name</label>
+                                        <input id="roomNameInput" name="roomName" type="text" class="form-control" aria-label="Name of the room"/>
+                                    </div>
                                 </div>
-                                <label>
-                                    Private:
-                                    <input type="checkbox"/>
-                                </label>
+
+                                <div class="form-group">
+                                    <label for="roomPrivateInput">Private</label>
+                                    <input id="roomPrivateInput" name="roomPrivate" type="checkbox" data-toggle="toggle" />
+                                </div>
 
                                 <div class="help-block">
                                     This will create a room at your current coords.
                                 </div>
-                                <button class="btn btn-success">Create Room</button>
+                                
+                                <button class="btn btn-lg btn-success createRoomButton">Create Room</button>
                             </div>
                         </div>
+                        
                     </div>
 
                 </div>
@@ -317,7 +452,8 @@
                     <div class="rectangleFadeButtonIcon fontawesome fontawesome-chevron-left"></div>
                 </a>
 
-                <div class="roomName">No room loaded</div>
+                <div class="welcomeMessage">Coords</div>
+                <div class="roomName hidden">No room loaded</div>
 
                 <a class="rectangleFadeButton leaveRoomButton hiddenWhenNotRoomMember hidden">
                     <div class="rectangleFadeButtonBackground"></div>
@@ -330,7 +466,7 @@
                 <h4>Most recent users:</h4>
             </div>
 
-            <div class="roomUsers hiddenWhenRoomMember hidden">
+            <div class="roomUsers scrollableContent hiddenWhenRoomMember hidden">
 
             </div>
 
@@ -369,13 +505,14 @@
         <div id="menuPanelContentOverlay" class="panelContentOverlay hidden"></div>
         <div id="roomPanelContentOverlay" class="panelContentOverlay hidden"></div>
 
-        <script src="bower_components/jquery/dist/jquery.js"></script>
-        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="bower_components/oauth-js/dist/oauth.js"></script>
-        <script src="bower_components/socket.io-client/socket.io.js"></script>
-        <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
-        <script src="bower_components/leaflet-gps/dist/leaflet-gps.src.js"></script>
-        <script src="bower_components/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
+        <script src="components/jquery/dist/jquery.js"></script>
+        <script src="components/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="components/oauth-js/dist/oauth.js"></script>
+        <script src="components/socket.io-client/socket.io.js"></script>
+        <script src="components/leaflet/dist/leaflet-src.js"></script>
+        <script src="components/leaflet-gps/dist/leaflet-gps.src.js"></script>
+        <script src="components/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
+
 
         <script src="javascripts/NativeWrapper.js"></script>
         <script src="javascripts/CoordsLog.js"></script>

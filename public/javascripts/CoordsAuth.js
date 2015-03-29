@@ -4,8 +4,26 @@ CoordsAuth = {
         key: 'xii9p-_4ZfUXQZhCmOnMFyqLgjM'
     },
 
+    initialize: function initialize()
+    {
+        OAuth.initialize(CoordsAuth.credentials.key);
+        
+        $.ajax({
+            url: '/oauth/token',
+            success: function (data, status)
+            {
+                CoordsDB.setString("oauthtoken", data.token);
+            },
+            error: function (data)
+            {
+                CoordsAuth.logout();
+            }
+        });
+    },
+    
     logout: function logout()
     {
+        CoordsRooms.closeRoom();
         CoordsDB.removeObject("user");
         CoordsPages.changePage("loginPage");
     },
@@ -38,6 +56,8 @@ CoordsAuth = {
                 })
                 .fail(function (e)
                 {
+                    CoordsLog.e("Failed to authenticate, error: ");
+                    CoordsLog.e(e);
                     CoordsAuth.logout();
                 });
         }
@@ -55,33 +75,27 @@ CoordsAuth = {
 
             CoordsUI.showLoadingBar();
 
-            OAuth.initialize(CoordsAuth.credentials.key);
+            CoordsAuth.authenticate(provider, CoordsDB.getString("oauthtoken"), function (userObject)
+            {
+                CoordsLog.i("Successfully authenticated, stored user object in local storage");
 
-            $.ajax({
-                url: '/oauth/token',
-                success: function (data, status)
+                var userData = userObject["providerUserData"];
+                jQuery.extend(userObject, userData);
+
+                delete(userObject["providerUserData"]);
+
+                CoordsDB.setObject("user", userObject);
+
+                CoordsUser.checkLogin(function loginSuccess()
                 {
-                    CoordsAuth.authenticate(provider, data.token, function (userObject)
-                    {
-                        CoordsLog.i("Successfully authenticated, stored user object in local storage");
-                        
-                        var userData = userObject["providerUserData"];
-                        jQuery.extend(userObject, userData);
-                        
-                        delete(userObject["providerUserData"]);
-
-                        CoordsDB.setObject("user", userObject);
-
-                        CoordsUser.checkLogin(function loginSuccess()
-                        {
-                            CoordsPages.changePage("mapPage");
-                        });
-                    });
-                },
-                error: function (data)
-                {
-                    CoordsAuth.logout();
-                }
+                    var roomPanel = $('#roomPanel');
+                    
+                    $('#roomManagementTabPanel').appendTo('#roomPanel');
+                    roomPanel.find('.welcomeMessage').removeClass('hidden');
+                    roomPanel.find('.roomName').addClass('hidden');
+                    
+                    CoordsPages.changePage("mainPage");
+                });
             });
         }
         catch (e)

@@ -200,12 +200,12 @@ module.exports = function (env)
             req.body.private,
             req.body.passphrase,
             function(result){
-                res.status(200).json({
-                    'response': true,
-                    'message': 'room '+room.name+' was created'
-                });
-                console.log(result);
                 console.log("Rooms.js : Inserted 1 room into the rooms collection");
+                
+                res.status(200).json({
+                    action: "rooms/create",
+                    status: "success"
+                });
             }, function(err){
                 res.status(500);
                 console.log(err);
