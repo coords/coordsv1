@@ -110,9 +110,11 @@
                                         Logging in as a user will bring you to a map page which should display Heriot Watt.
                                         On this map there are currently more than 5 rooms around the Heriot Watt campus.
                                     </p>
+
                                     <p>
                                         Clicking on an icon will display information to the right of the interface in a panel about a chat room, which you can join (as long as it is public). Joining a room will bring a prototype of the messaging system, with speech bubbles, similar to Facebook's messenger and other popular chat services.
                                     </p>
+
                                     <p>
                                         Clicking the menu button on the right will display information about the user logged in and provide a list of nearby rooms. It also has the ability to create a room, by selecting the "plus" tab. Pressing the power off button will return you to the homepage and sign you out.
                                     </p>
@@ -121,10 +123,10 @@
                                         <li><a href="https://github.com/andrewthecoder">Andrew Beveridge</a></li>
                                         <li><a href="https://github.com/lg90">Leif Gehrmann</a></li>
                                     </ul>
-                                    
+
                                     <p class="text-center">
                                         <a href="http://validator.w3.org/check?uri=coords.uk&amp;charset=%28detect+automatically%29&amp;doctype=Inline&amp;group=0">
-                                            <img src="/images/html5css3badges.png" height="150" alt="W3C HTML5" />
+                                            <img src="/images/html5css3badges.png" height="150" alt="W3C HTML5"/>
                                         </a>
                                     </p>
 
@@ -148,11 +150,11 @@
                                         </li>
                                     </ul>
                                     <h2>Validation</h2>
-                                    
+
                                     <p>
                                         This website is constructed using valid XHTML5 and CSS3, following <a href="http://www.w3.org/">W3C</a> standards and best practices.
                                     </p>
-                                    
+
                                     <p>
                                         Here are the tools used to validate that the code written is valid:
                                     </p>
@@ -162,39 +164,40 @@
                                             <a href="http://validator.w3.org/check?uri=coords.uk&amp;charset=%28detect+automatically%29&amp;doctype=Inline&amp;group=0">
                                                 W3C HTML5 Validator
                                             </a>
-                                            <br />
-                                            
-                                            This is the mainstream, "official" W3C web validator. It does not officially support HTML5 fully yet, so the results have to be taken with a pinch of salt.<br />
-                                            It also unfortunately does not yet check whether the HTML5 is sent with the correct content-type to trigger XML mode (XHTML5), so while it provides a guideline it does not truly tell us whether our XHTML5 document is valid.<br />
+                                            <br/>
+
+                                            This is the mainstream, "official" W3C web validator. It does not officially support HTML5 fully yet, so the results have to be taken with a pinch of salt.<br/>
+                                            It also unfortunately does not yet check whether the HTML5 is sent with the correct content-type to trigger XML mode (XHTML5), so while it provides a guideline it does not truly tell us whether our XHTML5 document is valid.<br/>
                                             Regardless, as expected our document passes validation.
                                         </li>
-                                        
+
                                         <li class="list-group-item">
                                             <a href="https://validator.nu/?doc=http%3A%2F%2Fcoords.uk%2F&amp;schema=http%3A%2F%2Fs.validator.nu%2Fxhtml5-rdfalite.rnc+http%3A%2F%2Fs.validator.nu%2Fhtml5%2Fassertions.sch+http%3A%2F%2Fc.validator.nu%2Fall%2F&amp;parser=xml&amp;showimagereport=yes&amp;showsource=yes">
                                                 Validator.nu XHTML5 Validator
                                             </a>
-                                            <br />
+                                            <br/>
 
-                                            This validator is the most up-to-date version of the parsing engine behind the "official" W3C validator. Contributed to since 2006 by a variety of W3C staff members, the source changes regularly and can be seen on GitHub here: <a href="https://github.com/validator/validator">https://github.com/validator/validator</a>.<br />
+                                            This validator is the most up-to-date version of the parsing engine behind the "official" W3C validator. Contributed to since 2006 by a variety of W3C staff members, the source changes regularly and can be seen on GitHub here: <a href="https://github.com/validator/validator">https://github.com/validator/validator</a>.<br/>
                                             It is the only official validator which supports validating XHTML5 in XML mode, so it's what we've been checking against as we work. As such, it passes validation.
                                         </li>
-                                        
+
                                         <li class="list-group-item">
                                             <a href="https://jigsaw.w3.org/css-validator/validator?uri=coords.uk%2Fstylesheets%2Fmedia-sizes.css&amp;profile=css3&amp;usermedium=all&amp;warning=1&amp;vextwarning=true&amp;lang=en">
                                                 W3C CSS Validator
                                             </a>
-                                            <br />
+                                            <br/>
 
-                                            This last validator is the official W3C CSS validator. Again somewhat of a work in progress, as CSS3 is still a moving target with vendor extensions coming and going and new properties becoming part of the standard every few weeks.<br />
-                                            Developing a real-world web application which uses entirely W3C-valid CSS can be very frustrating at times, as many widely used and supported features are still not part of the standard, meaning using them requires adding "vendor prefixes" to properties to add support for the major browsers. As this breaks validation, we have avoided using these in our own CSS, at the expense of a slightly less exciting interface.<br />
-                                            Also making CSS validation exceedingly difficult in real world development is the fact that most third-party libraries include CSS rules of their own, and they will almost always fail validation according to the W3C, as they use vendor prefixes to access full functionality.<br />
-                                            <br />
-                                            Even more frustratingly, despite our best efforts to write entirely valid CSS in our own files, we managed to find a bug in the CSS validator itself which has been reported but not yet fixed: <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=18913">https://www.w3.org/Bugs/Public/show_bug.cgi?id=18913</a><br />
+                                            This last validator is the official W3C CSS validator. Again somewhat of a work in progress, as CSS3 is still a moving target with vendor extensions coming and going and new properties becoming part of the standard every few weeks.<br/>
+                                            Developing a real-world web application which uses entirely W3C-valid CSS can be very frustrating at times, as many widely used and supported features are still not part of the standard, meaning using them requires adding "vendor prefixes" to properties to add support for the major browsers. As this breaks validation, we have avoided using these in our own CSS, at the expense of a slightly less exciting interface.<br/>
+                                            Also making CSS validation exceedingly difficult in real world development is the fact that most third-party libraries include CSS rules of their own, and they will almost always fail validation according to the W3C, as they use vendor prefixes to access full functionality.<br/>
+                                            <br/>
+                                            Even more frustratingly, despite our best efforts to write entirely valid CSS in our own files, we managed to find a bug in the CSS validator itself which has been reported but not yet fixed: <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=18913">https://www.w3.org/Bugs/Public/show_bug.cgi?id=18913</a><br/>
                                             This bug causes our validation to have 8 errors, all caused by the same bug which fails to parse whitespace in the CSS3 calc() function correctly.
                                         </li>
                                     </ul>
 
                                     <h2>External Libraries</h2>
+
                                     <p>Packages were installed using <a href="http://bower.io/">Bower</a>, which makes dependencies manageable for this kind of project. </p>
                                     <pre>~/coords/public $ bower list
 bower check-new     Checking for new versions of the project dependencies..
@@ -216,7 +219,8 @@ public /home/coords/coords/public
                                     <table class="table table-responsive">
                                         <thead>
                                             <tr>
-                                                <th>Bower Name</th><th>Overview</th>
+                                                <th>Bower Name</th>
+                                                <th>Overview</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -275,12 +279,12 @@ public /home/coords/coords/public
         </div>
 
         <div id="mainPage" class="unscrollablePageContainer inactivePage">
-            <div class="scrollableContent fullHeight mainMapPageHeader">
+            <div class="scrollableContent fullHeight">
                 <div class="scrollableContent fullHeight">
                     <div id="discoveryMap"></div>
-                    <div class="dropdown userProfileButton">
+                    <div class="dropdown userProfileButton hidden">
                         <button class="fab userProfilePhotoContainer" id="userProfilePhotoContainerButton" data-toggle="dropdown">
-                            <img alt="User Photo" src="/images/logo.png" class="img-responsive img-circle userProfilePhoto"/>
+                            <img alt="User Photo" src="" class="img-responsive img-circle userProfilePhoto"/>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="userProfilePhotoContainerButton">
                             <li role="presentation" class="userProfileName"></li>
@@ -289,8 +293,8 @@ public /home/coords/coords/public
                             <li role="presentation" class="logoutButton"><a role="menuitem" tabindex="-1" href="#">Sign out</a></li>
                         </ul>
                     </div>
-                    <!--<button id="mapMenuButton" class="fab green fab-glyphicon glyphicon-menu-hamburger openMenuPanelButton"></button>-->
-                    <button class="fab fab-white geolocateDiscoveryMap gps_not_fixed">
+
+                    <button class="fab fab-white geolocateDiscoveryMap mapGeolocateButton gps_not_fixed">
                         <svg class="gps_fixed square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <use xlink:href="/images/material.svg#gps_fixed"></use>
                         </svg>
@@ -301,7 +305,8 @@ public /home/coords/coords/public
                             <use xlink:href="/images/material.svg#gps_off"></use>
                         </svg>
                     </button>
-                    <button class="fab fab-green openNearbyPage hidden-md hidden-lg">
+
+                    <button class="fab fab-green openNearbyPanel">
                         <svg class="square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <use xlink:href="/images/material.svg#view_list"></use>
                         </svg>
@@ -311,18 +316,25 @@ public /home/coords/coords/public
         </div>
 
         <div id="roomPage" class="unscrollablePageContainer inactivePage">
-            <div class="scrollableContent fullHeight mainMapPageHeader">
+            <div class="scrollableContent fullHeight">
                 <div class="scrollableContent fullHeight">
                     <div id="roomMap"></div>
-                    <button class="fab fab-white geolocateMainMap hidden-md hidden-lg">
-                        <svg class=" square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                    <button class="fab fab-white geolocateRoomMap mapGeolocateButton gps_not_fixed">
+                        <svg class="gps_fixed square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <use xlink:href="/images/material.svg#gps_fixed"></use>
                         </svg>
-                        <svg class=" square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <svg class="gps_not_fixed square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <use xlink:href="/images/material.svg#gps_not_fixed"></use>
                         </svg>
-                        <svg class=" square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <svg class="gps_off square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <use xlink:href="/images/material.svg#gps_off"></use>
+                        </svg>
+                    </button>
+
+                    <button class="fab fab-green openChatPanel">
+                        <svg class="square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="/images/material.svg#chat"></use>
                         </svg>
                     </button>
                 </div>
@@ -408,18 +420,20 @@ public /home/coords/coords/public
                                 <svg class="white-svg square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                     <use xlink:href="/images/fontawesome.svg#map-marker"></use>
                                 </svg>
-                            </a></li>
+                            </a>
+                        </li>
                         <li role="presentation">
                             <a href="#createRoom" aria-controls="createRoom" role="tab" data-toggle="tab">
                                 <svg class="white-svg square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                     <use xlink:href="/images/fontawesome.svg#plus-circle"></use>
                                 </svg>
-                            </a></li>
+                            </a>
+                        </li>
                     </ul>
 
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        
+
                         <div role="tabpanel" class="tab-pane active" id="nearbyRooms">
                             <div class="rooms-nearby">
                                 <h4>Nearby Rooms</h4>
@@ -428,10 +442,10 @@ public /home/coords/coords/public
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div role="tabpanel" class="tab-pane" id="createRoom">
                             <div class="create-room">
-                                
+
                                 <div class="form-group">
                                     <div class="input-group">
                                         <label for="roomNameInput" class="input-group-addon">Room Name</label>
@@ -441,17 +455,17 @@ public /home/coords/coords/public
 
                                 <div class="form-group">
                                     <label for="roomPrivateInput">Private</label>
-                                    <input id="roomPrivateInput" name="roomPrivate" type="checkbox" data-toggle="toggle" />
+                                    <input id="roomPrivateInput" name="roomPrivate" type="checkbox" data-toggle="toggle"/>
                                 </div>
 
                                 <div class="help-block">
                                     This will create a room at your current coords.
                                 </div>
-                                
+
                                 <button class="btn btn-lg btn-success createRoomButton">Create Room</button>
                             </div>
                         </div>
-                        
+
                     </div>
 
                 </div>
@@ -460,17 +474,15 @@ public /home/coords/coords/public
 
             <a class="closePanelButton noselect">
                 <div class="closePanelButtonIcon">
-                    <div class="closePanelButtonIconCharacter">
-                        <svg class=" square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <use xlink:href="/images/fontawesome.svg#black-chevron-left"></use>
-                        </svg>
-                    </div>
+                    <svg class="black-svg closePanelButtonIconArrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <use xlink:href="/images/fontawesome.svg#chevron-left"></use>
+                    </svg>
                 </div>
             </a>
 
         </div>
 
-        <div id="roomPanel" class="unscrollablePanelContainer rightPanel inactivePanel">
+        <div id="roomDetailsPanel" class="unscrollablePanelContainer rightPanel inactivePanel">
 
             <div class="roomHeader">
 
@@ -486,26 +498,17 @@ public /home/coords/coords/public
                 <div class="welcomeMessage">Coords</div>
                 <div class="roomName hidden">No room loaded</div>
 
-                <a class="rectangleFadeButton leaveRoomButton hiddenWhenNotRoomMember hidden">
-                    <div class="rectangleFadeButtonBackground"></div>
-                    <div class="rectangleFadeButtonIcon">
-                        <svg class="white-svg square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <use xlink:href="/images/fontawesome.svg#sign-out"></use>
-                        </svg>
-                    </div>
-                </a>
-                
             </div>
 
-            <div class="roomUsersHeading margin-top-10 hiddenWhenRoomMember hidden">
+            <div class="roomUsersHeading margin-top-10">
                 <h4>Most recent users:</h4>
             </div>
 
-            <div class="roomUsers scrollableContent hiddenWhenRoomMember hidden">
+            <div class="roomUsers scrollableContent">
 
             </div>
 
-            <div class="roomDetails hiddenWhenRoomMember hidden">
+            <div class="roomDetails">
 
                 <h4>Room details:</h4>
 
@@ -525,20 +528,49 @@ public /home/coords/coords/public
 
             </div>
 
+        </div>
 
-            <div class="roomMessages scrollableContent fullHeightMinus135 hiddenWhenNotRoomMember hidden">
+        <div id="roomChatPanel" class="unscrollablePanelContainer rightPanel inactivePanel">
+
+            <div class="roomHeader">
+
+                <a class="rectangleFadeButton closePanelButton">
+                    <div class="rectangleFadeButtonBackground"></div>
+                    <div class="rectangleFadeButtonIcon">
+                        <svg class="white-svg square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="/images/fontawesome.svg#chevron-left"></use>
+                        </svg>
+                    </div>
+                </a>
+
+                <div class="welcomeMessage">Coords</div>
+                <div class="roomName hidden">No room loaded</div>
+
+                <a class="rectangleFadeButton leaveRoomButton">
+                    <div class="rectangleFadeButtonBackground"></div>
+                    <div class="rectangleFadeButtonIcon">
+                        <svg class="white-svg square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="/images/fontawesome.svg#sign-out"></use>
+                        </svg>
+                    </div>
+                </a>
+                
+            </div>
+
+            <div class="roomMessages scrollableContent fullHeightMinus135">
 
             </div>
 
-            <div class="roomComposeMessage hiddenWhenNotRoomMember hidden">
-                <textarea class="messenger-compose-text" placeholder="Write a message" />
+            <div class="roomComposeMessage">
+                <textarea class="messenger-compose-text" placeholder="Write a message"/>
                 <button type="submit" class="messenger-compose-send">Send</button>
             </div>
-
+            
         </div>
 
         <div id="menuPanelContentOverlay" class="panelContentOverlay hidden"></div>
-        <div id="roomPanelContentOverlay" class="panelContentOverlay hidden"></div>
+        <div id="roomDetailsPanelContentOverlay" class="panelContentOverlay hidden"></div>
+        <div id="roomChatPanelContentOverlay" class="panelContentOverlay hidden"></div>
 
         <script src="components/jquery/dist/jquery.js"></script>
         <script src="components/bootstrap/dist/js/bootstrap.js"></script>
@@ -559,7 +591,8 @@ public /home/coords/coords/public
         <script src="javascripts/CoordsAuth.js"></script>
         <script src="javascripts/CoordsMessaging.js"></script>
         <script src="javascripts/CoordsRooms.js"></script>
-        <script src="javascripts/CoordsMap.js"></script>
+        <script src="javascripts/CoordsDiscoveryMap.js"></script>
+        <script src="javascripts/CoordsRoomMap.js"></script>
         <script src="javascripts/DocumentReady.js"></script>
     </body>
 </html>

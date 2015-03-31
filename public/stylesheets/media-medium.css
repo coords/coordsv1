@@ -1,7 +1,7 @@
 
 /* This file is min-width: 992px */
 
-div#roomPanelContentOverlay {
+div#roomDetailsPanelContentOverlay {
     display: none !important;
 }
 
@@ -13,11 +13,11 @@ body.mapPage div.unscrollablePageContainer.activePage {
     padding-right: 500px;
 }
 
-body.mapPage div#roomPanel a.closePanelButton {
+body.mapPage div#roomDetailsPanel a.closePanelButton {
     display: none;    
 }
 
-body.mapPage div#roomPanel {
+body.mapPage div#roomDetailsPanel {
     display: block;
     width: 500px !important;
 

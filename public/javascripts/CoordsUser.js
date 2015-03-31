@@ -39,6 +39,7 @@ CoordsUser = {
 
         $('.userProfileName').text(userData['name']);
         $('.userProfilePhoto').attr('src', userData['avatar']);
+        $('.userProfileButton').removeClass('hidden');
 
         if (CoordsUtil.isDefined(userData['email']))
         {

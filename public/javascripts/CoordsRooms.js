@@ -34,10 +34,12 @@ CoordsRooms = {
 
     closeRoom: function closeRoom()
     {
-        var roomPanel = $('#roomPanel');
         
-        roomPanel.find('.hiddenWhenRoomMember').addClass('hidden');
-        roomPanel.find('.hiddenWhenNotRoomMember').addClass('hidden');
+    },
+
+    leaveRoom: function leaveRoom()
+    {
+        CoordsDB.removeString("currentRoomId");
     },
     
     createRoom: function createRoom(roomName, roomPassphrase, roomLatitude, roomLongitude)
@@ -70,7 +72,7 @@ CoordsRooms = {
             contentType: "application/json",
             dataType: "json",
             success: function (msg) {
-                CoordsMap.getMarkers();
+                CoordsDiscoveryMap.getMarkers();
                 $('[href=#nearbyRooms]').tab('show');
                 CoordsUI.hideLoadingBar();
             },
@@ -98,14 +100,11 @@ CoordsRooms = {
             {
                 CoordsLog.i("Loaded fresh room details: ");
                 CoordsLog.i(room);
-
-
-                $('#roomManagementTabPanel').appendTo('#menuPanel > div.scrollableContent');
                 
-                var roomPanel = $('#roomPanel');
+                var roomDetailsPanel = $('#roomDetailsPanel');
 
-                roomPanel.find('.roomName').text(room.name).removeClass('hidden');
-                roomPanel.find('.welcomeMessage').addClass('hidden');
+                roomDetailsPanel.find('.roomName').text(room.name).removeClass('hidden');
+                roomDetailsPanel.find('.welcomeMessage').addClass('hidden');
                 
                 var exampleMessagesHTML = '<div class="messenger-message messenger-message-user-other">' +
                     '    <div class="messenger-message-timestamp">' +
@@ -200,10 +199,10 @@ CoordsRooms = {
                     '    </div>' +
                     '</div>';
 
-                var messagesContainer = roomPanel.find('.roomMessages');
+                var messagesContainer = roomDetailsPanel.find('.roomMessages');
                 messagesContainer.html(exampleMessagesHTML);
 
-                var roomUsersContainer = roomPanel.find('.roomUsers');
+                var roomUsersContainer = roomDetailsPanel.find('.roomUsers');
 
                 roomUsersContainer.html("This room has no users... Be the first to join!");
                 
@@ -277,15 +276,15 @@ CoordsRooms = {
                     roomUsersContainer.html("This room has no users... Be the first to join!");
                 }
 
-                roomPanel.find('.roomPrivate').text(room.private ? "Yes" : "No");
+                roomDetailsPanel.find('.roomPrivate').text(room.private ? "Yes" : "No");
 
                 if (CoordsUtil.isDefined(room.dist))
                 {
-                    roomPanel.find('.roomDistance').text(Math.round(room.dist.calculated)).closest('tr').removeClass('hidden');
+                    roomDetailsPanel.find('.roomDistance').text(Math.round(room.dist.calculated)).closest('tr').removeClass('hidden');
                 }
                 else
                 {
-                    roomPanel.find('.roomDistance').closest('tr').addClass('hidden');
+                    roomDetailsPanel.find('.roomDistance').closest('tr').addClass('hidden');
                 }
 
                 $('.joinRoomButton').off('click').click(function ()
@@ -303,10 +302,8 @@ CoordsRooms = {
                         dataType: "json",
                         success: function (msg)
                         {
-                            roomPanel.find('.hiddenWhenRoomMember').addClass('hidden');
-                            roomPanel.find('.hiddenWhenNotRoomMember').removeClass('hidden');
-
-                            CoordsUI.hideLoadingBar();
+                            CoordsDB.setString("currentRoomId", room['_id']);
+                            CoordsPages.changePage("roomPage");
                         },
                         error: function (x, e)
                         {
@@ -315,36 +312,11 @@ CoordsRooms = {
                     });
                 });
 
-                $('.leaveRoomButton').off('click').click(function ()
-                {
-                    CoordsUI.showLoadingBar();
-                    
-                    $.ajax({
-                        type: "POST",
-                        url: "rooms/leave",
-                        data: JSON.stringify({
-                            'roomId': room['_id']
-                        }),
-                        contentType: "application/json",
-                        dataType: "json",
-                        success: function (msg)
-                        {
-                            CoordsRooms.loadRoom(room);
-                        },
-                        error: function (x, e)
-                        {
-                            CoordsLog.e("Failed to leave room");
-                        }
-                    });
-                });
 
-                roomPanel.find('.hiddenWhenRoomMember').removeClass('hidden');
-                roomPanel.find('.hiddenWhenNotRoomMember').addClass('hidden');
-                
                 var latlng = L.latLng(room.loc.lat, room.loc.lon);
-                CoordsMap.map.panTo(latlng);
+                CoordsDiscoveryMap.map.panTo(latlng);
 
-                CoordsUI.openPanel("roomPanel");
+                CoordsUI.openPanel("roomDetailsPanel");
                 CoordsUI.hideLoadingBar();
             },
             error: function (x, e)

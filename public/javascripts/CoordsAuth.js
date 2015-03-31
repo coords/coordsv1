@@ -88,11 +88,10 @@ CoordsAuth = {
 
                 CoordsUser.checkLogin(function loginSuccess()
                 {
-                    var roomPanel = $('#roomPanel');
+                    var roomDetailsPanel = $('#roomDetailsPanel');
                     
-                    $('#roomManagementTabPanel').appendTo('#roomPanel');
-                    roomPanel.find('.welcomeMessage').removeClass('hidden');
-                    roomPanel.find('.roomName').addClass('hidden');
+                    roomDetailsPanel.find('.welcomeMessage').removeClass('hidden');
+                    roomDetailsPanel.find('.roomName').addClass('hidden');
                     
                     CoordsPages.changePage("mainPage");
                 });

@@ -28,8 +28,12 @@ CoordsPages = {
                 CoordsAuth.logout(); 
             });
 
-            $('.openMenuPanelButton').click(function() {
+            $('.openNearbyPanel').click(function() {
                 CoordsUI.openPanel("menuPanel");
+            });
+            
+            $('.openChatPanel').click(function() {
+                CoordsUI.openPanel("roomChatPanel");
             });
             
             $('.expandUserProfileButton').off('click').click(function() {
@@ -39,6 +43,34 @@ CoordsPages = {
             $('.closePanelButton').click(function() {
                 var panelId = $(this).closest('div.unscrollablePanelContainer').attr('id');
                 CoordsUI.closePanel(panelId);
+            });
+
+            $('.leaveRoomButton').off('click').click(function ()
+            {
+                CoordsUI.showLoadingBar();
+
+
+                CoordsRooms.leaveRoom();
+                CoordsPages.changePage("mainPage");
+
+                /*$.ajax({
+                 type: "POST",
+                 url: "rooms/leave",
+                 data: JSON.stringify({
+                 'roomId': room['_id']
+                 }),
+                 contentType: "application/json",
+                 dataType: "json",
+                 success: function (msg)
+                 {
+                 CoordsRooms.leaveRoom();
+                 CoordsPages.changePage("mainPage");
+                 },
+                 error: function (x, e)
+                 {
+                 CoordsLog.e("Failed to leave room");
+                 }
+                 });*/
             });
 
             CoordsAuth.initialize();
@@ -93,11 +125,10 @@ CoordsPages = {
             {
                 CoordsUser.checkLogin(function loginSuccess()
                 {
-                    var roomPanel = $('#roomPanel');
+                    var roomDetailsPanel = $('#roomDetailsPanel');
 
-                    $('#roomManagementTabPanel').appendTo('#roomPanel');
-                    roomPanel.find('.welcomeMessage').removeClass('hidden');
-                    roomPanel.find('.roomName').addClass('hidden');
+                    roomDetailsPanel.find('.welcomeMessage').removeClass('hidden');
+                    roomDetailsPanel.find('.roomName').addClass('hidden');
                     
                     CoordsPages.changePage(currentPageId);
                 });
@@ -233,17 +264,23 @@ CoordsPages = {
             }
             else if (newPageId == "mainPage")
             {
-                CoordsMap.initialize();
+                CoordsDiscoveryMap.initialize();
 
                 $('.createRoomButton').click(function() {
 
-                    var mapCenter = CoordsMap.map.getCenter();
+                    var mapCenter = CoordsDiscoveryMap.map.getCenter();
                     var roomNameInput = $('#roomNameInput');
                     
                     CoordsRooms.createRoom( roomNameInput.val(), '', mapCenter.lat, mapCenter.lng );
                     roomNameInput.val('');
                 });
                 
+                CoordsUI.hideLoadingBar();
+            }
+            else if (newPageId == "roomPage")
+            {
+                CoordsRoomMap.initialize();
+
                 CoordsUI.hideLoadingBar();
             }
 

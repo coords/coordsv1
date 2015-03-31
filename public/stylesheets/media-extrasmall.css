@@ -233,17 +233,19 @@ div.unscrollablePanelContainer a.closePanelButton {
     cursor: pointer;
 }
 
-div.unscrollablePanelContainer a.closePanelButton .closePanelButtonIconCharacter {
+div.unscrollablePanelContainer a.closePanelButton .closePanelButtonIconArrow {
+    width: 18px;
+    height: 18px;
     margin-left: -3px;
 }
 
-div.unscrollablePanelContainer a.closePanelButton:hover .closePanelButtonIconCharacter {
+div.unscrollablePanelContainer a.closePanelButton:hover .closePanelButtonIconArrow {
     transition: transform .3s ease-in-out;
 
 }
 
-div.unscrollablePanelContainer a.closePanelButton:hover .closePanelButtonIconCharacter,
-div.unscrollablePanelContainer a.closePanelButton:active .closePanelButtonIconCharacter {
+div.unscrollablePanelContainer a.closePanelButton:hover .closePanelButtonIconArrow,
+div.unscrollablePanelContainer a.closePanelButton:active .closePanelButtonIconArrow {
     transform: rotate(360deg);
 }
 
@@ -542,6 +544,11 @@ img.userProfilePhoto {
     width: 100%;
 }
 
+div.userProfilePhotoContainer img.userProfilePhoto {
+    height: 70px;
+    width: 70px;
+}
+
 div.userProfileNameColumn {
     display: inline-block;
     height: 70px;
@@ -657,26 +664,26 @@ div.slideDownCollapsed {
 }
 
 /*********************************/
-/*          CHAT PANEL           */
+/*    ROOM DETAILS PANEL         */
 /*********************************/
 
-div#roomPanel {
+div#roomDetailsPanel {
     width: 100%;
     background: #ffffff;
 }
 
-div#roomPanel div.scrollableContent {
+div#roomDetailsPanel div.scrollableContent {
     width: 100%;
     box-shadow: none;
 
 }
 
-div#roomPanel a.closePanelButton {
+div#roomDetailsPanel a.closePanelButton {
     height: 60px;
     width: 60px;
 }
 
-div#roomPanel a.leaveRoomButton {
+div#roomDetailsPanel a.leaveRoomButton {
     height: 60px;
     width: 60px;
     position: absolute;
@@ -684,7 +691,7 @@ div#roomPanel a.leaveRoomButton {
     right: 0;
 }
 
-div#roomPanel div.roomHeader {
+div#roomDetailsPanel div.roomHeader {
     text-align: center;
     height: 60px;
     width: 100%;
@@ -696,22 +703,64 @@ div#roomPanel div.roomHeader {
     overflow: hidden;
 }
 
-div#roomPanel div.roomUsersHeading {
+div#roomDetailsPanel div.roomUsersHeading {
     padding: 0 1em 0 1em;
     height: 40px;
 }
 
-div#roomPanel div.roomUsers {
+div#roomDetailsPanel div.roomUsers {
     padding: 0 1em 0 1em;
     height: calc(100% - 300px);
 }
 
-div#roomPanel div.roomDetails {
+div#roomDetailsPanel div.roomDetails {
     padding: 0 1em 0 1em;
     height: 200px;
 }
 
-div#roomPanel div.roomComposeMessage {
+
+
+/*********************************/
+/*          CHAT PANEL           */
+/*********************************/
+
+div#roomChatPanel {
+    width: 100%;
+    background: #ffffff;
+}
+
+div#roomChatPanel div.scrollableContent {
+    width: 100%;
+    box-shadow: none;
+
+}
+
+div#roomChatPanel a.closePanelButton {
+    height: 60px;
+    width: 60px;
+}
+
+div#roomChatPanel a.leaveRoomButton {
+    height: 60px;
+    width: 60px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+div#roomChatPanel div.roomHeader {
+    text-align: center;
+    height: 60px;
+    width: 100%;
+    color: #ffffff;
+    background: rgba(0, 178, 89, 1);
+    padding: 17px;
+    font-weight: 600;
+    font-size: large;
+    overflow: hidden;
+}
+
+div#roomChatPanel div.roomComposeMessage {
     font-size: 0;
     width: 100%;
     border-top: 1px solid #dddddd;
@@ -721,32 +770,32 @@ div#roomPanel div.roomComposeMessage {
     transition: height 0.3s;
 }
 
-div#roomPanel .messenger-message {
+div#roomChatPanel .messenger-message {
     width: 100%;
     padding: 5px 17px;
     margin-top: 5px;
     margin-bottom: 5px;
 }
 
-div#roomPanel .messenger-message:first-child {
+div#roomChatPanel .messenger-message:first-child {
     padding-top: 17px;
 }
 
-div#roomPanel .messenger-message:last-child {
+div#roomChatPanel .messenger-message:last-child {
     padding-bottom: 17px;
 }
 
 /*The space between adjacent messages are shortened to be concise*/
 /*We need two to separate between us and other users*/
-div#roomPanel .messenger-message-user-me + .messenger-message-user-me {
+div#roomChatPanel .messenger-message-user-me + .messenger-message-user-me {
     margin-top: -10px;
 }
 
-div#roomPanel .messenger-message-user-other + .messenger-message-user-other {
+div#roomChatPanel .messenger-message-user-other + .messenger-message-user-other {
     margin-top: -10px;
 }
 
-div#roomPanel .messenger-message .messenger-message-timestamp {
+div#roomChatPanel .messenger-message .messenger-message-timestamp {
     display: none;
     font-size: 80%;
     text-transform: uppercase;
@@ -756,7 +805,7 @@ div#roomPanel .messenger-message .messenger-message-timestamp {
     text-align: center;
 }
 
-div#roomPanel .messenger-message .messenger-message-content {
+div#roomChatPanel .messenger-message .messenger-message-content {
     vertical-align: bottom;
     display: inline-block;
     border-radius: 5px;
@@ -764,35 +813,35 @@ div#roomPanel .messenger-message .messenger-message-content {
 
 }
 
-div#roomPanel .messenger-message.messenger-message-user-other .messenger-message-user {
+div#roomChatPanel .messenger-message.messenger-message-user-other .messenger-message-user {
     display: inline-block;
 }
 
-div#roomPanel .messenger-message.messenger-message-user-other .messenger-message-user img {
+div#roomChatPanel .messenger-message.messenger-message-user-other .messenger-message-user img {
     width: 34px;
     height: 34px;
     border-radius: 100px;
     margin-right: 5px;
 }
 
-div#roomPanel .messenger-message.messenger-message-user-other .messenger-message-user {
+div#roomChatPanel .messenger-message.messenger-message-user-other .messenger-message-user {
 
 }
 
-div#roomPanel .messenger-message.messenger-message-user-other .messenger-message-content {
+div#roomChatPanel .messenger-message.messenger-message-user-other .messenger-message-content {
     background: #eeeeee;
 }
 
-div#roomPanel .messenger-message.messenger-message-user-me {
+div#roomChatPanel .messenger-message.messenger-message-user-me {
     text-align: right;
 }
 
-div#roomPanel .messenger-message.messenger-message-user-me .messenger-message-content {
+div#roomChatPanel .messenger-message.messenger-message-user-me .messenger-message-content {
     background: rgba(0, 178, 89, 1);
     color: #ffffff;
 }
 
-div#roomPanel .messenger-compose-text {
+div#roomChatPanel .messenger-compose-text {
     outline: none;
     height: 100%;
     display: inline-block;
@@ -804,7 +853,7 @@ div#roomPanel .messenger-compose-text {
     font-size: 15px;
 }
 
-div#roomPanel .messenger-compose-send {
+div#roomChatPanel .messenger-compose-send {
     color: #fff;
     margin: 0;
     height: 100%;
@@ -817,6 +866,9 @@ div#roomPanel .messenger-compose-send {
     width: 75px;
     font-size: 15px;
 }
+
+
+
 
 /*********************************/
 /*          ROOMS LIST           */
@@ -925,7 +977,7 @@ body.loginPage footer.footer {
     bottom: calc(70px + 35px);
     right: 35px;
 }
-.openNearbyPage {
+.openNearbyPanel {
     position: absolute;
     bottom: 35px;
     right: 35px;
@@ -941,14 +993,37 @@ body.loginPage footer.footer {
     display: none !important;
 }
 
-.geolocateDiscoveryMap svg {
+
+.mapGeolocateButton svg {
     display: none;
 }
 
-.geolocateDiscoveryMap.gps_fixed svg.gps_fixed, .geolocateDiscoveryMap.gps_fixed svg.gps_fixed path {
+.mapGeolocateButton.gps_fixed svg.gps_fixed, .mapGeolocateButton.gps_fixed svg.gps_fixed path {
     display: inline;
     fill: #007AFD;
 }
-.geolocateDiscoveryMap.gps_not_fixed svg.gps_not_fixed {
+.mapGeolocateButton.gps_not_fixed svg.gps_not_fixed {
     display: inline;
+}
+
+
+
+/*********************************/
+/*          ROOM PAGE           */
+/*********************************/
+
+#roomMap {
+    height: 100%;
+    width: 100%;
+}
+
+.geolocateRoomMap {
+    position: absolute;
+    bottom: calc(70px + 35px);
+    right: 35px;
+}
+.openChatPanel {
+    position: absolute;
+    bottom: 35px;
+    right: 35px;
 }
