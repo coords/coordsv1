@@ -57,51 +57,22 @@ button {
     font-weight: bold;
 }
 
-.fontawesomepsuedo:before,
-.fontawesomepsuedo:after {
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: inherit;
-}
-
-.fontawesome-power-off {
-    background: transparent url("/images/fontawesomesvg/white/svg/power-off.svg") center center no-repeat;
-}
-
-.fontawesome-caret-down {
-    background: transparent url("/images/fontawesomesvg/white/svg/caret-down.svg") center center no-repeat;
-}
-
-.fontawesome-map-marker {
-    background: transparent url("/images/fontawesomesvg/white/svg/map-marker.svg") center center no-repeat;
-}
-
-.fontawesome-plus-circle {
-    background: transparent url("/images/fontawesomesvg/white/svg/plus-circle.svg") center center no-repeat;
-}
-
-.fontawesome-chevron-left {
-    background: transparent url("/images/fontawesomesvg/white/svg/chevron-circle-left.svg") center center no-repeat;
-}
-
-.fontawesome-black-chevron-left {
-    background: transparent url("/images/fontawesomesvg/black/svg/chevron-circle-left.svg") center center no-repeat;
-}
-
-.fontawesome-sign-out {
-    background: transparent url("/images/fontawesomesvg/white/svg/sign-out.svg") center center no-repeat;
-}
-
-.fontawesome {
+.fit-parent {
     height: 100%;
     width: 100%;
-    background-size: 100%;
 }
 
-.btn-lg.btn-fa:before {
-    position: absolute;
-    left: 20px;
-    top: 10px;
-    font-size: 25px;
+.square25px {
+    width: 25px;
+    height: 25px;
+}
+
+.black-svg, .black-svg path {
+    fill: #000;
+}
+
+.white-svg, .white-svg path {
+    fill: #fff;
 }
 
 /********************/
@@ -725,10 +696,6 @@ div#roomPanel div.roomHeader {
     overflow: hidden;
 }
 
-div#roomPanel div.roomHeader .fontawesome {
-    background-size: 60%;
-}
-
 div#roomPanel div.roomUsersHeading {
     padding: 0 1em 0 1em;
     height: 40px;
@@ -873,12 +840,6 @@ ul.nav-tabs [role="tab"], ul.nav-tabs [role="tab"]:hover, ul.nav-tabs [role="tab
     font-size: 25px !important;
 }
 
-ul.nav-tabs .fontawesome {
-    height: 40px;
-    width: 40px;
-    margin: 0 auto;
-}
-
 .rooms-nearby h4, .rooms-nearby p {
     padding-left: 17px;
     padding-top: 17px;
@@ -976,26 +937,18 @@ body.loginPage footer.footer {
     line-height: 36px;
 }
 
-.leaflet-control-gps .gps-button {
-    width: 36px !important;
-    height: 36px !important;
+.leaflet-container .leaflet-control-gps {
+    display: none !important;
 }
 
-.leaflet-control-gps {
-    box-shadow: none !important;
-
-    border: 2px solid rgba(0, 0, 0, 0.2);
+.geolocateDiscoveryMap svg {
+    display: none;
 }
 
-.leaflet-control-gps .gps-button {
-    background: #ffffff url('/images/maps-gps-icon.png') no-repeat 0 0;
+.geolocateDiscoveryMap.gps_fixed svg.gps_fixed, .geolocateDiscoveryMap.gps_fixed svg.gps_fixed path {
+    display: inline;
+    fill: #007AFD;
 }
-
-.leaflet-control-gps .gps-button:hover,
-.leaflet-control-gps .gps-button.active:hover {
-    background: #ffffff url('/images/maps-gps-icon.png') no-repeat -180px 0;
-}
-
-.leaflet-control-gps .gps-button.active {
-    background: #ffffff url('/images/maps-gps-icon.png') no-repeat -324px 0;
+.geolocateDiscoveryMap.gps_not_fixed svg.gps_not_fixed {
+    display: inline;
 }

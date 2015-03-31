@@ -22,14 +22,14 @@
     background-color: #d23f31;
 }
 
-.fab.fab-red svg {
+.fab.fab-red svg, .fab.fab-red svg path {
     fill: #FFF;
 }
 
 .fab.fab-blue {
     background-color: #4285f4;
 }
-.fab.fab-blue svg{
+.fab.fab-blue svg, .fab.fab-blue svg path {
     fill: #FFF;
 }
 
@@ -38,7 +38,7 @@
     background-color: #00b259;
 }
 
-.fab.fab-green svg{
+.fab.fab-green svg, .fab.fab-green svg path {
     fill: #FFF;
 }
 

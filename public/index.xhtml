@@ -10,17 +10,16 @@
 
         <title>Coords</title>
         <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.css"/>
-        <link rel="stylesheet" href="components/bootstrap-social/bootstrap-social.css"/>
         <link rel="stylesheet" href="components/leaflet/dist/leaflet.css"/>
         <link rel="stylesheet" href="components/leaflet-gps/dist/leaflet-gps.src.css"/>
         <link rel="stylesheet" href="components/leaflet.markercluster/dist/MarkerCluster.Default.css"/>
-        <link rel="stylesheet" href="components/font-awesome/css/font-awesome.css"/>
         <link rel="stylesheet" href="components/animate.css/animate.css"/>
         <link rel="stylesheet" href="components/roboto-fontface/roboto-fontface.css"/>
 
         <link rel="stylesheet" href="stylesheets/fab.css"/>
         <link rel="stylesheet" href="stylesheets/media-sizes.css"/>
         <link rel="stylesheet" href="stylesheets/markerclustermod.css"/>
+        <link rel="stylesheet" href="stylesheets/bootstrap-social.css"/>
     </head>
     <body>
 
@@ -55,14 +54,20 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6">
                                     <p>
-                                        <a class="btn btn-block btn-lg btn-social btn-facebook btn-fa fontawesomepsuedo fa-facebook">
+                                        <a class="btn btn-block btn-lg btn-social btn-facebook">
+                                            <svg class="white-svg square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                <use xlink:href="/images/fontawesome.svg#facebook"></use>
+                                            </svg>
                                             Sign in with Facebook
                                         </a>
                                     </p>
                                 </div>
                                 <div class="col-xs-12 col-sm-6">
                                     <p>
-                                        <a class="btn btn-block btn-lg btn-social btn-twitter btn-fa fontawesomepsuedo fa-twitter">
+                                        <a class="btn btn-block btn-lg btn-social btn-twitter">
+                                            <svg class="white-svg square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                <use xlink:href="/images/fontawesome.svg#twitter"></use>
+                                            </svg>
                                             Sign in with Twitter
                                         </a>
                                     </p>
@@ -71,14 +76,20 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6">
                                     <p>
-                                        <a class="btn btn-block btn-lg btn-social btn-google-plus btn-fa fontawesomepsuedo fa-google-plus">
+                                        <a class="btn btn-block btn-lg btn-social btn-google-plus">
+                                            <svg class="white-svg square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                <use xlink:href="/images/fontawesome.svg#google-plus"></use>
+                                            </svg>
                                             Sign in with Google
                                         </a>
                                     </p>
                                 </div>
                                 <div class="col-xs-12 col-sm-6">
                                     <p>
-                                        <a class="btn btn-block btn-lg btn-social btn-github btn-fa fontawesomepsuedo fa-github">
+                                        <a class="btn btn-block btn-lg btn-social btn-github">
+                                            <svg class="white-svg square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                <use xlink:href="/images/fontawesome.svg#github"></use>
+                                            </svg>
                                             Sign in with GitHub
                                         </a>
                                     </p>
@@ -279,20 +290,20 @@ public /home/coords/coords/public
                         </ul>
                     </div>
                     <!--<button id="mapMenuButton" class="fab green fab-glyphicon glyphicon-menu-hamburger openMenuPanelButton"></button>-->
-                    <button class="fab fab-white geolocateDiscoveryMap">
-                        <svg viewBox="0 840 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <use xlink:href="/images/svg-sprite/svg-sprite-device.svg#ic_gps_fixed_24px"></use>
+                    <button class="fab fab-white geolocateDiscoveryMap gps_not_fixed">
+                        <svg class="gps_fixed square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="/images/material.svg#gps_fixed"></use>
                         </svg>
-                        <svg viewBox="0 864 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <use xlink:href="/images/svg-sprite/svg-sprite-device.svg#ic_gps_not_fixed_24px"></use>
+                        <svg class="gps_not_fixed square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="/images/material.svg#gps_not_fixed"></use>
                         </svg>
-                        <svg viewBox="0 888 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <use xlink:href="/images/svg-sprite/svg-sprite-device.svg#ic_gps_off_24px"></use>
+                        <svg class="gps_off square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="/images/material.svg#gps_off"></use>
                         </svg>
                     </button>
                     <button class="fab fab-green openNearbyPage hidden-md hidden-lg">
-                        <svg viewBox="0 3648 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <use xlink:href="/images/svg-sprite/svg-sprite-action.svg#ic_view_list_24px"></use>
+                        <svg class="square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="/images/material.svg#view_list"></use>
                         </svg>
                     </button>
                 </div>
@@ -304,14 +315,14 @@ public /home/coords/coords/public
                 <div class="scrollableContent fullHeight">
                     <div id="roomMap"></div>
                     <button class="fab fab-white geolocateMainMap hidden-md hidden-lg">
-                        <svg viewBox="0 840 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <use xlink:href="/images/svg-sprite/svg-sprite-device.svg#ic_gps_fixed_24px"></use>
+                        <svg class=" square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="/images/material.svg#gps_fixed"></use>
                         </svg>
-                        <svg viewBox="0 864 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <use xlink:href="/images/svg-sprite/svg-sprite-device.svg#ic_gps_not_fixed_24px"></use>
+                        <svg class=" square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="/images/material.svg#gps_not_fixed"></use>
                         </svg>
-                        <svg viewBox="0 888 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <use xlink:href="/images/svg-sprite/svg-sprite-device.svg#ic_gps_off_24px"></use>
+                        <svg class=" square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="/images/material.svg#gps_off"></use>
                         </svg>
                     </button>
                 </div>
@@ -339,12 +350,20 @@ public /home/coords/coords/public
 
                     <a class="rectangleFadeButton logoutButton">
                         <div class="rectangleFadeButtonBackground"></div>
-                        <div class="rectangleFadeButtonIcon fontawesome fontawesome-power-off"></div>
+                        <div class="rectangleFadeButtonIcon">
+                            <svg class="white-svg square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <use xlink:href="/images/fontawesome.svg#power-off"></use>
+                            </svg>
+                        </div>
                     </a>
 
                     <a class="rectangleFadeButton expandUserProfileButton">
                         <div class="rectangleFadeButtonBackground"></div>
-                        <div class="rectangleFadeButtonIcon fontawesome fontawesome-caret-down"></div>
+                        <div class="rectangleFadeButtonIcon">
+                            <svg class="white-svg square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <use xlink:href="/images/fontawesome.svg#caret-down"></use>
+                            </svg>
+                        </div>
                     </a>
 
                 </div>
@@ -386,11 +405,15 @@ public /home/coords/coords/public
                     <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation" class="active">
                             <a href="#nearbyRooms" aria-controls="nearbyRooms" role="tab" data-toggle="tab">
-                                <div class="fontawesome fontawesome-map-marker"></div>
+                                <svg class="white-svg square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <use xlink:href="/images/fontawesome.svg#map-marker"></use>
+                                </svg>
                             </a></li>
                         <li role="presentation">
                             <a href="#createRoom" aria-controls="createRoom" role="tab" data-toggle="tab">
-                                <div class="fontawesome fontawesome-plus-circle"></div>
+                                <svg class="white-svg square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <use xlink:href="/images/fontawesome.svg#plus-circle"></use>
+                                </svg>
                             </a></li>
                     </ul>
 
@@ -437,7 +460,11 @@ public /home/coords/coords/public
 
             <a class="closePanelButton noselect">
                 <div class="closePanelButtonIcon">
-                    <div class="closePanelButtonIconCharacter fontawesome fontawesome-black-chevron-left"></div>
+                    <div class="closePanelButtonIconCharacter">
+                        <svg class=" square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="/images/fontawesome.svg#black-chevron-left"></use>
+                        </svg>
+                    </div>
                 </div>
             </a>
 
@@ -449,7 +476,11 @@ public /home/coords/coords/public
 
                 <a class="rectangleFadeButton closePanelButton">
                     <div class="rectangleFadeButtonBackground"></div>
-                    <div class="rectangleFadeButtonIcon fontawesome fontawesome-chevron-left"></div>
+                    <div class="rectangleFadeButtonIcon">
+                        <svg class="white-svg square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="/images/fontawesome.svg#chevron-left"></use>
+                        </svg>
+                    </div>
                 </a>
 
                 <div class="welcomeMessage">Coords</div>
@@ -457,7 +488,11 @@ public /home/coords/coords/public
 
                 <a class="rectangleFadeButton leaveRoomButton hiddenWhenNotRoomMember hidden">
                     <div class="rectangleFadeButtonBackground"></div>
-                    <div class="rectangleFadeButtonIcon fontawesome fontawesome-sign-out"></div>
+                    <div class="rectangleFadeButtonIcon">
+                        <svg class="white-svg square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="/images/fontawesome.svg#sign-out"></use>
+                        </svg>
+                    </div>
                 </a>
                 
             </div>

@@ -49,8 +49,26 @@ CoordsMap = {
                     iconAnchor: [21, 21] // point of the icon which will correspond to marker's location
                 });
 
-                CoordsMap.map.addControl(new L.Control.Gps({position: 'bottomleft'}));
-                CoordsMap.map.addControl(new L.Control.Zoom({position: 'bottomleft'}));
+                CoordsMap.zoomControl = new L.Control.Zoom({position: 'bottomleft'});
+                CoordsMap.map.addControl(CoordsMap.zoomControl);
+                
+                var gpsLocationMarker = new L.Marker(new L.latLng(0,0), {
+                    icon: new L.DivIcon({
+                        className: 'gps-location-svg-marker',
+                        html:   '<svg class="gps_fixed square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">' +
+                        '<use xlink:href="/images/material.svg#gps_fixed"></use>' +
+                        '</svg>',
+                        iconSize: [20, 20],
+                        iconAnchor: [10, 10]
+                    })
+                });
+                
+                CoordsMap.gpsControl = new L.Control.Gps({
+                    position: 'bottomleft',
+                    marker: gpsLocationMarker
+                });
+                CoordsMap.map.addControl(CoordsMap.gpsControl);
+                
                 CoordsMap.map.addLayer(CoordsMap.roomMarkers);
 
                 CoordsMap.map.on('moveend', function (e) {
@@ -79,6 +97,19 @@ CoordsMap = {
                 CoordsMap.map.setView(previousPosition, previousZoom);
 
                 CoordsMap.getMarkers();
+                
+                CoordsMap.gpsButton = $('button.geolocateDiscoveryMap');
+
+                CoordsMap.gpsButton.off('click').on('click', function(){
+                    CoordsMap.gpsControl._switchGps();
+                    CoordsMap.gpsButton.removeClass('gps_fixed').addClass('gps_not_fixed');
+                });
+                CoordsMap.gpsControl.on('gpsdisabled', function(){
+                    CoordsMap.gpsButton.removeClass('gps_fixed').addClass('gps_not_fixed');
+                });
+                CoordsMap.gpsControl.on('gpslocated', function(){
+                    CoordsMap.gpsButton.removeClass('gps_not_fixed').addClass('gps_fixed');
+                });
             }
         }
 
