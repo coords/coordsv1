@@ -33,7 +33,9 @@
                 <div class="container">
 
                     <div class="row margin-top-10 text-center">
-                        <img src="/images/coords_logo.svg" class="coordsLogo" alt="Coords Logo"/>
+                        <svg class="coordsLogo" alt="Coords Logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="/images/coords_logo.svg#svg4797"></use>
+                        </svg>
                     </div>
 
                     <div class="row margin-top-20 text-center">
@@ -285,7 +287,7 @@ public /home/coords/coords/public
                     <div id="discoveryMap"></div>
                     <div class="dropdown userProfileButton hidden">
                         <button class="fab userProfilePhotoContainer" id="userProfilePhotoContainerButton" data-toggle="dropdown">
-                            <img alt="User Photo" src="" class="img-responsive img-circle userProfilePhoto"/>
+                            <img alt="User Photo" src="/userPhoto" class="img-responsive img-circle userProfilePhoto"/>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="userProfilePhotoContainerButton">
                             <li role="presentation" class="userProfileName"></li>
@@ -329,7 +331,7 @@ public /home/coords/coords/public
                     </div>
                 </a>
                 
-                <h3 id="roomPageTitle"></h3>
+                <h3 id="roomPageTitle">Coords Room</h3>
                 <a class="rectangleFadeButton" id="roomShowMapButton">
                     <div class="rectangleFadeButtonBackground"></div>
                     <div class="rectangleFadeButtonIcon">
