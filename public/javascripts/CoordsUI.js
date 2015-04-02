@@ -90,6 +90,12 @@ CoordsUI = {
                 CoordsUI.roomJoinContainer.hide();
                 CoordsUI.roomChatComposeContainer.show();
                 CoordsUI.roomLeaveButton.show();
+
+                CoordsUser.getJoinedRooms(function(rooms){
+                    CoordsRooms.displayJoinedRooms(rooms);
+                }, function(x,e){
+                });
+                
             },function(){});
         });
         
@@ -100,6 +106,12 @@ CoordsUI = {
                 CoordsUI.roomJoinContainer.hide();
                 CoordsUI.roomChatComposeContainer.show();
                 CoordsUI.roomLeaveButton.hide();
+
+                CoordsUser.getJoinedRooms(function(rooms){
+                    CoordsRooms.displayJoinedRooms(rooms);
+                }, function(x,e){
+                });
+                
             },function(){});
         });
 
