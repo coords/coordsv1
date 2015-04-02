@@ -4,9 +4,28 @@ CoordsAuth = {
         key: 'xii9p-_4ZfUXQZhCmOnMFyqLgjM'
     },
 
+    initialize: function initialize()
+    {
+        OAuth.initialize(CoordsAuth.credentials.key);
+        
+        $.ajax({
+            url: '/oauth/token',
+            success: function oauthInitializeSuccess(data, status)
+            {
+                CoordsDB.setString("oauthtoken", data.token);
+            },
+            error: function oauthInitializeError(data)
+            {
+                CoordsAuth.logout();
+            }
+        });
+    },
+    
     logout: function logout()
     {
+        CoordsDB.removeObject("currentRoomId");
         CoordsDB.removeObject("user");
+        
         CoordsPages.changePage("loginPage");
     },
     
@@ -14,36 +33,38 @@ CoordsAuth = {
     {
         try
         {
-            CoordsLog.v("CoordsAuth." + CoordsLog.getInlineFunctionTrace(arguments));
+            Log.v("CoordsAuth." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
             OAuth.popup(provider, {
                 state: token
             })
-                .done(function (r)
+                .done(function oauthPopupDone(r)
                 {
                     $.ajax({
                         url: '/oauth/signin/' + provider + '/' + r.code,
-                        success: function (data, status)
+                        success: function oauthSigninSuccess(data, status)
                         {
-                            CoordsLog.i("Successfully authenticated with signin endpoint, data: ");
-                            CoordsLog.i(data);
+                            Log.i("Successfully authenticated with signin endpoint, data: ");
+                            Log.i(data);
                             
                             callback(data);
                         },
-                        error: function (data)
+                        error: function oauthSigninError(data)
                         {
                             CoordsAuth.logout();
                         }
                     });
                 })
-                .fail(function (e)
+                .fail(function oauthPopupFail(e)
                 {
+                    Log.e("Failed to authenticate, error: ");
+                    Log.e(e);
                     CoordsAuth.logout();
                 });
         }
         catch (e)
         {
-            CoordsLog.exception(e);
+            Log.exception(e);
         }
     },
 
@@ -51,42 +72,34 @@ CoordsAuth = {
     {
         try
         {
-            CoordsLog.v("CoordsAuth." + CoordsLog.getInlineFunctionTrace(arguments));
+            Log.v("CoordsAuth." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
             CoordsUI.showLoadingBar();
 
-            OAuth.initialize(CoordsAuth.credentials.key);
+            CoordsAuth.authenticate(provider, CoordsDB.getString("oauthtoken"), function coordsAuthAuthenticateCallback(userObject)
+            {
+                Log.i("Successfully authenticated, stored user object in local storage");
 
-            $.ajax({
-                url: '/oauth/token',
-                success: function (data, status)
+                var userData = userObject["providerUserData"];
+                jQuery.extend(userObject, userData);
+
+                delete(userObject["providerUserData"]);
+
+                CoordsDB.setObject("user", userObject);
+                CoordsUser.currentUser = userObject;
+                
+                CoordsUser.checkLogin(function loginSuccess()
                 {
-                    CoordsAuth.authenticate(provider, data.token, function (userObject)
-                    {
-                        CoordsLog.i("Successfully authenticated, stored user object in local storage");
-                        
-                        var userData = userObject["providerUserData"];
-                        jQuery.extend(userObject, userData);
-                        
-                        delete(userObject["providerUserData"]);
-
-                        CoordsDB.setObject("user", userObject);
-
-                        CoordsUser.checkLogin(function loginSuccess()
-                        {
-                            CoordsPages.changePage("mapPage");
-                        });
-                    });
-                },
-                error: function (data)
-                {
-                    CoordsAuth.logout();
-                }
+                    CoordsUI.roomDetailsPanel.find('.welcomeMessage').removeClass('hidden');
+                    CoordsUI.roomDetailsPanel.find('.roomName').addClass('hidden');
+                    
+                    CoordsPages.changePage("mainPage");
+                });
             });
         }
         catch (e)
         {
-            CoordsLog.exception(e);
+            Log.exception(e);
         }
     }
 

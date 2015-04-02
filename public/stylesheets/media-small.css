@@ -1,6 +1,10 @@
 
 /* This file is min-width: 768px */
 
+p.tagline {
+    font-size: 20px;
+}
+
 div#menuPanel {
     width: 60%;
 }

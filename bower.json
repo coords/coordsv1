@@ -1,0 +1,31 @@
+{
+  "name": "Coords",
+  "version": "0.2.1",
+  "homepage": "http://coords.uk",
+  "authors": [
+    "Andrew Beveridge <github@andrewbeveridge.co.uk>"
+  ],
+  "description": "Easily chat with people near you and maintain chat rooms with friends centred around a common location!",
+  "license": "GPL",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "animate.css": "~3.2.6",
+    "bootstrap": "~3.3.4",
+    "jquery": "~2.1.3",
+    "leaflet": "~0.7.3",
+    "leaflet-gps": "~1.0.1",
+    "leaflet.markercluster": "~0.4.0",
+    "oauth-js": "~0.4.0",
+    "roboto-fontface": "~0.3.0",
+    "socket.io-client": "~1.3.5",
+    "moment": "~2.9.0",
+    "livestampjs": "~1.1.2"
+  }
+}

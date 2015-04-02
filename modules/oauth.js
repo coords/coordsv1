@@ -10,6 +10,18 @@ module.exports = function (env)
 
     env.Users = {};
 
+    env.Users.getJoinedRoomIds = function(userId,success,fail,badrequest){
+        if (env.Util.isHex(userId)){
+            var ObjectId = require('mongodb').ObjectID;
+            var userOId = new ObjectId(userId);
+            env.Users.getUserById(userId,function(user){
+                success(user.roomsJoined);
+            },fail,badrequest);
+        } else {
+            badrequest();
+        }
+    };
+
     env.Users.updateUser = function(userId,user,success,fail,badrequest){
         if (env.Util.isHex(userId)){
             var ObjectId = require('mongodb').ObjectID;
@@ -61,6 +73,45 @@ module.exports = function (env)
         return session.user.dbid;
     };
 
+    env.Users.handleUserLocationReceived = function (eventObject, success, fail){
+        // Create a userlocation object
+        var userlocationObject = {
+            'timestamp': eventObject['timestamp'],
+            'location' :  eventObject['location'],
+            'userId' :  eventObject['userId']
+        };
+
+        // If the message has location data for a user, update the users table
+
+            var userId = userlocationObject['userId'];
+
+            env.Users.getUserById(userId, function(user) {
+                console.log(" @handleUserLocationReceived, retrieved details of User "+userId);
+
+                user['location'] = userlocationObject['location'];
+
+                env.Users.updateUser(userId, user, function(user) {
+                    console.log(" @handleUserLocationReceived, successfully updated location for User "+userId);
+                    success(userlocationObject);
+                },function(err){
+                    console.log("error");
+                    console.log(err);
+                    res.status(500);
+                },function(){
+                    console.log("bad request");
+                    res.status(400);
+                });
+
+            },function(err){
+                console.log("error");
+                console.log(err);
+                res.status(500);
+            },function(){
+                console.log("bad request");
+                res.status(400);
+            });
+    };
+
     oauth.initialize(config.key, config.secret);
 
     /* Endpoints */
@@ -91,6 +142,7 @@ module.exports = function (env)
                     name: providerUserData.name,
                     email: providerUserData.email,
                     avatar: providerUserData.avatar,
+                    location: false,
                     provider: req.params.provider,
                     providerId: providerUserData.id,
                     accessToken: req.session.oauth[req.params.provider].access_token
@@ -145,6 +197,30 @@ module.exports = function (env)
     env.app.get('/user/session', function (req, res)
     {
         res.json(req.session);
+    });
+
+    env.app.get('/user/joinedRooms', function (req, res)
+    {
+        var userId = env.Users.getUserIdBySession(req.session);
+        env.Users.getJoinedRoomIds(userId,function(roomIds){
+            env.Rooms.getRoomsByIds(roomIds,function(rooms){
+                res.status(200).json(rooms);
+            },function(err){
+                console.log("error");
+                console.log(err);
+                res.status(500);
+            },function(){
+                console.log("bad request");
+                res.status(400);
+            });
+        },function(err){
+            console.log("error");
+            console.log(err);
+            res.status(500);
+        },function(){
+            console.log("bad request");
+            res.status(400);
+        });
     });
 
     /**

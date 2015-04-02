@@ -2,7 +2,7 @@ CoordsDB = {
 
     getString: function getString(key)
     {
-        CoordsLog.v("CoordsDB." + CoordsLog.getInlineFunctionTrace(arguments));
+        Log.v("CoordsDB." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
         if( $.type( key ) !== "string" )
         {
@@ -14,7 +14,7 @@ CoordsDB = {
 
     setString: function setString(key, value)
     {
-        CoordsLog.v("CoordsDB." + CoordsLog.getInlineFunctionTrace(arguments));
+        Log.v("CoordsDB." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
         if( $.type( key ) !== "string" )
         {
@@ -32,7 +32,7 @@ CoordsDB = {
 
     removeString: function removeString(key)
     {
-        CoordsLog.v("CoordsDB." + CoordsLog.getInlineFunctionTrace(arguments));
+        Log.v("CoordsDB." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
         if( $.type( key ) !== "string" )
         {
@@ -44,7 +44,7 @@ CoordsDB = {
 
     getObject: function getObject(key)
     {
-        CoordsLog.v("CoordsDB." + CoordsLog.getInlineFunctionTrace(arguments));
+        Log.v("CoordsDB." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
         if( $.type( key ) !== "string" )
         {
@@ -68,7 +68,7 @@ CoordsDB = {
 
     setObject: function setObject(key, value)
     {
-        CoordsLog.v("CoordsDB." + CoordsLog.getInlineFunctionTrace(arguments));
+        Log.v("CoordsDB." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
         if( $.type( key ) !== "string" )
         {
@@ -85,7 +85,7 @@ CoordsDB = {
 
     removeObject: function removeObject(key)
     {
-        CoordsLog.v("CoordsDB." + CoordsLog.getInlineFunctionTrace(arguments));
+        Log.v("CoordsDB." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
         if( $.type( key ) !== "string" )
         {
@@ -97,7 +97,7 @@ CoordsDB = {
 
     setPersistentObject: function setPersistentObject(key, value)
     {
-        CoordsLog.v("CoordsDB." + CoordsLog.getInlineFunctionTrace(arguments));
+        Log.v("CoordsDB." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
         if( $.type( key ) !== "string" )
         {
@@ -116,7 +116,7 @@ CoordsDB = {
 
     getPersistentObject: function getPersistentObject(key)
     {
-        CoordsLog.v("CoordsDB." + CoordsLog.getInlineFunctionTrace(arguments));
+        Log.v("CoordsDB." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
         if( $.type( key ) !== "string" )
         {
@@ -141,7 +141,7 @@ CoordsDB = {
 
     removePersistentObject: function removePersistentObject(key)
     {
-        CoordsLog.v("CoordsDB." + CoordsLog.getInlineFunctionTrace(arguments));
+        Log.v("CoordsDB." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
         if( $.type( key ) !== "string" )
         {
@@ -155,7 +155,7 @@ CoordsDB = {
 
     setPersistentString: function setPersistentString(key, value)
     {
-        CoordsLog.v("CoordsDB." + CoordsLog.getInlineFunctionTrace(arguments));
+        Log.v("CoordsDB." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
         if( $.type( key ) !== "string" )
         {
@@ -174,7 +174,7 @@ CoordsDB = {
 
     getPersistentString: function getPersistentString(key)
     {
-        CoordsLog.v("CoordsDB." + CoordsLog.getInlineFunctionTrace(arguments));
+        Log.v("CoordsDB." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
         if( $.type( key ) !== "string" )
         {
@@ -193,7 +193,7 @@ CoordsDB = {
 
     removePersistentString: function removePersistentString(key)
     {
-        CoordsLog.v("CoordsDB." + CoordsLog.getInlineFunctionTrace(arguments));
+        Log.v("CoordsDB." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
         if ($.type(key) !== "string")
         {

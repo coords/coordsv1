@@ -77,6 +77,28 @@ module.exports = function (env)
         }
     };
 
+    // Returns the room based on object id
+    env.Rooms.getRoomsByIds = function(roomIds,success,fail,badRequest){
+        var ObjectId = require('mongodb').ObjectID;
+        console.log(roomIds);
+        if( roomIds == undefined || roomIds.length == 0 ) {
+            success([]);
+            return;
+        }
+        console.log('/user/joinedRooms');
+
+        roomIds = env.Util.idToOId(roomIds);
+        var rooms = env.mongo.collection('rooms');
+        rooms.find({_id: { $in: roomIds} }).toArray(function(err, docs) {
+            if (err == null) {
+                success(docs);
+                return docs;
+            } else {
+                fail(err);
+            }
+        });
+    };
+
     // checks if the user has correctly given the passphrase
     env.Rooms.verifyRoomPassphrase = function(roomId,passphrase,success,fail,badRequest){
         if( env.Util.isString(passphrase) ||
@@ -200,12 +222,12 @@ module.exports = function (env)
             req.body.private,
             req.body.passphrase,
             function(result){
-                res.status(200).json({
-                    'response': true,
-                    'message': 'room '+room.name+' was created'
-                });
-                console.log(result);
                 console.log("Rooms.js : Inserted 1 room into the rooms collection");
+                
+                res.status(200).json({
+                    action: "rooms/create",
+                    status: "success"
+                });
             }, function(err){
                 res.status(500);
                 console.log(err);
@@ -414,6 +436,39 @@ module.exports = function (env)
             env.Rooms.getRoomById(roomId,function(room){
                 console.log(" @rooms/get, retrieved details of Room "+roomId);
                 res.status(200).json(room);
+            },function(err){
+                console.log("error");
+                console.log(err);
+                res.status(500);
+            },function(){
+                console.log("bad request");
+                res.status(400);
+            });
+        } else {
+            res.status(400);
+        }
+    });
+
+    /**
+     * Gets the members near a specified location in a room by ID
+     * @requires roomId
+     * @requires lat
+     * @requires lng
+     * @return a json object, with all the members
+     */
+    env.app.post('/rooms/getNearbyMembers', function (req, res)
+    {
+        if( env.Util.isHex(req.body.roomId)) {
+            var roomId = req.body.roomId;
+            var lat = req.body.lat;
+            var lng = req.body.lng;
+            
+            env.Rooms.getRoomById(roomId,function(room){
+                console.log(" @rooms/getNearbyMembers, retrieved details of Room "+roomId);
+                
+                // TODO: Here we should be actually looking up which users in room.usersJoined are within radius of lat / lng
+                
+                res.status(200).json(room.usersJoined);
             },function(err){
                 console.log("error");
                 console.log(err);

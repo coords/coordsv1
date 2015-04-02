@@ -6,6 +6,7 @@ env.express = require('express');
 env.path = require('path');
 env.favicon = require('serve-favicon');
 env.http = require('http');
+env.io = require('socket.io');
 env.logger = require('morgan');
 env.cookieParser = require('cookie-parser');
 env.bodyParser = require('body-parser');
@@ -45,8 +46,9 @@ env.app.use(env.bodyParser.urlencoded({
 
 require('./modules/util.js')(env);
 require('./modules/oauth.js')(env);
-require('./modules/socketio.js')(env);
+require('./modules/events.js')(env);
 require('./modules/rooms.js')(env);
+require('./modules/messages.js')(env);
 
 env.app.use(env.express.static(env.path.join(__dirname, 'public')));
 env.app.use('/', require('./routes/index'));

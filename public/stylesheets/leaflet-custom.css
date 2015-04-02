@@ -1,0 +1,77 @@
+.leaflet-popup .leaflet-popup-content-wrapper {
+    border-radius: 4px;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, .15);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    padding: 0;
+}
+.leaflet-popup-tip-container {
+    margin-top: -1px;
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+    color: #FFF;
+    opacity: 0.5;
+    top: 10px;
+    right: 10px;
+}
+.leaflet-container a.leaflet-popup-close-button:hover {
+    color: #FFF;
+    opacity: 1;
+}
+
+.leaflet-popup .leaflet-popup-content {
+    margin: 0;
+}
+
+.leaflet-popup-content .marker-room-head {
+    background: rgba(0, 178, 89, 1);
+    padding: 10px;
+    color: #FFF;
+    font-size: 16px;
+    padding-right: 30px;
+}
+
+.leaflet-popup-content .marker-room-body {
+    padding: 10px;
+    text-align: center;
+}
+
+.marker-room-body button {
+    width: 100%;
+}
+
+.marker-room-users {
+    display: inline-block;
+    text-align: center;
+}
+
+.marker-room-user {
+    display: inline-block;
+}
+
+.marker-room-user-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    background: #CCC;
+    margin-bottom: 10px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+.marker-room-user-more {
+    border-radius: 15px;
+    background: #CCC;
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+    margin-right: 5px;
+    vertical-align: top;
+    padding-top: 7px;
+}
+
+.marker-room-user-name {
+    display: none;
+}

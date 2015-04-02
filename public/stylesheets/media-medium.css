@@ -1,29 +1,63 @@
 
 /* This file is min-width: 992px */
 
-div#roomPanelContentOverlay {
+div#roomDetailsPanelContentOverlay {
     display: none !important;
 }
 
-body.mapPage div#menuPanel {
+body.mainPage div#menuPanel {
     width: 500px !important;
 }
 
-body.mapPage div.unscrollablePageContainer.activePage {
-    padding-right: 500px;
+body.mainPage div.unscrollablePageContainer.activePage {
+    /*padding-right: 500px;*/
 }
 
-body.mapPage div#roomPanel a.closePanelButton {
+body.mainPage div#roomDetailsPanel a.closePanelButton {
     display: none;    
 }
 
-body.mapPage div#roomPanel {
+body.mainPage div#roomDetailsPanel {
     display: block;
     width: 500px !important;
 
     transform: none !important;
 }
 
-body.mapPage div.rightPanel {
+body.mainPage div.rightPanel {
     box-shadow: -5px 0 5px rgba(0, 0, 0, .15);
+}
+
+div#roomChatPanelContentOverlay {
+    display: none !important;
+}
+
+
+body.roomPage div.unscrollablePageContainer.activePage {
+    /*padding-right: 50%;*/
+}
+
+body.roomPage div#roomChatPanel a.closePanelButton {
+    display: none;    
+}
+
+body.roomPage div#roomChatPanel {
+    display: block;
+    width: 50% !important;
+
+    transform: none !important;
+}
+
+body.roomPage div.rightPanel {
+    box-shadow: -5px 0 5px rgba(0, 0, 0, .15);
+}
+
+#roomChatView, #roomMapView {
+    width: 50%;
+}
+#roomMapView {
+    display: block;
+}
+#roomShowMapButton {
+    display: none;
 }

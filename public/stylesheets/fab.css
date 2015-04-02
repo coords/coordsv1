@@ -1,0 +1,57 @@
+.fab {
+    outline: none;
+    border: none;
+    padding: 0;
+    position: relative;
+    display: inline-block;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    color: #fff;
+    overflow: hidden;
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: 0.2s;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+
+    line-height: 56px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.fab.fab-red {
+    background-color: #d23f31;
+}
+
+.fab.fab-red svg, .fab.fab-red svg path {
+    fill: #FFF;
+}
+
+.fab.fab-blue {
+    background-color: #4285f4;
+}
+.fab.fab-blue svg, .fab.fab-blue svg path {
+    fill: #FFF;
+}
+
+
+.fab.fab-green {
+    background-color: #00b259;
+}
+
+.fab.fab-green svg, .fab.fab-green svg path {
+    fill: #FFF;
+}
+
+.fab.fab-white {
+    background-color: #ffffff;
+}
+
+.fab svg {
+    margin-top: 25%;
+    width: 50%;
+}
+
+.fab:active {
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
+    transition-delay: 0s;
+}
