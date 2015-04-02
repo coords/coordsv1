@@ -31,7 +31,7 @@ CoordsPages = {
                 var currentPageId = CoordsDB.getString("currentPageId");
                 if ( CoordsUtil.stringIsEmpty(currentPageId) )
                 {
-                    currentPageId = "mainPage";
+                    currentPageId = "loginPage";
                     CoordsDB.setString("currentPageId", currentPageId);
                 }
 
