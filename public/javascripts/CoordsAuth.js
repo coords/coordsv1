@@ -10,11 +10,11 @@ CoordsAuth = {
         
         $.ajax({
             url: '/oauth/token',
-            success: function (data, status)
+            success: function oauthInitializeSuccess(data, status)
             {
                 CoordsDB.setString("oauthtoken", data.token);
             },
-            error: function (data)
+            error: function oauthInitializeError(data)
             {
                 CoordsAuth.logout();
             }
@@ -23,8 +23,9 @@ CoordsAuth = {
     
     logout: function logout()
     {
-        CoordsRooms.closeRoom();
+        CoordsDB.removeObject("currentRoomId");
         CoordsDB.removeObject("user");
+        
         CoordsPages.changePage("loginPage");
     },
     
@@ -32,38 +33,38 @@ CoordsAuth = {
     {
         try
         {
-            CoordsLog.v("CoordsAuth." + CoordsLog.getInlineFunctionTrace(arguments));
+            Log.v("CoordsAuth." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
             OAuth.popup(provider, {
                 state: token
             })
-                .done(function (r)
+                .done(function oauthPopupDone(r)
                 {
                     $.ajax({
                         url: '/oauth/signin/' + provider + '/' + r.code,
-                        success: function (data, status)
+                        success: function oauthSigninSuccess(data, status)
                         {
-                            CoordsLog.i("Successfully authenticated with signin endpoint, data: ");
-                            CoordsLog.i(data);
+                            Log.i("Successfully authenticated with signin endpoint, data: ");
+                            Log.i(data);
                             
                             callback(data);
                         },
-                        error: function (data)
+                        error: function oauthSigninError(data)
                         {
                             CoordsAuth.logout();
                         }
                     });
                 })
-                .fail(function (e)
+                .fail(function oauthPopupFail(e)
                 {
-                    CoordsLog.e("Failed to authenticate, error: ");
-                    CoordsLog.e(e);
+                    Log.e("Failed to authenticate, error: ");
+                    Log.e(e);
                     CoordsAuth.logout();
                 });
         }
         catch (e)
         {
-            CoordsLog.exception(e);
+            Log.exception(e);
         }
     },
 
@@ -71,13 +72,13 @@ CoordsAuth = {
     {
         try
         {
-            CoordsLog.v("CoordsAuth." + CoordsLog.getInlineFunctionTrace(arguments));
+            Log.v("CoordsAuth." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
             CoordsUI.showLoadingBar();
 
-            CoordsAuth.authenticate(provider, CoordsDB.getString("oauthtoken"), function (userObject)
+            CoordsAuth.authenticate(provider, CoordsDB.getString("oauthtoken"), function coordsAuthAuthenticateCallback(userObject)
             {
-                CoordsLog.i("Successfully authenticated, stored user object in local storage");
+                Log.i("Successfully authenticated, stored user object in local storage");
 
                 var userData = userObject["providerUserData"];
                 jQuery.extend(userObject, userData);
@@ -85,13 +86,12 @@ CoordsAuth = {
                 delete(userObject["providerUserData"]);
 
                 CoordsDB.setObject("user", userObject);
-
+                CoordsUser.currentUser = userObject;
+                
                 CoordsUser.checkLogin(function loginSuccess()
                 {
-                    var roomDetailsPanel = $('#roomDetailsPanel');
-                    
-                    roomDetailsPanel.find('.welcomeMessage').removeClass('hidden');
-                    roomDetailsPanel.find('.roomName').addClass('hidden');
+                    CoordsUI.roomDetailsPanel.find('.welcomeMessage').removeClass('hidden');
+                    CoordsUI.roomDetailsPanel.find('.roomName').addClass('hidden');
                     
                     CoordsPages.changePage("mainPage");
                 });
@@ -99,7 +99,7 @@ CoordsAuth = {
         }
         catch (e)
         {
-            CoordsLog.exception(e);
+            Log.exception(e);
         }
     }
 

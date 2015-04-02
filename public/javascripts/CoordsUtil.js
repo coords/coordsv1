@@ -42,7 +42,7 @@ CoordsUtil = {
         }
         catch (e)
         {
-            CoordsLog.exception(e);
+            Log.exception(e);
         }
     },
 
@@ -74,7 +74,7 @@ CoordsUtil = {
         }
         catch (e)
         {
-            CoordsLog.exception(e);
+            Log.exception(e);
         }
     },
 
@@ -116,7 +116,7 @@ CoordsUtil = {
         }
         catch (e)
         {
-            CoordsLog.exception(e);
+            Log.exception(e);
         }
     },
 
@@ -132,7 +132,7 @@ CoordsUtil = {
         }
         catch (e)
         {
-            CoordsLog.exception(e);
+            Log.exception(e);
         }
     },
 
@@ -144,7 +144,7 @@ CoordsUtil = {
         }
         catch (e)
         {
-            CoordsLog.exception(e);
+            Log.exception(e);
         }
     },
 
@@ -160,7 +160,7 @@ CoordsUtil = {
         }
         catch (e)
         {
-            CoordsLog.exception(e);
+            Log.exception(e);
         }
     },
 
@@ -177,7 +177,7 @@ CoordsUtil = {
         }
         catch (e)
         {
-            CoordsLog.exception(e);
+            Log.exception(e);
         }
     },
 
@@ -185,13 +185,13 @@ CoordsUtil = {
     {
         try
         {
-            CoordsLog.v("CoordsUtil." + CoordsLog.getInlineFunctionTrace(arguments));
+            Log.v("CoordsUtil." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
             return (n.split('.')[1] || []).length;
         }
         catch (e)
         {
-            CoordsLog.exception(e);
+            Log.exception(e);
         }
     },
 
@@ -199,7 +199,7 @@ CoordsUtil = {
     {
         try
         {
-            CoordsLog.v("CoordsUtil." + CoordsLog.getInlineFunctionTrace(arguments));
+            Log.v("CoordsUtil." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
             if (!CoordsUtil.isDefined(iterable))
             {
@@ -221,7 +221,7 @@ CoordsUtil = {
         }
         catch (e)
         {
-            CoordsLog.exception(e);
+            Log.exception(e);
         }
     },
 
@@ -229,14 +229,14 @@ CoordsUtil = {
     {
         try
         {
-            CoordsLog.v("CoordsUtil." + CoordsLog.getInlineFunctionTrace(arguments));
+            Log.v("CoordsUtil." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
             var ts = new Date().getTime() / 1000;
             return Math.floor(ts);
         }
         catch (e)
         {
-            CoordsLog.exception(e);
+            Log.exception(e);
         }
     },
 
@@ -332,7 +332,7 @@ CoordsUtil = {
     {
         try
         {
-            CoordsLog.v("CoordsUtil." + CoordsLog.getInlineFunctionTrace(arguments));
+            Log.v("CoordsUtil." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
             return element.clone()
                 .children()
@@ -342,7 +342,7 @@ CoordsUtil = {
         }
         catch (e)
         {
-            CoordsLog.exception(e);
+            Log.exception(e);
         }
     }
     

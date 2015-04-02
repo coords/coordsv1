@@ -1,21 +1,44 @@
 CoordsUser = {
 
+    currentUser: false,
+    currentLocation: false,
+    currentLocationTimestamp: false,
+    currentLocationAccuracy: false,
+    currentLocationAltitude: false,
+    
     getCurrentUser: function getCurrentUser()
     {
-        return CoordsDB.getObject("user");
+        if(CoordsUser.currentUser === false)
+        {
+            CoordsUser.currentUser = CoordsDB.getObject("user");
+            
+            CoordsUser.currentUser.location = {
+                latitude: CoordsUser.currentLocation.lat,
+                longitude: CoordsUser.currentLocation.lng,
+                accuracy: CoordsUser.currentLocationAccuracy,
+                altitude: CoordsUser.currentLocationAltitude,
+                timestamp: CoordsUser.currentLocationTimestamp
+            };
+        }
+
+        return CoordsUser.currentUser;
     },
     
     checkLogin: function checkLogin(loggedInCallback)
     {
         try
         {
-            CoordsLog.v("CoordsUser." + CoordsLog.getInlineFunctionTrace(arguments));
+            Log.v("CoordsUser." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
             var userData = CoordsUser.getCurrentUser();
             
             if (CoordsUtil.iterableLength(userData))
             {
                 CoordsUser.populateUserProfile();
+                CoordsUser.getJoinedRooms(function(rooms){
+                    CoordsRooms.displayJoinedRooms(rooms);
+                }, function(x,e){
+                });
                 
                 if (CoordsUtil.isDefined(loggedInCallback))
                 {
@@ -29,7 +52,7 @@ CoordsUser = {
         }
         catch (e)
         {
-            CoordsLog.exception(e);
+            Log.exception(e);
         }
     },
     
@@ -115,6 +138,21 @@ CoordsUser = {
         $('.expandedUserProfileContainer').addClass('slideDownCollapsed');
         $('.expandUserProfileButton').removeClass('userProfileExpanded').off('click').click(function() {
             CoordsUser.expandUserProfile();
+        });
+    },
+
+    getJoinedRooms: function getJoinedRooms(success,error) {
+        $.ajax({
+            type: "GET",
+            url: "user/joinedRooms",
+            contentType: "application/json",
+            dataType: "json",
+            success: function getJoinedRoomsSuccess(rooms) {
+                success(rooms);
+            },
+            error: function getJoinedRoomsError(x, e){
+                error(x, e);
+            }
         });
     }
     

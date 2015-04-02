@@ -378,7 +378,7 @@ div.pageFooter h1 {
 
 /* Pages which need to be moved down to show this bar */
 
-body.pushedDownByLoadingBar div.unscrollablePageContainer.activePage {
+/*body.pushedDownByLoadingBar div.unscrollablePageContainer.activePage {
     top: 6px !important;
 }
 
@@ -392,14 +392,14 @@ body.pushedDownByLoadingBar div.panelContentOverlay {
 
 body.pushedDownByLoadingBar div.ui-widget-overlay.ui-front {
     top: 6px !important;
-}
+}*/
 
 /* Loading bar container */
 .loadingBar {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 10;
+    z-index: 30;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -570,6 +570,7 @@ h4.userProfileName {
 }
 
 a.rectangleFadeButton {
+    vertical-align: middle;
     position: relative;
     display: inline-block;
 
@@ -719,157 +720,6 @@ div#roomDetailsPanel div.roomDetails {
 }
 
 
-
-/*********************************/
-/*          CHAT PANEL           */
-/*********************************/
-
-div#roomChatPanel {
-    width: 100%;
-    background: #ffffff;
-}
-
-div#roomChatPanel div.scrollableContent {
-    width: 100%;
-    box-shadow: none;
-
-}
-
-div#roomChatPanel a.closePanelButton {
-    height: 60px;
-    width: 60px;
-}
-
-div#roomChatPanel a.leaveRoomButton {
-    height: 60px;
-    width: 60px;
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
-div#roomChatPanel div.roomHeader {
-    text-align: center;
-    height: 60px;
-    width: 100%;
-    color: #ffffff;
-    background: rgba(0, 178, 89, 1);
-    padding: 17px;
-    font-weight: 600;
-    font-size: large;
-    overflow: hidden;
-}
-
-div#roomChatPanel div.roomComposeMessage {
-    font-size: 0;
-    width: 100%;
-    border-top: 1px solid #dddddd;
-    background: #ffffff;
-    height: 80px;
-
-    transition: height 0.3s;
-}
-
-div#roomChatPanel .messenger-message {
-    width: 100%;
-    padding: 5px 17px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-div#roomChatPanel .messenger-message:first-child {
-    padding-top: 17px;
-}
-
-div#roomChatPanel .messenger-message:last-child {
-    padding-bottom: 17px;
-}
-
-/*The space between adjacent messages are shortened to be concise*/
-/*We need two to separate between us and other users*/
-div#roomChatPanel .messenger-message-user-me + .messenger-message-user-me {
-    margin-top: -10px;
-}
-
-div#roomChatPanel .messenger-message-user-other + .messenger-message-user-other {
-    margin-top: -10px;
-}
-
-div#roomChatPanel .messenger-message .messenger-message-timestamp {
-    display: none;
-    font-size: 80%;
-    text-transform: uppercase;
-    color: #666666;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    text-align: center;
-}
-
-div#roomChatPanel .messenger-message .messenger-message-content {
-    vertical-align: bottom;
-    display: inline-block;
-    border-radius: 5px;
-    padding: 8px;
-
-}
-
-div#roomChatPanel .messenger-message.messenger-message-user-other .messenger-message-user {
-    display: inline-block;
-}
-
-div#roomChatPanel .messenger-message.messenger-message-user-other .messenger-message-user img {
-    width: 34px;
-    height: 34px;
-    border-radius: 100px;
-    margin-right: 5px;
-}
-
-div#roomChatPanel .messenger-message.messenger-message-user-other .messenger-message-user {
-
-}
-
-div#roomChatPanel .messenger-message.messenger-message-user-other .messenger-message-content {
-    background: #eeeeee;
-}
-
-div#roomChatPanel .messenger-message.messenger-message-user-me {
-    text-align: right;
-}
-
-div#roomChatPanel .messenger-message.messenger-message-user-me .messenger-message-content {
-    background: rgba(0, 178, 89, 1);
-    color: #ffffff;
-}
-
-div#roomChatPanel .messenger-compose-text {
-    outline: none;
-    height: 100%;
-    display: inline-block;
-    width: calc(100% - 75px);
-    border: none;
-    padding: 17px;
-    box-sizing: border-box;
-    resize: none;
-    font-size: 15px;
-}
-
-div#roomChatPanel .messenger-compose-send {
-    color: #fff;
-    margin: 0;
-    height: 100%;
-    border: none;
-    box-sizing: border-box;
-    border-radius: 0;
-    vertical-align: top;
-    display: inline-block;
-    background: rgba(0, 178, 89, 1);
-    width: 75px;
-    font-size: 15px;
-}
-
-
-
-
 /*********************************/
 /*          ROOMS LIST           */
 /*********************************/
@@ -877,12 +727,13 @@ div#roomChatPanel .messenger-compose-send {
 ul.nav-tabs [role="presentation"] {
     background: rgba(0, 178, 89, 1);
     border-bottom: 7px solid rgba(0, 0, 0, 0);
-    width: 50%;
+    width: 33.33333%;
     text-align: center;
+    height: 55px;
 }
 
 ul.nav-tabs [role="presentation"].active {
-    border-bottom: 7px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 7px solid rgba(255, 255, 255, 0.5);
 }
 
 ul.nav-tabs [role="tab"], ul.nav-tabs [role="tab"]:hover, ul.nav-tabs [role="tab"]:focus {
@@ -892,7 +743,7 @@ ul.nav-tabs [role="tab"], ul.nav-tabs [role="tab"]:hover, ul.nav-tabs [role="tab
     font-size: 25px !important;
 }
 
-.rooms-nearby h4, .rooms-nearby p {
+.rooms-nearby h4, .rooms-nearby p, .rooms-joined h4, .rooms-joined p {
     padding-left: 17px;
     padding-top: 17px;
 }
@@ -927,8 +778,8 @@ ul.nav-tabs [role="tab"], ul.nav-tabs [role="tab"]:hover, ul.nav-tabs [role="tab
 /*********************************/
 
 img.coordsLogo {
+    width: 600px;
     display: block;
-
     max-width: 90%;
     padding-top: 2em;
     margin: 0 auto;
@@ -964,7 +815,7 @@ body.loginPage footer.footer {
 }
 
 /*********************************/
-/*          MAP PAGE           */
+/*           MAIN PAGE           */
 /*********************************/
 
 #discoveryMap {
@@ -972,7 +823,7 @@ body.loginPage footer.footer {
     width: 100%;
 }
 
-.geolocateDiscoveryMap {
+#discoveryMapGpsButton {
     position: absolute;
     bottom: calc(70px + 35px);
     right: 35px;
@@ -993,6 +844,9 @@ body.loginPage footer.footer {
     display: none !important;
 }
 
+.gps-location-svg-marker {
+    z-index: -2 !important;
+}
 
 .mapGeolocateButton svg {
     display: none;
@@ -1006,24 +860,228 @@ body.loginPage footer.footer {
     display: inline;
 }
 
+.userProfileName, .userProfileEmail {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+
+.userProfileName {
+    font-size: 16px;
+}
+
 
 
 /*********************************/
 /*          ROOM PAGE           */
 /*********************************/
 
+#roomHeader {
+    position: relative;
+    height: 60px;
+    width: 100%;
+    overflow: hidden;
+    background: rgba(0, 178, 89, 1);
+    color: #FFF;
+}
+
+#roomHeader svg, #roomHeader svg path {
+    fill: #FFF;
+}
+
+#roomPageTitle {
+    display: inline-block;
+    margin: 0;
+}
+
+#roomLeaveButton, #roomShowMapButton {
+    float:right;
+}
+
+#roomMapView {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    height: calc(100% - 60px);
+    width: 100%;
+    display:none;
+    overflow: hidden;
+}
+
 #roomMap {
     height: 100%;
     width: 100%;
 }
 
-.geolocateRoomMap {
-    position: absolute;
-    bottom: calc(70px + 35px);
-    right: 35px;
-}
-.openChatPanel {
+#roomMapGpsButton {
     position: absolute;
     bottom: 35px;
     right: 35px;
+}
+
+#roomChatView {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    height: calc(100% - 60px);
+    width: 100%;
+    overflow: hidden;
+}
+
+#roomChatMessages:empty:before {
+    position: absolute;
+    content: "No messages available";
+    top: 20px;
+    left: 20px;
+}
+
+#roomChatMessages .chat-message {
+    width: 100%;
+    padding: 5px 17px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#roomChatMessages .chat-message:first-child {
+    padding-top: 17px;
+}
+
+#roomChatMessages .chat-message:last-child {
+    padding-bottom: 17px;
+}
+
+/*The space between adjacent messages are shortened to be concise*/
+/*We need two to separate between us and other users*/
+#roomChatMessages .chat-message-user-me + .chat-message-user-me {
+    margin-top: -10px;
+}
+
+#roomChatMessages .chat-message-user-other + .chat-message-user-other {
+    margin-top: -10px;
+}
+
+#roomChatMessages .chat-message-user-other .chat-message-user-name {
+    font-size: 80%;
+    color: #666666;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-align: left;
+    margin-left: 50px;
+}
+
+#roomChatMessages .chat-message .chat-message-timestamp {
+    display: none;
+    font-size: 80%;
+    text-transform: uppercase;
+    color: #666666;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-align: center;
+}
+
+#roomChatMessages .chat-message .chat-message-timestamp.chat-message-timestamp-permanent {
+    display: block;
+}
+
+#roomChatMessages .chat-message .chat-message-content {
+    vertical-align: bottom;
+    display: inline-block;
+    border-radius: 5px;
+    padding: 8px;
+    cursor: pointer;
+    max-width: calc(100% - 43px);
+}
+
+#roomChatMessages .chat-message.chat-message-user-other .chat-message-user {
+    display: inline-block;
+}
+
+#roomChatMessages .chat-message.chat-message-user-other .chat-message-user img {
+    width: 34px;
+    height: 34px;
+    border-radius: 100px;
+    margin-right: 5px;
+    background: #CCC;
+}
+
+#roomChatMessages .chat-message.chat-message-user-other .chat-message-user {
+
+}
+
+#roomChatMessages .chat-message.chat-message-user-other .chat-message-content {
+    background: #eeeeee;
+}
+
+#roomChatMessages .chat-message.chat-message-user-me {
+    text-align: right;
+}
+
+#roomChatMessages .chat-message.chat-message-user-me .chat-message-content {
+    background: rgba(0, 178, 89, 1);
+    color: #ffffff;
+}
+
+#roomChatComposeContainer {
+    font-size: 0;
+    width: 100%;
+    border-top: 1px solid #dddddd;
+    background: #ffffff;
+    height: 90px;
+
+    transition: height 0.3s;
+}
+
+#roomChatComposeMessageInput {
+    outline: none;
+    height: 100%;
+    display: inline-block;
+    width: calc(100% - 75px);
+    border: none;
+    padding: 17px;
+    box-sizing: border-box;
+    resize: none;
+    font-size: 15px;
+}
+
+#roomChatSendMessageButton {
+    color: #fff;
+    margin: 0;
+    height: 100%;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 0;
+    vertical-align: top;
+    display: inline-block;
+    background: rgba(0, 178, 89, 1);
+    width: 75px;
+    font-size: 15px;
+}
+
+#roomJoinContainer {
+    display:none;
+    font-size: 0;
+    width: 100%;
+    border-top: 1px solid #dddddd;
+    background: #ffffff;
+    height: 90px;
+
+    transition: height 0.3s;
+}
+
+#roomJoinButton {
+    color: #fff;
+    margin: 0;
+    height: 100%;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 0;
+    vertical-align: top;
+    display: inline-block;
+    background: rgba(0, 178, 89, 1);
+    width: 100%;
+    font-size: 15px;
 }

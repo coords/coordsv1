@@ -18,7 +18,8 @@
 
         <link rel="stylesheet" href="stylesheets/fab.css"/>
         <link rel="stylesheet" href="stylesheets/media-sizes.css"/>
-        <link rel="stylesheet" href="stylesheets/markerclustermod.css"/>
+        <link rel="stylesheet" href="stylesheets/leaflet-custom.css"/>
+        <link rel="stylesheet" href="stylesheets/leaflet-markercluster-custom.css"/>
         <link rel="stylesheet" href="stylesheets/bootstrap-social.css"/>
     </head>
     <body>
@@ -32,7 +33,7 @@
                 <div class="container">
 
                     <div class="row margin-top-10 text-center">
-                        <img src="/images/logo.png" class="coordsLogo" alt="Coords Logo"/>
+                        <img src="/images/coords_logo.svg" class="coordsLogo" alt="Coords Logo"/>
                     </div>
 
                     <div class="row margin-top-20 text-center">
@@ -294,7 +295,7 @@ public /home/coords/coords/public
                         </ul>
                     </div>
 
-                    <button class="fab fab-white geolocateDiscoveryMap mapGeolocateButton gps_not_fixed">
+                    <button id="discoveryMapGpsButton" class="fab fab-white mapGeolocateButton gps_not_fixed">
                         <svg class="gps_fixed square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <use xlink:href="/images/material.svg#gps_fixed"></use>
                         </svg>
@@ -316,100 +317,77 @@ public /home/coords/coords/public
         </div>
 
         <div id="roomPage" class="unscrollablePageContainer inactivePage">
-            <div class="scrollableContent fullHeight">
-                <div class="scrollableContent fullHeight">
-                    <div id="roomMap"></div>
+            
+            <div id="roomHeader">
 
-                    <button class="fab fab-white geolocateRoomMap mapGeolocateButton gps_not_fixed">
-                        <svg class="gps_fixed square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <use xlink:href="/images/material.svg#gps_fixed"></use>
+                <a class="rectangleFadeButton backButton">
+                    <div class="rectangleFadeButtonBackground"></div>
+                    <div class="rectangleFadeButtonIcon">
+                        <svg class="black-svg square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="/images/material.svg#arrow_back"></use>
                         </svg>
-                        <svg class="gps_not_fixed square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <use xlink:href="/images/material.svg#gps_not_fixed"></use>
+                    </div>
+                </a>
+                
+                <h3 id="roomPageTitle"></h3>
+                <a class="rectangleFadeButton" id="roomShowMapButton">
+                    <div class="rectangleFadeButtonBackground"></div>
+                    <div class="rectangleFadeButtonIcon">
+                        <svg class="black-svg square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="/images/material.svg#map"></use>
                         </svg>
-                        <svg class="gps_off square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <use xlink:href="/images/material.svg#gps_off"></use>
+                    </div>
+                </a>
+                <a class="rectangleFadeButton" id="roomLeaveButton">
+                    <div class="rectangleFadeButtonBackground"></div>
+                    <div class="rectangleFadeButtonIcon">
+                        <svg class="black-svg square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <use xlink:href="/images/material.svg#exit_to_app"></use>
                         </svg>
-                    </button>
-
-                    <button class="fab fab-green openChatPanel">
-                        <svg class="square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <use xlink:href="/images/material.svg#chat"></use>
-                        </svg>
-                    </button>
-                </div>
+                    </div>
+                </a>
+                
             </div>
+            
+            <div id="roomMapView" class="fullHeightMinus200">
+                
+                <div id="roomMap"></div>
+
+                <button id="roomMapGpsButton" class="fab fab-white mapGeolocateButton gps_not_fixed">
+                    <svg class="gps_fixed square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <use xlink:href="/images/material.svg#gps_fixed"></use>
+                    </svg>
+                    <svg class="gps_not_fixed square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <use xlink:href="/images/material.svg#gps_not_fixed"></use>
+                    </svg>
+                    <svg class="gps_off square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <use xlink:href="/images/material.svg#gps_off"></use>
+                    </svg>
+                </button>
+                
+            </div>
+
+            <div id="roomChatView">
+
+                <div id="roomChatMessages" class="scrollableContent fullHeightMinus90">
+
+                </div>
+
+                <div id="roomChatComposeContainer">
+                    <textarea id="roomChatComposeMessageInput" placeholder="Write a message"/>
+                    <button type="submit" id="roomChatSendMessageButton">Send</button>
+                </div>
+                <div id="roomJoinContainer">
+                    <button type="submit" id="roomJoinButton">Join Room</button>
+                </div>
+
+            </div>
+            
         </div>
 
         <div id="menuPanel" class="unscrollablePanelContainer leftPanel inactivePanel">
 
             <div class="scrollableContent customWebkitScrollbar fullHeight noselect">
-
-                <div class="userProfileContainer">
-
-                    <div class="row userProfilePhotoContainer">
-                        <div class="col-xs-10">
-                            <img alt="User Photo" src="/images/logo.png" class="img-responsive img-circle userProfilePhoto"/>
-                        </div>
-                    </div>
-
-                    <div class="row userProfileSummaryContainer">
-                        <div class="col-xs-10">
-                            <h4 class="userProfileName">No data</h4>
-                            <span class="userProfileEmail">No data</span>
-                        </div>
-                    </div>
-
-                    <a class="rectangleFadeButton logoutButton">
-                        <div class="rectangleFadeButtonBackground"></div>
-                        <div class="rectangleFadeButtonIcon">
-                            <svg class="white-svg square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <use xlink:href="/images/fontawesome.svg#power-off"></use>
-                            </svg>
-                        </div>
-                    </a>
-
-                    <a class="rectangleFadeButton expandUserProfileButton">
-                        <div class="rectangleFadeButtonBackground"></div>
-                        <div class="rectangleFadeButtonIcon">
-                            <svg class="white-svg square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <use xlink:href="/images/fontawesome.svg#caret-down"></use>
-                            </svg>
-                        </div>
-                    </a>
-
-                </div>
-
-                <div class="expandedUserProfileContainer slideDown slideDownCollapsed">
-
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <h5>Gender</h5>
-                        </div>
-                        <div class="col-xs-8">
-                            <h5 class="userProfileGender">No data</h5>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <h5>Location</h5>
-                        </div>
-                        <div class="col-xs-8">
-                            <h5 class="userProfileLocation">No data</h5>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <h5>Date of birth</h5>
-                        </div>
-                        <div class="col-xs-8">
-                            <h5 class="userProfileDOB">No data</h5>
-                        </div>
-                    </div>
-
-                </div>
 
                 <div id="roomManagementTabPanel" role="tabpanel">
 
@@ -418,14 +396,21 @@ public /home/coords/coords/public
                         <li role="presentation" class="active">
                             <a href="#nearbyRooms" aria-controls="nearbyRooms" role="tab" data-toggle="tab">
                                 <svg class="white-svg square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                    <use xlink:href="/images/fontawesome.svg#map-marker"></use>
+                                    <use xlink:href="/images/material.svg#my_location"></use>
+                                </svg>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#joinedRooms" aria-controls="joinedRooms" role="tab" data-toggle="tab">
+                                <svg class="white-svg square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <use xlink:href="/images/material.svg#star"></use>
                                 </svg>
                             </a>
                         </li>
                         <li role="presentation">
                             <a href="#createRoom" aria-controls="createRoom" role="tab" data-toggle="tab">
                                 <svg class="white-svg square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                    <use xlink:href="/images/fontawesome.svg#plus-circle"></use>
+                                    <use xlink:href="/images/material.svg#add"></use>
                                 </svg>
                             </a>
                         </li>
@@ -439,6 +424,15 @@ public /home/coords/coords/public
                                 <h4>Nearby Rooms</h4>
 
                                 <div id="nearbyRoomsList">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="joinedRooms">
+                            <div class="rooms-joined">
+                                <h4>Joined Rooms </h4>
+
+                                <div id="joinedRoomsList">
                                 </div>
                             </div>
                         </div>
@@ -462,7 +456,7 @@ public /home/coords/coords/public
                                     This will create a room at your current coords.
                                 </div>
 
-                                <button class="btn btn-lg btn-success createRoomButton">Create Room</button>
+                                <button id="createRoomButton" class="btn btn-lg btn-success">Create Room</button>
                             </div>
                         </div>
 
@@ -482,97 +476,12 @@ public /home/coords/coords/public
 
         </div>
 
-        <div id="roomDetailsPanel" class="unscrollablePanelContainer rightPanel inactivePanel">
-
-            <div class="roomHeader">
-
-                <a class="rectangleFadeButton closePanelButton">
-                    <div class="rectangleFadeButtonBackground"></div>
-                    <div class="rectangleFadeButtonIcon">
-                        <svg class="white-svg square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <use xlink:href="/images/fontawesome.svg#chevron-left"></use>
-                        </svg>
-                    </div>
-                </a>
-
-                <div class="welcomeMessage">Coords</div>
-                <div class="roomName hidden">No room loaded</div>
-
-            </div>
-
-            <div class="roomUsersHeading margin-top-10">
-                <h4>Most recent users:</h4>
-            </div>
-
-            <div class="roomUsers scrollableContent">
-
-            </div>
-
-            <div class="roomDetails">
-
-                <h4>Room details:</h4>
-
-                <table>
-                    <tr>
-                        <td class="roomDetailName"><strong>Private: </strong></td>
-                        <td class="roomPrivate">No data</td>
-                    </tr>
-
-                    <tr>
-                        <td class="roomDetailName"><strong>Distance from your coords: </strong></td>
-                        <td class="roomDistance">No data</td>
-                    </tr>
-                </table>
-
-                <a class="btn btn-lg btn-primary btn-block margin-top-10 joinRoomButton">Join Room</a>
-
-            </div>
-
-        </div>
-
-        <div id="roomChatPanel" class="unscrollablePanelContainer rightPanel inactivePanel">
-
-            <div class="roomHeader">
-
-                <a class="rectangleFadeButton closePanelButton">
-                    <div class="rectangleFadeButtonBackground"></div>
-                    <div class="rectangleFadeButtonIcon">
-                        <svg class="white-svg square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <use xlink:href="/images/fontawesome.svg#chevron-left"></use>
-                        </svg>
-                    </div>
-                </a>
-
-                <div class="welcomeMessage">Coords</div>
-                <div class="roomName hidden">No room loaded</div>
-
-                <a class="rectangleFadeButton leaveRoomButton">
-                    <div class="rectangleFadeButtonBackground"></div>
-                    <div class="rectangleFadeButtonIcon">
-                        <svg class="white-svg square25px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <use xlink:href="/images/fontawesome.svg#sign-out"></use>
-                        </svg>
-                    </div>
-                </a>
-                
-            </div>
-
-            <div class="roomMessages scrollableContent fullHeightMinus135">
-
-            </div>
-
-            <div class="roomComposeMessage">
-                <textarea class="messenger-compose-text" placeholder="Write a message"/>
-                <button type="submit" class="messenger-compose-send">Send</button>
-            </div>
-            
-        </div>
 
         <div id="menuPanelContentOverlay" class="panelContentOverlay hidden"></div>
-        <div id="roomDetailsPanelContentOverlay" class="panelContentOverlay hidden"></div>
-        <div id="roomChatPanelContentOverlay" class="panelContentOverlay hidden"></div>
 
         <script src="components/jquery/dist/jquery.js"></script>
+        <script src="components/moment/moment.js"></script>
+        <script src="components/livestampjs/livestamp.min.js"></script>
         <script src="components/bootstrap/dist/js/bootstrap.js"></script>
         <script src="components/oauth-js/dist/oauth.js"></script>
         <script src="components/socket.io-client/socket.io.js"></script>
@@ -582,17 +491,18 @@ public /home/coords/coords/public
 
 
         <script src="javascripts/NativeWrapper.js"></script>
-        <script src="javascripts/CoordsLog.js"></script>
+        <script src="javascripts/Log.js"></script>
         <script src="javascripts/CoordsUtil.js"></script>
         <script src="javascripts/CoordsDB.js"></script>
         <script src="javascripts/CoordsUI.js"></script>
         <script src="javascripts/CoordsPages.js"></script>
         <script src="javascripts/CoordsUser.js"></script>
+        <script src="javascripts/CoordsUsers.js"></script>
         <script src="javascripts/CoordsAuth.js"></script>
-        <script src="javascripts/CoordsMessaging.js"></script>
         <script src="javascripts/CoordsRooms.js"></script>
         <script src="javascripts/CoordsDiscoveryMap.js"></script>
         <script src="javascripts/CoordsRoomMap.js"></script>
+        <script src="javascripts/CoordsEvents.js"></script>
         <script src="javascripts/DocumentReady.js"></script>
     </body>
 </html>

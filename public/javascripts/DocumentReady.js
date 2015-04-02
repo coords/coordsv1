@@ -14,10 +14,12 @@ $(function documentReady()
         // Only Chrome & Opera (Blink engine) pass the error object, which we need to get a stack trace
         if (typeof(e) != "undefined")
         {
-            CoordsLog.exception(e);
+            Log.exception(e);
         }
     };
 
+    CoordsEvents.init();
+    
     CoordsPages.setupPagesOnDocumentReady();
 
     CoordsPages.changeToCorrectPageOnDocumentReady();

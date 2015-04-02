@@ -50,8 +50,8 @@ if (typeof NativeWrapper === 'undefined')
 
         caughtError: function caughtError(errorString)
         {
-            CoordsLog.v("NativeWrapper." + CoordsLog.getInlineFunctionTrace(arguments));
-            CoordsLog.e(errorString);
+            Log.v("NativeWrapper." + Log.getInlineFunctionTrace(arguments, arguments.callee));
+            Log.e(errorString);
         },
         
         getStorageString: function getStorageString(key)

@@ -4,80 +4,17 @@ CoordsPages = {
     {
         try
         {
-            CoordsLog.v("CoordsPages." + CoordsLog.getInlineFunctionTrace(arguments));
+            Log.v("CoordsPages." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
-            /* Login page */
-
-            $('.btn-facebook').click(function() {
-                CoordsAuth.authenticateWithProvider('facebook');
-            });
-
-            $('.btn-twitter').click(function() {
-                CoordsAuth.authenticateWithProvider('twitter');
-            });
-
-            $('.btn-google-plus').click(function() {
-                CoordsAuth.authenticateWithProvider('google');
-            });
-
-            $('.btn-github').click(function() {
-                CoordsAuth.authenticateWithProvider('github');
-            });
-
-            $('.logoutButton').click(function() {
-                CoordsAuth.logout(); 
-            });
-
-            $('.openNearbyPanel').click(function() {
-                CoordsUI.openPanel("menuPanel");
-            });
+            CoordsUI.cacheElementSelectors();
             
-            $('.openChatPanel').click(function() {
-                CoordsUI.openPanel("roomChatPanel");
-            });
+            CoordsUI.setupEventHandlers();
             
-            $('.expandUserProfileButton').off('click').click(function() {
-                CoordsUser.expandUserProfile();
-            });
-            
-            $('.closePanelButton').click(function() {
-                var panelId = $(this).closest('div.unscrollablePanelContainer').attr('id');
-                CoordsUI.closePanel(panelId);
-            });
-
-            $('.leaveRoomButton').off('click').click(function ()
-            {
-                CoordsUI.showLoadingBar();
-
-
-                CoordsRooms.leaveRoom();
-                CoordsPages.changePage("mainPage");
-
-                /*$.ajax({
-                 type: "POST",
-                 url: "rooms/leave",
-                 data: JSON.stringify({
-                 'roomId': room['_id']
-                 }),
-                 contentType: "application/json",
-                 dataType: "json",
-                 success: function (msg)
-                 {
-                 CoordsRooms.leaveRoom();
-                 CoordsPages.changePage("mainPage");
-                 },
-                 error: function (x, e)
-                 {
-                 CoordsLog.e("Failed to leave room");
-                 }
-                 });*/
-            });
-
             CoordsAuth.initialize();
         }
         catch (e)
         {
-            CoordsLog.exception(e);
+            Log.exception(e);
         }
     },
 
@@ -85,7 +22,7 @@ CoordsPages = {
     {
         try
         {
-            CoordsLog.v("CoordsPages." + CoordsLog.getInlineFunctionTrace(arguments));
+            Log.v("CoordsPages." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
             var activePageId = $('.activePage').attr('id');
 
@@ -105,7 +42,7 @@ CoordsPages = {
         }
         catch (e)
         {
-            CoordsLog.exception(e);
+            Log.exception(e);
         }
     },
     
@@ -113,10 +50,10 @@ CoordsPages = {
     {
         try
         {
-            CoordsLog.v("CoordsPages." + CoordsLog.getInlineFunctionTrace(arguments));
+            Log.v("CoordsPages." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
             var currentPageId = CoordsPages.getCurrentPageId();
-            CoordsLog.d("Current page ID according to DB: " + currentPageId);
+            Log.d("Current page ID according to DB: " + currentPageId);
 
             var activePage = $('.activePage');
 
@@ -125,10 +62,8 @@ CoordsPages = {
             {
                 CoordsUser.checkLogin(function loginSuccess()
                 {
-                    var roomDetailsPanel = $('#roomDetailsPanel');
-
-                    roomDetailsPanel.find('.welcomeMessage').removeClass('hidden');
-                    roomDetailsPanel.find('.roomName').addClass('hidden');
+                    CoordsUI.roomDetailsPanel.find('.welcomeMessage').removeClass('hidden');
+                    CoordsUI.roomDetailsPanel.find('.roomName').addClass('hidden');
                     
                     CoordsPages.changePage(currentPageId);
                 });
@@ -136,7 +71,7 @@ CoordsPages = {
         }
         catch (e)
         {
-            CoordsLog.exception(e);
+            Log.exception(e);
         }
     },
 
@@ -144,14 +79,14 @@ CoordsPages = {
     {
         try
         {
-            CoordsLog.v("CoordsPages." + CoordsLog.getInlineFunctionTrace(arguments));
+            Log.v("CoordsPages." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
             var currentPageId = CoordsDB.getString("currentPageId");
-            CoordsLog.i("Attempting to change to page ID: " + newPageId + " from previous page ID: " + currentPageId);
+            Log.i("Attempting to change to page ID: " + newPageId + " from previous page ID: " + currentPageId);
 
             if(CoordsUtil.stringIsNotBlank(currentPageId) && ! (newPageId == "loginPage" && currentPageId == "loginPage") )
             {
-                CoordsLog.i("Showing loading bar as currentPageId is not blank and we're not reloading the login page");
+                Log.i("Showing loading bar as currentPageId is not blank and we're not reloading the login page");
                 CoordsUI.showLoadingBar();
             }
 
@@ -179,9 +114,10 @@ CoordsPages = {
             }
 
             $(' .unscrollablePageContainer').addClass("inactivePage").removeClass("activePage " + pageTransitionAnimationForwards + " " + pageTransitionAnimationReverse);
-            $('#' + newPageId).removeClass("inactivePage").addClass("activePage " + pageTransitionAnimation);
 
-            $('body').removeClass("loginPage aboutPage profilePage mainPage").addClass(newPageId);
+            CoordsUI[newPageId].removeClass("inactivePage").addClass("activePage " + pageTransitionAnimation);
+
+            $('body').removeClass().addClass(newPageId);
             
             CoordsPages.pageActionsAfterAnimation(newPageId, currentPageId);
 
@@ -189,7 +125,7 @@ CoordsPages = {
         }
         catch (e)
         {
-            CoordsLog.exception(e);
+            Log.exception(e);
         }
     },
 
@@ -197,7 +133,7 @@ CoordsPages = {
     {
         try
         {
-            CoordsLog.v("CoordsPages." + CoordsLog.getInlineFunctionTrace(arguments));
+            Log.v("CoordsPages." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
             var currentPageId = CoordsDB.getString("currentPageId");
             var previousPageId = CoordsDB.getString("previousPageId");
@@ -206,7 +142,7 @@ CoordsPages = {
         }
         catch (e)
         {
-            CoordsLog.exception(e);
+            Log.exception(e);
         }
     },
 
@@ -214,24 +150,24 @@ CoordsPages = {
     {
         try
         {
-            CoordsLog.v("CoordsPages." + CoordsLog.getInlineFunctionTrace(arguments));
+            Log.v("CoordsPages." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
             var previousPageId = CoordsDB.getString("previousPageId");
 
-            CoordsLog.d("Changing page to previous page ID: " + previousPageId);
+            Log.d("Changing page to previous page ID: " + previousPageId);
 
             CoordsPages.changePage(previousPageId);
             CoordsDB.removeString("previousPageId");
         }
         catch (e)
         {
-            CoordsLog.exception(e);
+            Log.exception(e);
         }
     },
 
     setupPageBeforeAnimation: function setupPageBeforeAnimation(newPageId, previousPageId)
     {
-        CoordsLog.v("CoordsPages." + CoordsLog.getInlineFunctionTrace(arguments));
+        Log.v("CoordsPages." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
         try
         {
@@ -241,16 +177,24 @@ CoordsPages = {
             {
                 
             }
+            else if (newPageId == "mainPage")
+            {
+
+            }
+            else if (newPageId == "roomPage")
+            {
+                CoordsRooms.initializeRoomPage();
+            }
         }
         catch (e)
         {
-            CoordsLog.exception(e);
+            Log.exception(e);
         }
     },
 
     pageActionsAfterAnimation: function pageActionsAfterAnimation(newPageId, previousPageId)
     {
-        CoordsLog.v("CoordsPages." + CoordsLog.getInlineFunctionTrace(arguments));
+        Log.v("CoordsPages." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
         try
         {
@@ -266,28 +210,17 @@ CoordsPages = {
             {
                 CoordsDiscoveryMap.initialize();
 
-                $('.createRoomButton').click(function() {
-
-                    var mapCenter = CoordsDiscoveryMap.map.getCenter();
-                    var roomNameInput = $('#roomNameInput');
-                    
-                    CoordsRooms.createRoom( roomNameInput.val(), '', mapCenter.lat, mapCenter.lng );
-                    roomNameInput.val('');
-                });
-                
                 CoordsUI.hideLoadingBar();
             }
             else if (newPageId == "roomPage")
             {
-                CoordsRoomMap.initialize();
-
                 CoordsUI.hideLoadingBar();
             }
 
         }
         catch (e)
         {
-            CoordsLog.exception(e);
+            Log.exception(e);
         }
     }
 
