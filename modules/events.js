@@ -55,9 +55,9 @@ module.exports = function (env)
         });
     });
 
-    http.listen(12345, function ()
+    http.listen(443, function ()
     {
-        console.log('events http server listening on *:12345');
+        console.log('events http server listening on *:443');
     });
 
 };

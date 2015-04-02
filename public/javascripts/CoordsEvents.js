@@ -8,7 +8,7 @@ CoordsEvents = {
         {
             Log.v("CoordsEvents." + Log.getInlineFunctionTrace(arguments, arguments.callee));
 
-            CoordsEvents.io = io(':12345');
+            CoordsEvents.io = io(':443');
             CoordsEvents.isInit =  true;
 
             CoordsEvents.io.on("event", function(eventObject) {
