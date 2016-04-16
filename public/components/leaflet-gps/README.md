@@ -3,7 +3,7 @@ Leaflet.Control.GPS
 
 A leaflet control plugin for tracking gps position
 
-Tested in Leaflet 0.7
+Tested in Leaflet 0.7.3
 
 **Demos online:**  
 [labs.easyblog.it/maps/leaflet-gps](http://labs.easyblog.it/maps/leaflet-gps/)
@@ -14,7 +14,6 @@ Adding the GPS Control to the map:
 
 ```
 map.addControl( new L.Control.Gps() );
-
 ```
 
 #Debugging
@@ -24,6 +23,12 @@ for simulate gps device and set realtime position
 
 [Manual Geolocation](https://chrome.google.com/webstore/detail/manual-geolocation/mfodligkojepnddfhkbkodbamcagfhlo)
 
+You can also use a dummy `transform` function:
+
+```
+var tinnedGps = { lat: 52.5, lng: -2.0 };
+map.addControl( new L.Control.Gps( { transform: function(realGps) { return tinnedGps; } ) );
+```
 
 #Where
 

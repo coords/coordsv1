@@ -1,6 +1,6 @@
 {
   "name": "leaflet-gps",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/leaflet-gps.min.js",
   "ignore": [
     "**/.*",
@@ -10,14 +10,13 @@
     "examples"
   ],
   "homepage": "https://github.com/stefanocudini/leaflet-gps",
-  "_release": "1.0.1",
+  "_release": "1.0.2",
   "_resolution": {
     "type": "version",
-    "tag": "v1.0.1",
-    "commit": "1f7918d6b22fedbe786f2efde316f7f52e694458"
+    "tag": "v1.0.2",
+    "commit": "2148877916fedcbf9cd96acb2b13679c64dc8a77"
   },
   "_source": "git://github.com/stefanocudini/leaflet-gps.git",
   "_target": "~1.0.1",
-  "_originalSource": "leaflet-gps",
-  "_direct": true
+  "_originalSource": "leaflet-gps"
 }
