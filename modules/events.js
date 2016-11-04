@@ -1,7 +1,15 @@
 module.exports = function (env)
 {
-    var http = env.http.Server(env.app);
-    var io = env.io(http);
+    var fs = require('fs');
+
+    var options = {
+        key: fs.readFileSync('/etc/letsencrypt/live/v1.coords.uk/privkey.pem'),
+        cert: fs.readFileSync('/etc/letsencrypt/live/v1.coords.uk/cert.pem'),
+        ca: fs.readFileSync('/etc/letsencrypt/live/v1.coords.uk/chain.pem')
+    };
+
+    var https = env.https.Server(options, env.app);
+    var io = env.io(https);
 
     io.on('connection', function (socket)
     {
@@ -55,9 +63,9 @@ module.exports = function (env)
         });
     });
 
-    http.listen(443, function ()
+    https.listen(12346, function ()
     {
-        console.log('events http server listening on *:443');
+        console.log('events https server listening on *:12346');
     });
 
 };

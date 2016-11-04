@@ -13,6 +13,7 @@
     "express": "~4.11.1",
     "express-session": "^1.0.4",
     "jade": "~1.9.1",
+    "letsencrypt-express": "^2.0.5",
     "mongodb": "^2.0.16",
     "morgan": "~1.5.1",
     "oauthio": "^0.3.1",
